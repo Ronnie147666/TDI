@@ -14,11 +14,11 @@ def isCritical(crit):
 ###########################################
 
 def preparation(player,placeHolder):
-    agiBuff=int(round(player.stg/2))
+    agiBuff=int(round(player.agi/2))
     player.arm+= agiBuff*3
     player.crit+= agiBuff*0.1    
-    player.buffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff,time=4))
-    LogNColor.Printer(str("Preparation-Your Agility:%d" %player.agi+agiBuff))
+    player.buffs.append(BuffNDebuff.BuffNDebuff(agi=agiBuff,time=4))
+    LogNColor.Printer(str("Preparation-Your Agility:%d" %(player.agi+agiBuff)))
 
 def poison(player,target):
     dmg=int(round(player.spell/2))
@@ -34,8 +34,6 @@ def backstab(player,target):
 
 def shadowbolt(player,target):
     target.hp-=player.spell*2 if not isCritical(player.crit) else player.spell*4
-    LogNColor.Printer(str("Shadowbolt-Enemy HP:%d" %target.hp))def shadowbolt(player,target):
-    target.hp-=player.spell*2 if not isCritical(player.crit) else player.spell*4
     LogNColor.Printer(str("Shadowbolt-Enemy HP:%d" %target.hp))
 
 def lifedrain(player,target):
@@ -44,7 +42,7 @@ def lifedrain(player,target):
     LogNColor.Printer(str("Lifedrain-Enemy HP:%d" %target.hp))
     LogNColor.Printer(str("Lifedrain-Your HP:%d" %player.hp))
 
-def immolate(placeHolder,target):
+def immolate(player,target):
     dmg=int(round(player.spell/3))
     target.hp-=dmg
     target.dots.append(HotsNDots.HotNDot(hp=dmg,time=4,name="Immolate"))

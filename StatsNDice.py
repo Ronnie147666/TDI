@@ -71,8 +71,8 @@ def enemyLevelUp(enemy,floor):
           floor-=1
      
 
-def roll(x):
-    return random.randint(1,x)
+def roll(x1,x2):
+    return random.randint(x1,x2)
 
 def range_dict(*args):
     return_val = {}

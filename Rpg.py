@@ -14,7 +14,9 @@ def startGame():
     floor = 0
     while p == None:
           try:
-                LogNColor.Printer(str("What class do you choose:"'\n'"Warrior"'\n'"Paladin"))
+                LogNColor.Printer(str("What class do you choose:"))
+                for key in Class.classList.keys():
+                    LogNColor.Printer(key.title())
                 c = str(raw_input())                
                 p = Class.classList[c]()
           except:
@@ -42,7 +44,7 @@ def startGame():
       LogNColor.Printer("Crit:"+str(p.crit))
       LogNColor.Printer("Spell:"+str(p.spell))
       LogNColor.Printer("Strength:"+str(p.stg))
-      LogNColor.Printer("Strength:"+str(p.agi))
+      LogNColor.Printer("Agility:"+str(p.agi))
       LogNColor.Printer("")
       
       if p.items:

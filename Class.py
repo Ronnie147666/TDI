@@ -25,7 +25,7 @@ class Player(object):
      self.curse=0
      
 
-
+#################
   
 class Paladin(Player):
     def __init__(self):
@@ -37,11 +37,7 @@ class Paladin(Player):
         return paladin
     
     movesList = {
-    'heal':SpellsList.heal,
-    'slam':SpellsList.slam,
-    'growth':SpellsList.growth,
-    'immolate':SpellsList.immolate,    
-    'shieldblock':SpellsList.shieldblock
+    'heal':SpellsList.heal
 }
 
 ###############
@@ -57,9 +53,7 @@ class Warrior(Player):
         return warrior
 
     movesList = {
-    'heal':SpellsList.heal,
-    'growth':SpellsList.growth,
-    'immolate':SpellsList.immolate,    
+    'slam':SpellsList.slam,
     'shieldblock':SpellsList.shieldblock
 }
 
@@ -76,10 +70,9 @@ class Warlock(Player):
         return warlock
 
     movesList = {
-    'heal':SpellsList.heal,
-    'growth':SpellsList.growth,
-    'immolate':SpellsList.immolate,    
-    'shieldblock':SpellsList.shieldblock
+    'shadowbolt':SpellsList.shadowbolt,
+    'lifedrain':SpellsList.lifedrain,    
+    'immolate':SpellsList.immolate
 }
 
 ################
@@ -95,10 +88,9 @@ class Druid(Player):
         return druid
 
     movesList = {
-    'heal':SpellsList.heal,
-    'growth':SpellsList.growth,
-    'immolate':SpellsList.immolate,    
-    'shieldblock':SpellsList.shieldblock
+    'lunarstrike':SpellsList.lunarstrike,
+    'growth':SpellsList.growth,    
+    'spirituality':SpellsList.spirituality
 }
 
 
@@ -115,14 +107,61 @@ class Rogue(Player):
         return rogue
 
     movesList = {
-    'heal':SpellsList.heal,
-    'growth':SpellsList.growth,
-    'immolate':SpellsList.immolate,    
-    'shieldblock':SpellsList.shieldblock
+    'preparation':SpellsList.preparation,
+    'poison':SpellsList.poison,
+    'backstab':SpellsList.backstab
 }
 
+################
 
+class Priest(Player):
+    def __init__(self):
+        super(Priest, self).__init__()
+        self.hp=100
 
+    @staticmethod   
+    def createPriest():
+        priest = Priest()
+        return priest
+
+    movesList = {
+    'prayer':SpellsList.prayer
+}
+
+################
+
+class DeathKnight(Player):
+    def __init__(self):
+        super(DeathKnight, self).__init__()
+        self.hp=100
+
+    @staticmethod   
+    def createDeathKnight():
+        deathKnight = DeathKnight()
+        return deathKnight
+
+    movesList = {
+    'deathstrike':SpellsList.deathstrike,
+    'deathgrip':SpellsList.deathgrip
+}
+
+################
+
+class Ranger(Player):
+    def __init__(self):
+        super(Ranger, self).__init__()
+        self.hp=100
+
+    @staticmethod   
+    def createRanger():
+        ranger = Ranger()
+        return ranger
+
+    movesList = {
+    'deadlyshot':SpellsList.deathstrike
+}
+    
+    
 ################
 
 class Mage(Player):
@@ -136,10 +175,7 @@ class Mage(Player):
         return mage
 
     movesList = {
-    'heal':SpellsList.heal,
-    'growth':SpellsList.growth,
-    'immolate':SpellsList.immolate,    
-    'shieldblock':SpellsList.shieldblock
+    'arcanebolt':SpellsList.arcanebolt
 }
 
 
@@ -151,8 +187,9 @@ classList = {
     'druid': Druid.createDruid,
     'rogue': Rogue.createRogue,
     'mage': Mage.createMage,
-    'warrior': Warrior.createWarrior
-    
-
+    'warrior': Warrior.createWarrior,
+    'priest': Priest.createPriest,
+    'ranger': Ranger.createRanger,
+    'death knight': DeathKnight.createDeathKnight
 
     }
