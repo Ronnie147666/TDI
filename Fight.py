@@ -19,26 +19,26 @@ def fight(player,enemy,floor):
                 BuffNDebuff.clearBuffsNDebuffs(enemy)
                 statsCalculated = True
           try:
-              for t in range(0,player.moveCount):
-                    LogNColor.Printer("What will you do: ")
-                    s = str(raw_input())  
-                    resolveAction(player,enemy,s)
-              if(enemy.hp>0):
-                    resolveAction(enemy,player,random.randint(1,2))    
-              else:
-                    lootPhase(player,floor)
-                    StatsNDice.levelUp(player,floor)
-                    StatsNDice.calculateStats(player)
-              if (player.hp<=0):
-                  LogNColor.Printer("You lost!")
-                  Rpg.startGame()
-              BuffNDebuff.reduceBuffsNDebuffs(player)
-              BuffNDebuff.reduceBuffsNDebuffs(enemy)
-              statsCalculated = False
+                for t in range(0,player.moveCount):
+                      LogNColor.Printer("What will you do: ")
+                      s = str(raw_input())  
+                      resolveAction(player,enemy,s)
+                if(enemy.hp>0):
+                      resolveAction(enemy,player,random.randint(1,2))    
+                else:
+                      lootPhase(player,floor)
+                      StatsNDice.levelUp(player,floor)
+                      StatsNDice.calculateStats(player)
+                if (player.hp<=0):
+                    LogNColor.Printer("You lost!")
+                    Rpg.startGame()
+                BuffNDebuff.reduceBuffsNDebuffs(player)
+                BuffNDebuff.reduceBuffsNDebuffs(enemy)
+                statsCalculated = False
           except:
-              if s  == 'quit':
-                  Rpg.quitGame()         
-              LogNColor.Printer("Wrong command")
+                if s  == 'quit':
+                    Rpg.quitGame()         
+                LogNColor.Printer("Wrong command")
 
 
 def getLoot(floor):

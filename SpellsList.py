@@ -91,6 +91,14 @@ def shieldblock(player,placeHolder):
     player.buffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff,time=4))
     LogNColor.Printer(str("Shieldblock-Your Strength:%d" %player.stg+stgBuff))
 
+def taunt(placeHolder,target):
+    stgDebuff=-int(round(target.stg/4))
+    target.hp+= stgDebuff*10
+    target.dmg+= stgDebuff*5
+    target.debuffs.append(BuffNDebuff.BuffNDebuff(stg=stgDebuff,time=4))
+    LogNColor.Printer(str("Taunt-Enemy Strength:%d" %(target.stg+stgDebuff)))
+    
+
 ####################################
 
 
@@ -142,7 +150,9 @@ def deathstrike(player,target):
     LogNColor.Printer(str("Death Strike-Your HP:%d" %player.hp))
     
 ########################################################
+    
     #################################################
+    
 ########################################################
 
 def dragonbreath(enemy,target):
@@ -177,7 +187,7 @@ def stealife(enemy,target):
     LogNColor.Printer(str("Steal Life-Your HP:%d" %target.hp))
     LogNColor.Printer(str("Steal Life-Enemy HP:%d" %enemy.hp))
 
-def bloodstrike(player,target):
+def bloodstrike(enemy,target):
     target.hp-=((player.spell*0.25)+(player.dmg*0.25)) if not isCritical(player.crit) else ((player.spell*0.5)+(player.dmg*0.5))*2
     player.hp+=player.spell*0.25+player.dmg*0.25
     LogNColor.Printer(str("Blood Strike-Enemy HP:%d" %target.hp))

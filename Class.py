@@ -54,7 +54,8 @@ class Warrior(Player):
 
     movesList = {
     'slam':SpellsList.slam,
-    'shieldblock':SpellsList.shieldblock
+    'shieldblock':SpellsList.shieldblock,
+    'taunt':SpellsList.taunt
 }
 
 ###############
