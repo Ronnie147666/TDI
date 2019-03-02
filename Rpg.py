@@ -30,8 +30,8 @@ def startGame():
       p.hots=[]
       p.dots=[]      
       StatsNDice.calculateStats(p)
-      e = Enemy.createEnemy(random.randint(1,2))
-      e = Enemy.createEnemy(1)
+      e = Enemy.enemyList[random.randint(1,3)]()
+##      e = Enemy.enemyList[1]()
       StatsNDice.enemyLevelUp(e,floor-1)
       StatsNDice.calculateStats(e)
       LogNColor.Printer("Floor: "+str(floor))
