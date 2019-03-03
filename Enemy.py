@@ -43,6 +43,23 @@ class Dragon(Enemy):
     2:SpellsList.dragonbreath
 }    
 
+class DarkKnight(Enemy):
+    def __init__(self):
+        super(DarkKnight, self).__init__()          
+        self.stg=50
+        self.agi=50
+        self.inl=50
+
+    @staticmethod   
+    def createDarkKnight():
+        darkKnight = DarkKnight()
+        return darkKnight
+
+    movesList = {
+    1:SpellsList.soulsteal,
+    2:SpellsList.dragonbreath
+}    
+
 class Ghoul(Enemy):
     def __init__(self):
         super(Ghoul, self).__init__()

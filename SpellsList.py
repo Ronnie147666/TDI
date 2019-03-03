@@ -156,8 +156,15 @@ def deathstrike(player,target):
 ########################################################
 
 def dragonbreath(enemy,target):
-    target.hp-=enemy.spell*4 if not isCritical(enemy.crit) else enemy.spell*8
+    s=enemy.spell
+    target.hp-=roll(s*2,s*4) if not isCritical(enemy.crit) else roll(s*4,s*8)
     LogNColor.Printer(str("Dragonbreath-Your HP:%d" %target.hp))
+
+def tailwhip(enemy,target):
+    target.hp-=enemy.dmg*3 if not isCritical(enemy.crit) else enemy.spell*8
+    LogNColor.Printer(str("Tailwhip-Your HP:%d" %target.hp))
+
+        
     
 def soulsteal(enemy,target):
     target.hp-=int(round(enemy.spell))
@@ -199,7 +206,9 @@ def bloodboil(placeHolder,target):
     target.dots.append(HotsNDots.HotNDot(hp=dmg,time=3,name="Bloodboil"))
     LogNColor.Printer(str("Bloodboil-Enemy HP:%d" %target.hp))
 
-
+def mutilate(enemy,target):
+    target.hp-=(enemy.dmg*3) if not isCritical(enemy.crit) else (enemy.dmg*6)
+    LogNColor.Printer(str("Mutilate-Your HP:%d" %target.hp))
 
 
 
