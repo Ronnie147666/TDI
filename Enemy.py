@@ -2,7 +2,7 @@ import SpellsList
 
 class Enemy(object):   
     def __init__(self):
-     self.stg=20
+     self.stg=50
      self.agi=50
      self.inl=50
      self.bonusStg=0
@@ -14,6 +14,7 @@ class Enemy(object):
      self.arm=0
      self.crit=0     
      self.spell=0
+     self.spellR=0
      self.moveCount=1     
 
      self.buffs=[]
@@ -29,9 +30,9 @@ class Enemy(object):
 class Dragon(Enemy):
     def __init__(self):
         super(Dragon, self).__init__()          
-        self.stg=50
-        self.agi=50
-        self.inl=50
+        self.stg=35
+        self.agi=30
+        self.inl=25
 
     @staticmethod   
     def createDragon():
@@ -46,9 +47,9 @@ class Dragon(Enemy):
 class DarkKnight(Enemy):
     def __init__(self):
         super(DarkKnight, self).__init__()          
-        self.stg=50
-        self.agi=50
-        self.inl=50
+        self.stg=30
+        self.agi=25
+        self.inl=20
 
     @staticmethod   
     def createDarkKnight():
@@ -60,17 +61,17 @@ class DarkKnight(Enemy):
     2:SpellsList.dragonbreath
 }    
 
-class Ghoul(Enemy):
+class Lich(Enemy):
     def __init__(self):
-        super(Ghoul, self).__init__()
-        self.stg=30
-        self.agi=30
-        self.inl=30
+        super(Lich, self).__init__()
+        self.stg=15
+        self.agi=20
+        self.inl=35
 
     @staticmethod   
-    def createGhoul():
-        ghoul = Ghoul()
-        return ghoul
+    def createLich():
+        lich = Lich()
+        return lich
 
     movesList = {
     1:SpellsList.soulsteal,
@@ -80,9 +81,9 @@ class Ghoul(Enemy):
 class Archmage(Enemy):
     def __init__(self):
         super(Archmage, self).__init__()
-        self.stg=30
-        self.agi=50
-        self.inl=90
+        self.stg=15
+        self.agi=25
+        self.inl=35
 
     @staticmethod   
     def createArchmage():
@@ -94,51 +95,51 @@ class Archmage(Enemy):
     2:SpellsList.dragonbreath
 }
 
-class Basilisk(Enemy):
+class Demon(Enemy):
     def __init__(self):
-        super(Basilisk, self).__init__()
-        self.stg=30
-        self.agi=50
-        self.inl=90
+        super(Demon, self).__init__()
+        self.stg=35
+        self.agi=25
+        self.inl=25
 
     @staticmethod   
-    def createBasilisk():
-        basilisk = Basilisk()
-        return basilisk     
+    def createDemon():
+        demon = Demon()
+        return demon     
 
     movesList = {
     1:SpellsList.soulsteal,
     2:SpellsList.dragonbreath
 }
 
- class Berserker(Enemy):
+ class UnholyGladiator(Enemy):
     def __init__(self):
-        super(Berserker, self).__init__()
-        self.stg=30
-        self.agi=50
-        self.inl=90
+        super(UnholyGladiator, self).__init__()
+        self.stg=35
+        self.agi=30
+        self.inl=15
 
     @staticmethod   
-    def createBerserker():
-        berserker = Berserker()
-        return berserker     
+    def createUnholyGladiator():
+        unholyGladiator = UnholyGladiator()
+        return unholyGladiator     
 
     movesList = {
     1:SpellsList.soulsteal,
     2:SpellsList.dragonbreath
 }
        
- class FireGolem(Enemy):
+ class DarkWizard(Enemy):
     def __init__(self):
-        super(FireGolem, self).__init__()
-        self.stg=30
-        self.agi=50
-        self.inl=90
+        super(DarkWizard, self).__init__()
+        self.stg=15
+        self.agi=20
+        self.inl=45
 
     @staticmethod   
-    def createFireGolem():
-        fireGolem = FireGolem()
-        return fireGolem     
+    def createDarkWizard():
+        darkWizard = DarkWizard()
+        return darkWizard     
 
     movesList = {
     1:SpellsList.soulsteal,
@@ -148,9 +149,9 @@ class Basilisk(Enemy):
  class DarkCultist(Enemy):
     def __init__(self):
         super(DarkCultist, self).__init__()
-        self.stg=30
-        self.agi=50
-        self.inl=90
+        self.stg=15
+        self.agi=25
+        self.inl=30
 
     @staticmethod   
     def createDarkCultist():
@@ -165,9 +166,9 @@ class Basilisk(Enemy):
  class CursedDjinni(Enemy):
     def __init__(self):
         super(CursedDjinni, self).__init__()
-        self.stg=30
-        self.agi=50
-        self.inl=90
+        self.stg=25
+        self.agi=30
+        self.inl=35
 
     @staticmethod   
     def createCursedDjinni():
@@ -182,9 +183,9 @@ class Basilisk(Enemy):
  class DrowRanger(Enemy):
     def __init__(self):
         super(DrowRanger, self).__init__()
-        self.stg=30
-        self.agi=50
-        self.inl=90
+        self.stg=25
+        self.agi=40
+        self.inl=25
 
     @staticmethod   
     def createDrowRanger():
@@ -200,8 +201,8 @@ class Basilisk(Enemy):
     def __init__(self):
         super(FireElemental, self).__init__()
         self.stg=30
-        self.agi=50
-        self.inl=90
+        self.agi=25
+        self.inl=25
 
     @staticmethod   
     def createElemental():
@@ -216,9 +217,9 @@ class Basilisk(Enemy):
  class WindElemental(Enemy):
     def __init__(self):
         super(WindElemental, self).__init__()
-        self.stg=30
-        self.agi=50
-        self.inl=90
+        self.stg=25
+        self.agi=30
+        self.inl=25
 
     @staticmethod   
     def createWindElemental():
@@ -233,9 +234,9 @@ class Basilisk(Enemy):
  class WaterElemental(Enemy):
     def __init__(self):
         super(WaterElemental, self).__init__()
-        self.stg=30
-        self.agi=50
-        self.inl=90
+        self.stg=25
+        self.agi=25
+        self.inl=30
 
     @staticmethod   
     def createWaterElemental():
@@ -250,9 +251,9 @@ class Basilisk(Enemy):
  class Ghost(Enemy):
     def __init__(self):
         super(Ghost, self).__init__()
-        self.stg=30
-        self.agi=50
-        self.inl=90
+        self.stg=10
+        self.agi=30
+        self.inl=30
 
     @staticmethod   
     def createGhost():
@@ -267,9 +268,9 @@ class Basilisk(Enemy):
  class MercilessGladiator(Enemy):
     def __init__(self):
         super(MercilessGladiator, self).__init__()
-        self.stg=30
-        self.agi=50
-        self.inl=90
+        self.stg=25
+        self.agi=40
+        self.inl=10
 
     @staticmethod   
     def createMercilessGladiator():
