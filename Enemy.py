@@ -14,7 +14,7 @@ class Enemy(object):
      self.arm=0
      self.crit=0     
      self.spell=0
-     self.spellR=0
+     self.res=0
      self.moveCount=1     
 
      self.buffs=[]
