@@ -38,7 +38,9 @@ class Paladin(Player):
         return paladin
     
     movesList = {
-    'heal':SpellsList.heal
+    'heal':SpellsList.heal,
+    'crusaderstrike':SpellsList.crusaderstrike,
+    'blessingofkings':SpellsList.blessingofkings
 }
 
 ###############
@@ -144,7 +146,8 @@ class DeathKnight(Player):
 
     movesList = {
     'deathstrike':SpellsList.deathstrike,
-    'deathgrip':SpellsList.deathgrip
+    'deathgrip':SpellsList.deathgrip,
+    'runiccorruption':SpellsList.runiccorruption
 }
 
 ################

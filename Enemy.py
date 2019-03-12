@@ -112,7 +112,7 @@ class Demon(Enemy):
     2:SpellsList.dragonbreath
 }
 
- class UnholyGladiator(Enemy):
+class UnholyGladiator(Enemy):
     def __init__(self):
         super(UnholyGladiator, self).__init__()
         self.stg=35
@@ -129,7 +129,7 @@ class Demon(Enemy):
     2:SpellsList.dragonbreath
 }
        
- class DarkWizard(Enemy):
+class DarkWizard(Enemy):
     def __init__(self):
         super(DarkWizard, self).__init__()
         self.stg=15
@@ -146,7 +146,7 @@ class Demon(Enemy):
     2:SpellsList.dragonbreath
 }
 
- class DarkCultist(Enemy):
+class DarkCultist(Enemy):
     def __init__(self):
         super(DarkCultist, self).__init__()
         self.stg=15
@@ -163,7 +163,7 @@ class Demon(Enemy):
     2:SpellsList.dragonbreath
 }   
 
- class CursedDjinni(Enemy):
+class CursedDjinni(Enemy):
     def __init__(self):
         super(CursedDjinni, self).__init__()
         self.stg=25
@@ -180,7 +180,7 @@ class Demon(Enemy):
     2:SpellsList.dragonbreath
 }  
 
- class DrowRanger(Enemy):
+class DrowRanger(Enemy):
     def __init__(self):
         super(DrowRanger, self).__init__()
         self.stg=25
@@ -197,7 +197,7 @@ class Demon(Enemy):
     2:SpellsList.dragonbreath
 }  
 
- class FireElemental(Enemy):
+class FireElemental(Enemy):
     def __init__(self):
         super(FireElemental, self).__init__()
         self.stg=30
@@ -214,7 +214,7 @@ class Demon(Enemy):
     2:SpellsList.dragonbreath
 }  
 
- class WindElemental(Enemy):
+class WindElemental(Enemy):
     def __init__(self):
         super(WindElemental, self).__init__()
         self.stg=25
@@ -231,7 +231,7 @@ class Demon(Enemy):
     2:SpellsList.dragonbreath
 }  
 
- class WaterElemental(Enemy):
+class WaterElemental(Enemy):
     def __init__(self):
         super(WaterElemental, self).__init__()
         self.stg=25
@@ -248,7 +248,7 @@ class Demon(Enemy):
     2:SpellsList.dragonbreath
 }  
 
- class Ghost(Enemy):
+class Ghost(Enemy):
     def __init__(self):
         super(Ghost, self).__init__()
         self.stg=10
@@ -265,7 +265,7 @@ class Demon(Enemy):
     2:SpellsList.dragonbreath
 }  
 
- class MercilessGladiator(Enemy):
+class MercilessGladiator(Enemy):
     def __init__(self):
         super(MercilessGladiator, self).__init__()
         self.stg=25

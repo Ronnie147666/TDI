@@ -37,12 +37,18 @@ def clearBuffsNDebuffs(character):
     stgBuffs=0
     for b in character.buffs:
         if b.time==0:
-            stgBuffs+=b.stg  
+            stgBuffs+=b.stg
+    stgDebuffs=0
+    for b in character.debuffs:
+        if b.time==0:
+            stgDebuffs+=b.stg    
     character.buffs = [buff for buff in character.buffs if buff.time > 0]
     character.debuffs = [debuff for debuff in character.debuffs if debuff.time > 0]
     if stgBuffs>0:
         if character.hp>StatsNDice.calculateHpWBuffs(character):
             character.hp = StatsNDice.calculateHpWBuffs(character)
+    if stgDebuffs>0:
+        character.hp+=stgDebuffs*10
 
 def reduceBuffsNDebuffs(character):
     for buff in character.buffs:

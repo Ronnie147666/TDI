@@ -72,11 +72,13 @@ def spirituality(player,placeHolder):
     player.dmg+= stgBuff*3
     player.arm+= agiBuff*0.1
     player.crit+= agiBuff*3
-    player.spell+= intBuff*0.1 
+    player.spell+= intBuff*5
     player.buffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff,time=4))
     player.buffs.append(BuffNDebuff.BuffNDebuff(agi=agiBuff,time=4))
     player.buffs.append(BuffNDebuff.BuffNDebuff(inl=intBuff,time=4))
-    LogNColor.Printer(str("Preparation-Your Agility:%d" %player.agi+agiBuff))
+    LogNColor.Printer(str("Spirituality-Your Strength:%d" %player.stg+stgBuff))
+    LogNColor.Printer(str("Spirituality-Your Agility:%d" %player.agi+agiBuff))
+    LogNColor.Printer(str("Spirituality-Your Intellect:%d" %player.inl+intBuff))
 
 ######################################
 
@@ -101,8 +103,22 @@ def taunt(placeHolder,target):
 
 ####################################
 
+def crusaderstrike(player,target):
+    dmg=(player.dmg*2)-(target.arm*0.75)
+    target.hp-=dmg if not isCritical(player.crit) else dmg*2
+    LogNColor.Printer(str("Crusader Strike-Enemy HP:%d" %target.hp))
 
+def blessingofkings(player,placeHolder):
+    stgBuff=int(round(player.stg/2))
+    inlBuff=int(round(player.inl/2))
+    player.dmg= totalStg*10
+    player.dmg= totalStg*5
+    player.spell= totalInl*5
+    player.res= totalInl*3
 
+    player.buffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff,inl=inlBuff,time=4),)
+    LogNColor.Printer(str("Blessing Of Kings-Your Strength:%d" %(player.stg+stgBuff)))
+    LogNColor.Printer(str("Blessing Of Kings-Your Intellect:%d" %(player.inl+inlBuff)))
 
 def heal(player,placeHolder):
     player.hp+=player.spell
@@ -148,12 +164,30 @@ def deathstrike(player,target):
     player.hp+=player.spell*0.25+player.dmg*0.25
     LogNColor.Printer(str("Death Strike-Enemy HP:%d" %target.hp))
     LogNColor.Printer(str("Death Strike-Your HP:%d" %player.hp))
+
+def runiccorruption(player,enemy):
+    stgDebuff=int(round(player.stg/2))
+    agiDebuff=int(round(player.agi/2))
+    intDebuff=int(round(player.inl/2))
+    enemy.hp-= stgBuff*10
+    enemy.dmg-= stgBuff*3
+    enemy.arm-= agiBuff*0.1
+    enemy.crit-= agiBuff*3
+    enemy.spell-= intBuff*5
+    enemy.res-= intBuff*3
+    enemy.buffs.append(BuffNDebuff.BuffNDebuff(stg=stgDebuff,time=4))
+    enemy.buffs.append(BuffNDebuff.BuffNDebuff(agi=agiDebuff,time=4))
+    enemy.buffs.append(BuffNDebuff.BuffNDebuff(inl=intDebuff,time=4))
+    LogNColor.Printer(str("Runic Corruption-Enemy Strength:%d" %enemy.stg+stgDebuff))
+    LogNColor.Printer(str("Runic Corruption-Enemy Agility:%d" %enemy.agi+agiBuff))
+    LogNColor.Printer(str("Runic Corruption-Enemy Intellect:%d" %enemy.inl+intDebuff))
+
     
-########################################################
-    
-    #################################################
-    
-########################################################
+                                    ########################################################
+                                        
+                                        #################################################
+                                        
+                                    ########################################################
 
 def dragonbreath(enemy,target):
     s=enemy.spell
