@@ -31,7 +31,9 @@ class Player(object):
 class Paladin(Player):
     def __init__(self):
         super(Paladin, self).__init__()
-        self.hp=100
+        self.stg=90
+        self.agi=90
+        self.inl=90
     @staticmethod   
     def createPaladin():
         paladin = Paladin()

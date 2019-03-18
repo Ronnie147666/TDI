@@ -68,11 +68,13 @@ def growth(player,placeHolder):
 def spirituality(player,placeHolder):
     stgBuff=int(round(player.stg/2))
     agiBuff=int(round(player.agi/2))
-    intBuff=int(round(player.inl/2))    
+    intBuff=int(round(player.inl/2))
+    player.hp= player.stg*10  
     player.dmg+= stgBuff*3
     player.arm+= agiBuff*0.1
     player.crit+= agiBuff*3
     player.spell+= intBuff*5
+    player.res+= intBuff*3
     player.buffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff,time=4))
     player.buffs.append(BuffNDebuff.BuffNDebuff(agi=agiBuff,time=4))
     player.buffs.append(BuffNDebuff.BuffNDebuff(inl=intBuff,time=4))
@@ -111,10 +113,10 @@ def crusaderstrike(player,target):
 def blessingofkings(player,placeHolder):
     stgBuff=int(round(player.stg/2))
     inlBuff=int(round(player.inl/2))
-    player.dmg= totalStg*10
-    player.dmg= totalStg*5
-    player.spell= totalInl*5
-    player.res= totalInl*3
+    player.dmg+=stgBuff*10
+    player.dmg+=stgBuff*5
+    player.spell+=inlBuff*5
+    player.res+=inlBuff*3
 
     player.buffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff,inl=inlBuff,time=4),)
     LogNColor.Printer(str("Blessing Of Kings-Your Strength:%d" %(player.stg+stgBuff)))
@@ -245,9 +247,67 @@ def mutilate(enemy,target):
     LogNColor.Printer(str("Mutilate-Your HP:%d" %target.hp))
 
 
+def firestrike(enemy,player):
+    dmg=(enemy.dmg+enemy.spell)
+    player.hp-=(dmg*2) if not isCritical(enemy.crit) else (dmg*4)
+    LogNColor.Printer(str("Firestrike-Your HP:%d" %player.hp))
 
+def windstrike(enemy,player):
+    dmg=(enemy.dmg+enemy.spell)
+    player.hp-=(dmg*2) if not isCritical(enemy.crit) else (dmg*4)
+    LogNColor.Printer(str("Windstrike-Your HP:%d" %player.hp))
 
+def waterstrike(enemy,player):
+    dmg=(enemy.dmg+enemy.spell)
+    player.hp-=(dmg*2) if not isCritical(enemy.crit) else (dmg*4)
+    LogNColor.Printer(str("Waterstrike-Your HP:%d" %player.hp))
 
+def fireinvocation(enemy,placeHolder):
+    stgBuff=int(round(enemy.stg/2))
+    enemy.hp+=stgBuff*10
+    enemy.dmg+=stgBuff*5
 
+    enemy.buffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff,time=4),)
+    LogNColor.Printer(str("Fire Invocation-Enemy Strength:%d" %(enemy.stg+stgBuff)))
+
+def windinvocation(enemy,placeHolder):
+    agiBuff=int(round(enemy.agi/2))
+    enemy.arm+=agiBuff*3
+    enemy.crit+=agiBuff*0.1    
+
+    enemy.buffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff,time=4),)
+    LogNColor.Printer(str("Wind Invocation-Enemy Agility:%d" %(enemy.stg+stgBuff)))
+
+def waterinvocation(enemy,placeHolder):
+    inlBuff=int(round(enemy.inl/2))
+    enemy.spell+=inlBuff*5
+    enemy.res+=inlBuff*3
+
+    enemy.buffs.append(BuffNDebuff.BuffNDebuff(inl=inlBuff,time=4),)
+    LogNColor.Printer(str("Water Invocation-Enemy Intellect:%d" %(enemy.inl+inlBuff)))
+
+def firestorm(enemy,player):
+    stgDebuff=int(round(player.stg/2))
+    enemy.hp-=stgBuff*10
+    enemy.dmg-=stgBuff*5
+
+    enemy.debuffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff,time=4),)
+    LogNColor.Printer(str("Fire Storm-Your Strength:%d" %(player.stg+stgDebuff)))
+
+def windstorm(enemy,player):
+    agiDebuff=int(round(player.agi/2))
+    enemy.arm-=agiBuff*3
+    enemy.crit-=agiBuff*0.1    
+
+    enemy.debuffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff,time=4),)
+    LogNColor.Printer(str("Wind Storm-Your Agility:%d" %(player.stg+agiDebuff)))
+
+def waterstorm(enemy,player):
+    inlDebuff=int(round(player.inl/2))
+    enemy.spell-=inlBuff*5
+    enemy.res-=inlBuff*3
+
+    enemy.debuffs.append(BuffNDebuff.BuffNDebuff(inl=inlDebuff,time=4),)
+    LogNColor.Printer(str("Water Storm-Your Intellect:%d" %(player.inl+inlDebuff)))
 
     

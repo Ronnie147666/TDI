@@ -35,7 +35,7 @@ class Dragon(Enemy):
         self.inl=25
 
     @staticmethod   
-    def createDragon():
+    def create():
         dragon = Dragon()
         return dragon
 
@@ -52,7 +52,7 @@ class DarkKnight(Enemy):
         self.inl=20
 
     @staticmethod   
-    def createDarkKnight():
+    def create():
         darkKnight = DarkKnight()
         return darkKnight
 
@@ -69,7 +69,7 @@ class Lich(Enemy):
         self.inl=35
 
     @staticmethod   
-    def createLich():
+    def create():
         lich = Lich()
         return lich
 
@@ -86,7 +86,7 @@ class Archmage(Enemy):
         self.inl=35
 
     @staticmethod   
-    def createArchmage():
+    def create():
         archmage = Archmage()
         return archmage     
 
@@ -103,7 +103,7 @@ class Demon(Enemy):
         self.inl=25
 
     @staticmethod   
-    def createDemon():
+    def create():
         demon = Demon()
         return demon     
 
@@ -120,7 +120,7 @@ class UnholyGladiator(Enemy):
         self.inl=15
 
     @staticmethod   
-    def createUnholyGladiator():
+    def create():
         unholyGladiator = UnholyGladiator()
         return unholyGladiator     
 
@@ -137,7 +137,7 @@ class DarkWizard(Enemy):
         self.inl=45
 
     @staticmethod   
-    def createDarkWizard():
+    def create():
         darkWizard = DarkWizard()
         return darkWizard     
 
@@ -154,7 +154,7 @@ class DarkCultist(Enemy):
         self.inl=30
 
     @staticmethod   
-    def createDarkCultist():
+    def create():
         darkCultist = DarkCultist()
         return darkCultist     
 
@@ -171,7 +171,7 @@ class CursedDjinni(Enemy):
         self.inl=35
 
     @staticmethod   
-    def createCursedDjinni():
+    def create():
         cursedDjinni = CursedDjinni()
         return cursedDjinni     
 
@@ -188,7 +188,7 @@ class DrowRanger(Enemy):
         self.inl=25
 
     @staticmethod   
-    def createDrowRanger():
+    def create():
         drowRanger = DrowRanger()
         return drowRanger     
 
@@ -205,13 +205,14 @@ class FireElemental(Enemy):
         self.inl=25
 
     @staticmethod   
-    def createElemental():
+    def create():
         fireElemental = FireElemental()
         return fireElemental     
 
     movesList = {
-    1:SpellsList.soulsteal,
-    2:SpellsList.dragonbreath
+    1:SpellsList.firestrike,
+    2:SpellsList.fireinvocation,
+    3:SpellsList.firestorm
 }  
 
 class WindElemental(Enemy):
@@ -222,13 +223,14 @@ class WindElemental(Enemy):
         self.inl=25
 
     @staticmethod   
-    def createWindElemental():
+    def create():
         windElemental = WindElemental()
         return windElemental     
 
     movesList = {
-    1:SpellsList.soulsteal,
-    2:SpellsList.dragonbreath
+    1:SpellsList.windstrike,
+    2:SpellsList.windinvocation,
+    3:SpellsList.windstorm
 }  
 
 class WaterElemental(Enemy):
@@ -239,13 +241,14 @@ class WaterElemental(Enemy):
         self.inl=30
 
     @staticmethod   
-    def createWaterElemental():
+    def create():
         waterElemental = WaterElemental()
         return waterElemental     
 
     movesList = {
-    1:SpellsList.soulsteal,
-    2:SpellsList.dragonbreath
+    1:SpellsList.waterstrike,
+    2:SpellsList.waterinvocation,
+    3:SpellsList.waterstorm
 }  
 
 class Ghost(Enemy):
@@ -256,7 +259,7 @@ class Ghost(Enemy):
         self.inl=30
 
     @staticmethod   
-    def createGhost():
+    def create():
         ghost = Ghost()
         return ghost     
 
@@ -273,7 +276,7 @@ class MercilessGladiator(Enemy):
         self.inl=10
 
     @staticmethod   
-    def createMercilessGladiator():
+    def create():
         mercilessGladiator = MercilessGladiator()
         return mercilessGladiator     
 
@@ -286,8 +289,10 @@ class MercilessGladiator(Enemy):
 ###################################
     
 enemyList = {
-    1:Dragon.createDragon,
-    2:Ghoul.createGhoul,
-    3:Archmage.createArchmage
+    1:Dragon.create,
+    2:FireElemental.create,
+    3:WindElemental.create,
+    4:WaterElemental.create,
+    5:Archmage.create
 
     }

@@ -10,6 +10,7 @@ import LogNColor
 def startGame():
     LogNColor.setColor("red")
     LogNColor.Printer(str("Welcome to the Colosseum!"))
+    print random.randint(1,5)
     p = None
     floor = 0
     while p == None:
@@ -30,8 +31,7 @@ def startGame():
       p.hots=[]
       p.dots=[]      
       StatsNDice.calculateStats(p)
-      e = Enemy.enemyList[random.randint(1,3)]()
-##      e = Enemy.enemyList[1]()
+      e = Enemy.enemyList[random.randint(1,5)]()
       StatsNDice.enemyLevelUp(e,floor-1)
       StatsNDice.calculateStats(e)
       LogNColor.Printer("Floor: "+str(floor))

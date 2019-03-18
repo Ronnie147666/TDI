@@ -38,14 +38,14 @@ def fight(player,enemy,floor):
           except:
                 if s  == 'quit':
                     Rpg.quitGame()         
-                LogNColor.Printer("Wrong command")
+                LogNColor.Printer("Wrong commandl")
 
 
 def getLoot(floor):
       loot=[]
       for i in range(0,floor):
             dice = random.randint(1,29)
-            loot.append(ItemList.itemChance[StatsNDice.roll(dice)])
+            loot.append(ItemList.itemChance[dice])
       return loot
 
 def lootPhase(player,floor):
