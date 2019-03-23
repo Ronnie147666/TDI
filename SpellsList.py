@@ -129,15 +129,24 @@ def heal(player,placeHolder):
 
 ########################################
 
-
+def arcanepower(player,placeHolder):
+    inlBuff=int(round(player.inl/2))
+    player.spell+=inlBuff*5
+    player.res+=inlBuff*3
+    player.buffs.append(BuffNDebuff.BuffNDebuff(inl=inlBuff,time=4),)
+    LogNColor.Printer(str("Arcane Power-Your Intellect:%d" %(player.inl+inlBuff)))
     
 def arcanebolt(player,target):
     target.hp-=player.spell*3 if not isCritical(player.crit) else player.spell*6
     LogNColor.Printer(str("Arcanebolt-Enemy HP:%d" %target.hp))
 
-
+def ignite(player,target):
+    dmg=int(round(player.spell/2,5))
+    target.hp-=dmg
+    target.dots.append(HotsNDots.HotNDot(hp=dmg,time=4,name="ignite"))
+    LogNColor.Printer(str("Ignite-Enemy HP:%d" %target.hp))
+    
 ##################################################
-
 
 def prayer(player,placeHolder):
     hpHeal=int(round(player.spell/0.2))
@@ -147,6 +156,17 @@ def prayer(player,placeHolder):
         player.hp+=hpHeal
     player.hots.append(HotsNDots.HotNDot(hp=hpHeal,time=4,name="Prayer"))
     LogNColor.Printer(str("Prayer-Your HP:%d" %player.hp))
+
+def silence(player,enemy):
+    intDebuff=int(round(player.inl/3))
+    enemy.spell-= intBuff*5
+    enemy.res-= intBuff*3
+    enemy.debuffs.append(BuffNDebuff.BuffNDebuff(inl=intDebuff,time=4))
+    LogNColor.Printer(str("silence-Enemy Intellect:%d" %enemy.inl+intDebuff))
+
+def penance(player,target):
+    target.hp-=player.spell*2 if not isCritical(player.crit) else player.spell*4
+    LogNColor.Printer(str("Penance-Enemy HP:%d" %target.hp))
 
 ################################################
 
@@ -177,9 +197,7 @@ def runiccorruption(player,enemy):
     enemy.crit-= agiBuff*3
     enemy.spell-= intBuff*5
     enemy.res-= intBuff*3
-    enemy.buffs.append(BuffNDebuff.BuffNDebuff(stg=stgDebuff,time=4))
-    enemy.buffs.append(BuffNDebuff.BuffNDebuff(agi=agiDebuff,time=4))
-    enemy.buffs.append(BuffNDebuff.BuffNDebuff(inl=intDebuff,time=4))
+    enemy.debuffs.append(BuffNDebuff.BuffNDebuff(stg=stgDebuff,agi=agiDebuff,inl=intDebuff,time=4))
     LogNColor.Printer(str("Runic Corruption-Enemy Strength:%d" %enemy.stg+stgDebuff))
     LogNColor.Printer(str("Runic Corruption-Enemy Agility:%d" %enemy.agi+agiBuff))
     LogNColor.Printer(str("Runic Corruption-Enemy Intellect:%d" %enemy.inl+intDebuff))

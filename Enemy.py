@@ -1,4 +1,5 @@
 import SpellsList
+import StatsNDice
 
 class Enemy(object):   
     def __init__(self):
@@ -288,11 +289,24 @@ class MercilessGladiator(Enemy):
     
 ###################################
     
-enemyList = {
-    1:Dragon.create,
-    2:FireElemental.create,
-    3:WindElemental.create,
-    4:WaterElemental.create,
-    5:Archmage.create
+##enemyList = {
+##    1:Dragon.create,
+##    2:FireElemental.create,
+##    3:WindElemental.create,
+##    4:WaterElemental.create,
+##    5:Archmage.create
+##
+##    }
 
-    }
+
+enemyList = StatsNDice.range_dict(
+                     (range(0,10), Dragon.create),
+                     (range(10,20), FireElemental.create),
+                     (range(20,30), WindElemental.create),
+                     (range(30,40), WaterElemental.create),
+                     (range(40,45), Archmage.create))
+
+
+
+
+

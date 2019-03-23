@@ -131,6 +131,8 @@ class Priest(Player):
         return priest
 
     movesList = {
+    'penance':SpellsList.penance,
+    'silence':SpellsList.silence,
     'prayer':SpellsList.prayer
 }
 
@@ -182,7 +184,9 @@ class Mage(Player):
         return mage
 
     movesList = {
-    'arcanebolt':SpellsList.arcanebolt
+    'arcanepower':SpellsList.arcanepower,
+    'deathgrip':SpellsList.deathgrip,
+    'ignite':SpellsList.ignite
 }
 
 
