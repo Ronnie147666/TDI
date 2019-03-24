@@ -167,7 +167,9 @@ class Ranger(Player):
         return ranger
 
     movesList = {
-    'deadlyshot':SpellsList.deathstrike
+    'deadlyshot':SpellsList.deadlyshot,
+    'wildcall':SpellsList.wildcall,
+    'paralyzeshot':SpellsList.paralyzeshot
 }
     
     

@@ -1,6 +1,6 @@
 import Item
 import StatsNDice
-import randint from random
+from random import randint
 
 items = {
     'Titansword': Item.Item(strg=100,agi=150,name="Titansword"),

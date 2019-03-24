@@ -1,4 +1,4 @@
-import SpellsList
+import EnemySpellsList
 import StatsNDice
 
 class Enemy(object):   
@@ -41,8 +41,8 @@ class Dragon(Enemy):
         return dragon
 
     movesList = {
-    1:SpellsList.soulsteal,
-    2:SpellsList.dragonbreath
+    1:EnemySpellsList.soulsteal,
+    2:EnemySpellsList.dragonbreath
 }    
 
 class DarkKnight(Enemy):
@@ -58,8 +58,8 @@ class DarkKnight(Enemy):
         return darkKnight
 
     movesList = {
-    1:SpellsList.soulsteal,
-    2:SpellsList.dragonbreath
+    1:EnemySpellsList.soulsteal,
+    2:EnemySpellsList.dragonbreath
 }    
 
 class Lich(Enemy):
@@ -75,8 +75,8 @@ class Lich(Enemy):
         return lich
 
     movesList = {
-    1:SpellsList.soulsteal,
-    2:SpellsList.dragonbreath
+    1:EnemySpellsList.soulsteal,
+    2:EnemySpellsList.dragonbreath
 }  
 
 class Archmage(Enemy):
@@ -92,8 +92,8 @@ class Archmage(Enemy):
         return archmage     
 
     movesList = {
-    1:SpellsList.soulsteal,
-    2:SpellsList.dragonbreath
+    1:EnemySpellsList.soulsteal,
+    2:EnemySpellsList.dragonbreath
 }
 
 class Demon(Enemy):
@@ -109,8 +109,8 @@ class Demon(Enemy):
         return demon     
 
     movesList = {
-    1:SpellsList.soulsteal,
-    2:SpellsList.dragonbreath
+    1:EnemySpellsList.soulsteal,
+    2:EnemySpellsList.dragonbreath
 }
 
 class UnholyGladiator(Enemy):
@@ -126,8 +126,8 @@ class UnholyGladiator(Enemy):
         return unholyGladiator     
 
     movesList = {
-    1:SpellsList.soulsteal,
-    2:SpellsList.dragonbreath
+    1:EnemySpellsList.soulsteal,
+    2:EnemySpellsList.dragonbreath
 }
        
 class DarkWizard(Enemy):
@@ -143,25 +143,25 @@ class DarkWizard(Enemy):
         return darkWizard     
 
     movesList = {
-    1:SpellsList.soulsteal,
-    2:SpellsList.dragonbreath
+    1:EnemySpellsList.soulsteal,
+    2:EnemySpellsList.dragonbreath
 }
 
-class DarkCultist(Enemy):
+class Dreadlord(Enemy):
     def __init__(self):
-        super(DarkCultist, self).__init__()
+        super(Dreadlord, self).__init__()
         self.stg=15
         self.agi=25
         self.inl=30
 
     @staticmethod   
     def create():
-        darkCultist = DarkCultist()
-        return darkCultist     
+        dreadlord = Dreadlord()
+        return dreadlord     
 
     movesList = {
-    1:SpellsList.soulsteal,
-    2:SpellsList.dragonbreath
+    1:EnemySpellsList.soulsteal,
+    2:EnemySpellsList.dragonbreath
 }   
 
 class CursedDjinni(Enemy):
@@ -177,8 +177,8 @@ class CursedDjinni(Enemy):
         return cursedDjinni     
 
     movesList = {
-    1:SpellsList.soulsteal,
-    2:SpellsList.dragonbreath
+    1:EnemySpellsList.soulsteal,
+    2:EnemySpellsList.dragonbreath
 }  
 
 class DrowRanger(Enemy):
@@ -194,8 +194,8 @@ class DrowRanger(Enemy):
         return drowRanger     
 
     movesList = {
-    1:SpellsList.soulsteal,
-    2:SpellsList.dragonbreath
+    1:EnemySpellsList.soulsteal,
+    2:EnemySpellsList.dragonbreath
 }  
 
 class FireElemental(Enemy):
@@ -211,9 +211,9 @@ class FireElemental(Enemy):
         return fireElemental     
 
     movesList = {
-    1:SpellsList.firestrike,
-    2:SpellsList.fireinvocation,
-    3:SpellsList.firestorm
+    1:EnemySpellsList.firestrike,
+    2:EnemySpellsList.fireinvocation,
+    3:EnemySpellsList.firestorm
 }  
 
 class WindElemental(Enemy):
@@ -229,9 +229,9 @@ class WindElemental(Enemy):
         return windElemental     
 
     movesList = {
-    1:SpellsList.windstrike,
-    2:SpellsList.windinvocation,
-    3:SpellsList.windstorm
+    1:EnemySpellsList.windstrike,
+    2:EnemySpellsList.windinvocation,
+    3:EnemySpellsList.windstorm
 }  
 
 class WaterElemental(Enemy):
@@ -247,9 +247,9 @@ class WaterElemental(Enemy):
         return waterElemental     
 
     movesList = {
-    1:SpellsList.waterstrike,
-    2:SpellsList.waterinvocation,
-    3:SpellsList.waterstorm
+    1:EnemySpellsList.waterstrike,
+    2:EnemySpellsList.waterinvocation,
+    3:EnemySpellsList.waterstorm
 }  
 
 class Ghost(Enemy):
@@ -265,8 +265,8 @@ class Ghost(Enemy):
         return ghost     
 
     movesList = {
-    1:SpellsList.soulsteal,
-    2:SpellsList.dragonbreath
+    1:EnemySpellsList.soulsteal,
+    2:EnemySpellsList.dragonbreath
 }  
 
 class MercilessGladiator(Enemy):
@@ -282,8 +282,8 @@ class MercilessGladiator(Enemy):
         return mercilessGladiator     
 
     movesList = {
-    1:SpellsList.soulsteal,
-    2:SpellsList.dragonbreath
+    1:EnemySpellsList.soulsteal,
+    2:EnemySpellsList.dragonbreath
 }  
                         
     
