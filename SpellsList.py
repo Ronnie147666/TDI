@@ -207,10 +207,10 @@ def deathstrike(player,target):
     LogNColor.Printer(str("Death Strike-Enemy HP:%d" %target.hp))
     LogNColor.Printer(str("Death Strike-Your HP:%d" %player.hp))
 
-def runiccorruption(player,enemy):
-    stgDebuff=int(round(player.stg/2))
-    agiDebuff=int(round(player.agi/2))
-    intDebuff=int(round(player.inl/2))
+def runiccorruption(placeHolder,enemy):
+    stgDebuff=int(round(enemy.stg/4))
+    agiDebuff=int(round(enemy.agi/4))
+    intDebuff=int(round(enemy.inl/4))
     enemy.hp-= stgBuff*10
     enemy.dmg-= stgBuff*3
     enemy.arm-= agiBuff*0.1

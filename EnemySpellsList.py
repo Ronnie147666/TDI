@@ -11,6 +11,8 @@ def isCritical(crit):
         return True
     return False
 
+
+
 def dragonbreath(enemy,target):
     s=enemy.spell
     target.hp-=roll(s*2,s*4) if not isCritical(enemy.crit) else roll(s*4,s*8)
@@ -144,5 +146,33 @@ def waterstorm(enemy,player):
 
     enemy.debuffs.append(BuffNDebuff.BuffNDebuff(inl=inlDebuff,time=4),)
     LogNColor.Printer(str("Water Storm-Your Intellect:%d" %(player.inl+inlDebuff)))
+
+def colossalspirit(enemy,placeHolder):
+    stgBuff=int(round(enemy.stg/4))
+    enemy.hp+= stgBuff*10
+    enemy.dmg+= stgBuff*5
+    enemy.buffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff,time=4))
+    LogNColor.Printer(str("Colossal Spirit-Enemy Strength:%d" %enemy.stg+stgBuff))    
+
+def piercingshout(placeHolder,target):
+    stgDebuff=-int(round(target.stg/4))
+    target.hp+= stgDebuff*10
+    target.dmg+= stgDebuff*5
+    target.debuffs.append(BuffNDebuff.BuffNDebuff(stg=stgDebuff,time=4))
+    LogNColor.Printer(str("Piercing Shout-Your Strength:%d" %(target.stg+stgDebuff)))
+
+def nighthowl(placeHolder,target):
+    stgDebuff=int(round(target.stg/3))
+    intDebuff=int(round(target.inl/3))
+    target.hp-= stgBuff*10
+    target.dmg-= stgBuff*3
+    target.spell-= intBuff*5
+    target.res-= intBuff*3
+    target.debuffs.append(BuffNDebuff.BuffNDebuff(stg=stgDebuff,inl=intDebuff,time=4))
+    LogNColor.Printer(str("Runic Corruption-Enemy Strength:%d" %target.stg+stgDebuff))
+    LogNColor.Printer(str("Runic Corruption-Enemy Intellect:%d" %target.inl+intDebuff))
+
+
+
 
     

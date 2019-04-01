@@ -266,7 +266,7 @@ class Ghost(Enemy):
 
     movesList = {
     1:EnemySpellsList.soulsteal,
-    2:EnemySpellsList.dragonbreath
+    2:EnemySpellsList.nighthowl
 }  
 
 class MercilessGladiator(Enemy):
@@ -282,23 +282,14 @@ class MercilessGladiator(Enemy):
         return mercilessGladiator     
 
     movesList = {
-    1:EnemySpellsList.soulsteal,
-    2:EnemySpellsList.dragonbreath
+    1:EnemySpellsList.titanstrike,
+    2:EnemySpellsList.colossalspirit,
+    3:EnemySpellsList.piercingshout
 }  
                         
     
 ###################################
     
-##enemyList = {
-##    1:Dragon.create,
-##    2:FireElemental.create,
-##    3:WindElemental.create,
-##    4:WaterElemental.create,
-##    5:Archmage.create
-##
-##    }
-
-
 enemyList = StatsNDice.range_dict(
                      (range(0,10), Dragon.create),
                      (range(10,20), FireElemental.create),
