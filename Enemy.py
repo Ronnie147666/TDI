@@ -24,27 +24,27 @@ class Enemy(object):
      self.hots=[]
      self.curse=0
      
-
 ###################################
 
-
-class Dragon(Enemy):
+class BlackDragon(Enemy):
     def __init__(self):
-        super(Dragon, self).__init__()          
+        super(BlackDragon, self).__init__()          
         self.stg=35
         self.agi=30
         self.inl=25
 
     @staticmethod   
     def create():
-        dragon = Dragon()
-        return dragon
+        blackDragon = BlackDragon()
+        return blackDragon
 
     movesList = {
-    1:EnemySpellsList.soulsteal,
-    2:EnemySpellsList.dragonbreath
+    1:EnemySpellsList.dragonbreath,
+    2:EnemySpellsList.tailwhip
 }    
 
+###################################
+    
 class DarkKnight(Enemy):
     def __init__(self):
         super(DarkKnight, self).__init__()          
@@ -58,9 +58,12 @@ class DarkKnight(Enemy):
         return darkKnight
 
     movesList = {
-    1:EnemySpellsList.soulsteal,
-    2:EnemySpellsList.dragonbreath
+    1:EnemySpellsList.darkbinding,
+    2:EnemySpellsList.shadowstrike,    
+    3:EnemySpellsList.darktouch
 }    
+
+###################################
 
 class Lich(Enemy):
     def __init__(self):
@@ -75,9 +78,12 @@ class Lich(Enemy):
         return lich
 
     movesList = {
-    1:EnemySpellsList.soulsteal,
-    2:EnemySpellsList.dragonbreath
+    1:EnemySpellsList.icychains,
+    2:EnemySpellsList.frostbolt,    
+    3:EnemySpellsList.stealife
 }  
+
+###################################
 
 class Archmage(Enemy):
     def __init__(self):
@@ -92,9 +98,12 @@ class Archmage(Enemy):
         return archmage     
 
     movesList = {
-    1:EnemySpellsList.soulsteal,
-    2:EnemySpellsList.dragonbreath
+    1:EnemySpellsList.arcanefocus,
+    2:EnemySpellsList.arcanemissiles,    
+    3:EnemySpellsList.arcaneleak
 }
+
+###################################
 
 class Demon(Enemy):
     def __init__(self):
@@ -110,25 +119,30 @@ class Demon(Enemy):
 
     movesList = {
     1:EnemySpellsList.soulsteal,
-    2:EnemySpellsList.dragonbreath
+    2:EnemySpellsList.wrath
 }
 
-class UnholyGladiator(Enemy):
+###################################
+
+class FuriousSwordmaster(Enemy):
     def __init__(self):
-        super(UnholyGladiator, self).__init__()
+        super(FuriousSwordmaster, self).__init__()
         self.stg=35
         self.agi=30
         self.inl=15
 
     @staticmethod   
     def create():
-        unholyGladiator = UnholyGladiator()
-        return unholyGladiator     
+       furiousSwordmaster = FuriousSwordmaster()
+        return furiousSwordmaster     
 
     movesList = {
-    1:EnemySpellsList.soulsteal,
-    2:EnemySpellsList.dragonbreath
+    1:EnemySpellsList.furiousstrike,
+    2:EnemySpellsList.swiftspirit,    
+    3:EnemySpellsList.cuttingedge
 }
+
+###################################
        
 class DarkWizard(Enemy):
     def __init__(self):
@@ -147,6 +161,8 @@ class DarkWizard(Enemy):
     2:EnemySpellsList.dragonbreath
 }
 
+###################################
+
 class Dreadlord(Enemy):
     def __init__(self):
         super(Dreadlord, self).__init__()
@@ -164,7 +180,9 @@ class Dreadlord(Enemy):
     2:EnemySpellsList.dragonbreath
 }   
 
-class CursedDjinni(Enemy):
+###################################
+
+class CursedNecromancer(Enemy):
     def __init__(self):
         super(CursedDjinni, self).__init__()
         self.stg=25
@@ -180,6 +198,8 @@ class CursedDjinni(Enemy):
     1:EnemySpellsList.soulsteal,
     2:EnemySpellsList.dragonbreath
 }  
+
+###################################
 
 class DrowRanger(Enemy):
     def __init__(self):
@@ -197,6 +217,8 @@ class DrowRanger(Enemy):
     1:EnemySpellsList.soulsteal,
     2:EnemySpellsList.dragonbreath
 }  
+
+###################################
 
 class FireElemental(Enemy):
     def __init__(self):
@@ -216,6 +238,8 @@ class FireElemental(Enemy):
     3:EnemySpellsList.firestorm
 }  
 
+###################################
+
 class WindElemental(Enemy):
     def __init__(self):
         super(WindElemental, self).__init__()
@@ -233,6 +257,8 @@ class WindElemental(Enemy):
     2:EnemySpellsList.windinvocation,
     3:EnemySpellsList.windstorm
 }  
+
+###################################
 
 class WaterElemental(Enemy):
     def __init__(self):
@@ -252,6 +278,8 @@ class WaterElemental(Enemy):
     3:EnemySpellsList.waterstorm
 }  
 
+###################################
+
 class Ghost(Enemy):
     def __init__(self):
         super(Ghost, self).__init__()
@@ -265,9 +293,11 @@ class Ghost(Enemy):
         return ghost     
 
     movesList = {
-    1:EnemySpellsList.soulsteal,
+    1:EnemySpellsList.nighthowl,
     2:EnemySpellsList.nighthowl
 }  
+
+###################################
 
 class MercilessGladiator(Enemy):
     def __init__(self):
@@ -282,16 +312,15 @@ class MercilessGladiator(Enemy):
         return mercilessGladiator     
 
     movesList = {
-    1:EnemySpellsList.titanstrike,
+    1:EnemySpellsList.colossalstrike,
     2:EnemySpellsList.colossalspirit,
     3:EnemySpellsList.piercingshout
 }  
                         
-    
 ###################################
     
 enemyList = StatsNDice.range_dict(
-                     (range(0,10), Dragon.create),
+                     (range(0,10), BlackDragon.create),
                      (range(10,20), FireElemental.create),
                      (range(20,30), WindElemental.create),
                      (range(30,40), WaterElemental.create),

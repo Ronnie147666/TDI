@@ -11,7 +11,9 @@ def isCritical(crit):
         return True
     return False
 
-###########################################
+                                            #########################
+                                                        ##Rogue##
+                                            #########################
 
 def preparation(player,placeHolder):
     agiBuff=int(round(player.agi/2))
@@ -25,38 +27,45 @@ def preparation(player,placeHolder):
     LogNColor.Printer(str("Preparation-Your Intellect:%d" %(player.inl+intBuff)))
 
 def poison(player,target):
-    dmg=int(round(player.spell/2))
+    dmg=int(round(player.spell/2))-(target.res*0.8)
     target.hp-=dmg
     target.dots.append(HotsNDots.HotNDot(hp=dmg,time=5,name="Poison"))
     LogNColor.Printer(str("Poison-Enemy HP:%d" %target.hp))
     
 def backstab(player,target):
-    target.hp-=(player.dmg*3)-target.arm*0.8 if not isCritical(player.crit) else (player.dmg*6)-target.arm*0.8
+    dmg=(player.dmg*3)-(target.arm*0.8)
+    target.hp-=dmg if not isCritical(player.crit) else dmg*2
     LogNColor.Printer(str("Backstab-Enemy HP:%d" %target.hp))
 
-###########################################
+                                            #########################
+                                                        ##Warlock##
+                                            #########################
 
 def shadowbolt(player,target):
-    target.hp-=player.spell*2 if not isCritical(player.crit) else player.spell*4
+    dmg=player.spell*2
+    target.hp-=dmg if not isCritical(player.crit) else dmg*2
     LogNColor.Printer(str("Shadowbolt-Enemy HP:%d" %target.hp))
 
 def lifedrain(player,target):
-    target.hp-=int(round(player.spell/2))
+    dmg=int(round(player.spell/2))
+    target.hp-=dmg if not isCritical(player.crit) else dmg*2
     player.hp+=player.spell
     LogNColor.Printer(str("Lifedrain-Enemy HP:%d" %target.hp))
     LogNColor.Printer(str("Lifedrain-Your HP:%d" %player.hp))
 
 def immolate(player,target):
     dmg=int(round(player.spell/3))
-    target.hp-=dmg
+    target.hp-=dmg if not isCritical(player.crit) else dmg*2
     target.dots.append(HotsNDots.HotNDot(hp=dmg,time=4,name="Immolate"))
     LogNColor.Printer(str("Immolate-Enemy HP:%d" %target.hp))
 
-
-########################################
+                                            #########################
+                                                        ##Druid##
+                                            #########################
     
 def lunarstrike(player,target):
-    target.hp-=((player.spell*0.5)+(player.dmg*0.5))-target.arm if not isCritical(player.crit) else ((player.spell*0.5)+(player.dmg*0.5))*2-target.arm
+    dmg=((player.spell*0.5)+(player.dmg*0.5))-(target.arm*0.75+target.res*0.75)
+    target.hp-=dmg if not isCritical(player.crit) else dmg*2
     LogNColor.Printer(str("Lunar Strike-Enemy HP:%d" %target.hp))    
 
 
@@ -84,10 +93,13 @@ def spirituality(player,placeHolder):
     LogNColor.Printer(str("Spirituality-Your Agility:%d" %(player.agi+agiBuff)))
     LogNColor.Printer(str("Spirituality-Your Intellect:%d" %(player.inl+intBuff)))
 
-######################################
+                                            #########################
+                                                        ##Warrior##
+                                            #########################
 
 def slam(player, target):
-    target.hp-=player.dmg*1.5-target.arm if not isCritical(player.crit) else player.dmg*1.5*2-target.arm
+    dmg=player.dmg*1.5-target.arm*0.7
+    target.hp-=dmg if not isCritical(player.crit) else dmg*2
     LogNColor.Printer(str("Slam-Enemy HP: %d" %target.hp))    
 
 def shieldblock(player,placeHolder):
@@ -105,7 +117,9 @@ def taunt(placeHolder,target):
     LogNColor.Printer(str("Taunt-Enemy Strength:%d" %(target.stg+stgDebuff)))
     
 
-####################################
+                                            #########################
+                                                        ##Paladin##
+                                            #########################
 
 def crusaderstrike(player,target):
     dmg=(player.dmg*2)-(target.arm*0.75)
@@ -128,8 +142,9 @@ def heal(player,placeHolder):
     player.hp+=player.spell
     LogNColor.Printer(str("Heal-Your HP:%d" %player.hp))
 
-
-########################################
+                                            #########################
+                                                        ##Mage##
+                                            #########################
 
 def arcanepower(player,placeHolder):
     inlBuff=int(round(player.inl/2))
@@ -139,16 +154,19 @@ def arcanepower(player,placeHolder):
     LogNColor.Printer(str("Arcane Power-Your Intellect:%d" %(player.inl+inlBuff)))
     
 def arcanebolt(player,target):
-    target.hp-=player.spell*3 if not isCritical(player.crit) else player.spell*6
+    dmg=player.spell*3-target.res*0.6
+    target.hp-=dmg if not isCritical(player.crit) else dmg*2
     LogNColor.Printer(str("Arcanebolt-Enemy HP:%d" %target.hp))
 
 def ignite(player,target):
-    dmg=int(round(player.spell/2,5))
+    dmg=int(round(player.spell/2,5))-target.res*0.8
     target.hp-=dmg
-    target.dots.append(HotsNDots.HotNDot(hp=dmg,time=4,name="ignite"))
+    target.dots.append(HotsNDots.HotNDot(hp=dmg,time=4,name="Ignite"))
     LogNColor.Printer(str("Ignite-Enemy HP:%d" %target.hp))
     
-##################################################
+                                            #########################
+                                                        ##Priest##
+                                            #########################
 
 def prayer(player,placeHolder):
     hpHeal=int(round(player.spell/0.2))
@@ -167,10 +185,13 @@ def silence(player,enemy):
     LogNColor.Printer(str("Silence-Enemy Intellect:%d" %enemy.inl+intDebuff))
 
 def penance(player,target):
-    target.hp-=player.spell*2 if not isCritical(player.crit) else player.spell*4
+    dmg=player.spell*2 -target.res*0.65
+    target.hp-=dmg if not isCritical(player.crit) else dmg*2
     LogNColor.Printer(str("Penance-Enemy HP:%d" %target.hp))
 
-################################################
+                                            #########################
+                                                        ##Ranger##
+                                            #########################
 
 def wildcall(player,placeHolder):
     stgBuff=int(round(player.stg/2))
@@ -184,7 +205,8 @@ def wildcall(player,placeHolder):
     LogNColor.Printer(str("Wild Call-Your Agility:%d" %(player.agi+agiBuff)))
 
 def deadlyshot(player,target):
-    target.hp-=(player.dmg*2)-target.arm*0.9 if not isCritical(player.crit) else (player.dmg*4)-target.arm*0.9
+    dmg=player.dmg*2-target.arm*0.9
+    target.hp-=dmg if not isCritical(player.crit) else dmg*2
     LogNColor.Printer(str("Deadly Shot-Enemy HP:%d" %target.hp))
 
 def paralyzeshot(player,enemy):
@@ -194,15 +216,18 @@ def paralyzeshot(player,enemy):
     enemy.debuffs.append(BuffNDebuff.BuffNDebuff(agi=agiDebuff,time=4))
     LogNColor.Printer(str("Paralyze Shot-Enemy Agility:%d" %enemy.agi+agiDebuff))
 
-#####################################################
-
+                                            #########################
+                                                        ##DeathKnight##
+                                            #########################
 
 def deathgrip(player,target):
-    target.hp-=((player.spell*0.5)+(player.dmg*0.5))-target.arm if not isCritical(player.crit) else ((player.spell*0.5)+(player.dmg*0.5))*2-target.arm
+    dmg=((player.spell*0.5)+(player.dmg*0.5))-(target.arm*0.5+target.res*0.5)
+    target.hp-=dmg if not isCritical(player.crit) else dmg*2
     LogNColor.Printer(str("Death Grip-Enemy HP:%d" %target.hp))    
 
 def deathstrike(player,target):
-    target.hp-=((player.spell*0.25)+(player.dmg*0.25)) if not isCritical(player.crit) else ((player.spell*0.5)+(player.dmg*0.5))*2
+    dmg=((player.spell*0.25)+(player.dmg*0.25))-(target.arm*0.5+target.res*0.5)
+    target.hp-=dmg if not isCritical(player.crit) else dmg*2
     player.hp+=player.spell*0.25+player.dmg*0.25
     LogNColor.Printer(str("Death Strike-Enemy HP:%d" %target.hp))
     LogNColor.Printer(str("Death Strike-Your HP:%d" %player.hp))

@@ -1,6 +1,5 @@
 import SpellsList
 
-
 class Player(object):
     def __init__(self):
      self.stg=60
@@ -25,8 +24,7 @@ class Player(object):
      self.hots=[]
      self.curse=0
      
-
-#################
+###################################
   
 class Paladin(Player):
     def __init__(self):
@@ -45,7 +43,7 @@ class Paladin(Player):
     'blessingofkings':SpellsList.blessingofkings
 }
 
-###############
+###################################
    
 class Warrior(Player):
     def __init__(self):
@@ -63,7 +61,7 @@ class Warrior(Player):
     'taunt':SpellsList.taunt
 }
 
-###############
+###################################
 
 class Warlock(Player):
     def __init__(self):
@@ -81,7 +79,7 @@ class Warlock(Player):
     'immolate':SpellsList.immolate
 }
 
-################
+###################################
 
 class Druid(Player):
     def __init__(self):
@@ -99,8 +97,7 @@ class Druid(Player):
     'spirituality':SpellsList.spirituality
 }
 
-
-################
+###################################
 
 class Rogue(Player):
     def __init__(self):
@@ -118,7 +115,7 @@ class Rogue(Player):
     'backstab':SpellsList.backstab
 }
 
-################
+###################################
 
 class Priest(Player):
     def __init__(self):
@@ -136,7 +133,7 @@ class Priest(Player):
     'prayer':SpellsList.prayer
 }
 
-################
+###################################
 
 class DeathKnight(Player):
     def __init__(self):
@@ -154,7 +151,7 @@ class DeathKnight(Player):
     'runiccorruption':SpellsList.runiccorruption
 }
 
-################
+###################################
 
 class Ranger(Player):
     def __init__(self):
@@ -172,8 +169,7 @@ class Ranger(Player):
     'paralyzeshot':SpellsList.paralyzeshot
 }
     
-    
-################
+###################################
 
 class Mage(Player):
     def __init__(self):

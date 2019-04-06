@@ -8,7 +8,7 @@ import LogNColor
 
 
 def startGame():
-    LogNColor.setColor("red")
+    LogNColor.setColor("yellow")
     LogNColor.Printer(str("Welcome to the Colosseum!"))
     p = None
     floor = 0
