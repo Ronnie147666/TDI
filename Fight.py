@@ -18,7 +18,7 @@ def fight(player,enemy,floor):
                 BuffNDebuff.clearBuffsNDebuffs(player)
                 BuffNDebuff.clearBuffsNDebuffs(enemy)
                 statsCalculated = True
-          try:
+          ##try:
                 for t in range(0,player.moveCount):
                       LogNColor.Printer("What will you do: ")
                       s = str(raw_input())  
@@ -35,10 +35,10 @@ def fight(player,enemy,floor):
                 BuffNDebuff.reduceBuffsNDebuffs(player)
                 BuffNDebuff.reduceBuffsNDebuffs(enemy)
                 statsCalculated = False
-          except:
+          ##except:
                 if s  == 'quit':
                     Rpg.quitGame()         
-                LogNColor.Printer("Wrong commandl")
+                LogNColor.Printer("Wrong command")
 
 
 def getLoot(floor):
@@ -50,9 +50,11 @@ def getLoot(floor):
 
 def lootPhase(player,floor):
       loot = getLoot(floor)
+      for l in loot:
+            StatsNDice.itemLevelUp(l,floor)
       LogNColor.Printer('\n'"You dropped:")
       for idx,i in enumerate(loot,1):
-            LogNColor.Printer(str(idx)+": "+str(i.name)+" STR: "+str(i.strg)+" AGI: "+str(i.agi)+" INT: "+str(i.intl))
+            LogNColor.Printer(str(idx)+": "+str(i.name)+" STR: "+str(i.stg)+" AGI: "+str(i.agi)+" INT: "+str(i.inl))
       while True:
             LogNColor.Printer("Would you like to equip or unequip an item?")
             c = str(raw_input())

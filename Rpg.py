@@ -19,6 +19,8 @@ def startGame():
                     LogNColor.Printer(key.title())
                 c = str(raw_input())                
                 p = Class.classList[c]()
+                LogNColor.Printer('\n'+str(type(p).__name__)+str(" Spells:"))
+                Class.displayClassSpell(p)
           except:
                 LogNColor.Printer(str("Wrong class!"))
 
@@ -30,13 +32,13 @@ def startGame():
       p.hots=[]
       p.dots=[]      
       StatsNDice.calculateStats(p)
-      e = Enemy.enemyList[random.randint(1,45)]()
+      e = Enemy.enemyList[random.randint(0,140)]()
       StatsNDice.enemyLevelUp(e,floor-1)
       StatsNDice.calculateStats(e)
-      LogNColor.Printer("Floor: "+str(floor))
-      LogNColor.Printer(str("Your next fight will be a " +str(type(e).__name__)+'\n'))
+      LogNColor.Printer('\n'"Floor: "+str(floor))
+      LogNColor.Printer(str("Your next fight will be a " +str(LogNColor.splitWords(type(e).__name__))+'\n'))
 
-      LogNColor.Printer(str("You stats:"'\n'))
+      LogNColor.Printer(str("Your stats:"'\n'))
       LogNColor.Printer("Hp:"+str(p.hp))
       LogNColor.Printer("Dmg:"+str(p.dmg))
       LogNColor.Printer("Arm:"+str(p.arm))
@@ -49,10 +51,10 @@ def startGame():
       if p.items:
           LogNColor.Printer("Your items:")
           for idx,i in enumerate(p.items):
-              LogNColor.Printer(str(idx+1)+": "+str(i.name)+" STR: "+str(i.strg)+" AGI: "+str(i.agi)+" INT: "+str(i.intl))
+              LogNColor.Printer(str(idx+1)+": "+str(i.name)+" STR: "+str(i.stg)+" AGI: "+str(i.agi)+" INT: "+str(i.inl))
           LogNColor.Printer("")    
 
-      LogNColor.Printer(str("Your enemy stats:"'\n'))
+      LogNColor.Printer(str("Enemy stats:"'\n'))
       LogNColor.Printer("Hp:"+str(e.hp))
       LogNColor.Printer("Dmg:"+str(e.dmg))
       LogNColor.Printer("Arm:"+str(e.arm))

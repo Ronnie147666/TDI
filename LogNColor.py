@@ -1,5 +1,5 @@
 from colorama import init,Fore, Back, Style
-import platform
+import platform, re
 
 if (platform.system()=="Windows"):
     init(convert=True)
@@ -24,6 +24,10 @@ colors = {
     
 
     }
+
+def splitWords(word):
+    return re.sub(r"(\w)([A-Z])", r"\1 \2", word)
+    
 
 ##Fore: BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, RESET.
 ##Back: BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, RESET.

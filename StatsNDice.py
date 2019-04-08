@@ -64,12 +64,23 @@ def levelUp(character,floor):
 
 def enemyLevelUp(enemy,floor):
      while floor>0:
-          newStg=enemy.stg*(1+0.1*floor)
-          newAgi=enemy.agi*(1+0.1*floor)
-          newInl=enemy.inl*(1+0.1*floor)
+          newStg=enemy.stg*(1+0.5*floor)
+          newAgi=enemy.agi*(1+0.5*floor)
+          newInl=enemy.inl*(1+0.5*floor)
           enemy.stg=int(round(newStg))
           enemy.agi=int(round(newAgi))
           enemy.inl=int(round(newInl))
+          floor-=1
+
+
+def itemLevelUp(item,floor):
+     while floor>0:
+          newStg=item.stg*(1+0.25*floor)
+          newAgi=item.agi*(1+0.25*floor)
+          newInl=item.inl*(1+0.25*floor)
+          item.stg=int(round(newStg))
+          item.agi=int(round(newAgi))
+          item.inl=int(round(newInl))
           floor-=1
      
 

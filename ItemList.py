@@ -1,24 +1,24 @@
 import Item
-import StatsNDice
 from random import randint
+from StatsNDice import roll,range_dict
 
 items = {
-    'Titansword': Item.Item(strg=100,agi=150,name="Titansword"),
-    'Dark Cleaver': Item.Item(strg=300,agi=150,name="Dark Cleaver"),
-    'Dragonlance': Item.Item(strg=300,agi=150,name="Dragonlance"),
-    'Grey Staff': Item.Item(strg=300,agi=150,name="Grey Staff"),
-    'Cursed Dagger': Item.Item(strg=300,agi=150,name="Cursed Dagger"),
-    'Twisted Hammer': Item.Item(strg=300,agi=150,name="Twisted Hammer"),
-    'Rod Of Betrayal': Item.Item(strg=300,agi=150,name="Rod Of Betrayal"),
-    'Arcanesword': Item.Item(strg=300,agi=150,name="Arcanesword"),
-    'Rod Of Centuries': Item.Item(strg=300,agi=150,name="Rod Of Centuries"),
-    'Forbidden Wand': Item.Item(strg=300,agi=150,name="Forbidden Wand"),
-    'Raven Cloak': Item.Item(strg=300,agi=150,name="Raven Cloak"),
-    'Morellonomicon': Item.Item(agi=200,intl=300,name="Morellonomicon")
+    'Titansword': Item.Item(stg=roll(5,25),agi=roll(5,25),name="Titansword"),
+    'Dark Cleaver': Item.Item(stg=roll(5,10),agi=roll(5,15),name="Dark Cleaver"),
+    'Dragonlance': Item.Item(stg=roll(5,15),agi=roll(5,10),name="Dragonlance"),
+    'Grey Staff': Item.Item(agi=roll(5,10),inl=roll(5,10),name="Grey Staff"),
+    'Cursed Dagger': Item.Item(stg=roll(5,10),agi=roll(5,25),name="Cursed Dagger"),
+    'Twisted Hammer': Item.Item(stg=roll(5,20),agi=roll(5,10),name="Twisted Hammer"),
+    'Rod Of Betrayal': Item.Item(agi=roll(5,15),inl=roll(5,15),name="Rod Of Betrayal"),
+    'Arcanesword': Item.Item(stg=roll(5,15),inl=roll(5,15),name="Arcanesword"),
+    'Rod Of Centuries': Item.Item(stg=roll(5,20),agi=roll(5,20),inl=roll(5,20),name="Rod Of Centuries"),
+    'Forbidden Wand': Item.Item(agi=roll(5,10),inl=roll(5,20),name="Forbidden Wand"),
+    'Raven Cloak': Item.Item(agi=roll(5,15),inl=roll(5,10),name="Raven Cloak"),
+    'Morellonomicon': Item.Item(agi=roll(5,10),inl=roll(10,15),name="Morellonomicon")
     }
 
 
-itemChance = StatsNDice.range_dict(
+itemChance = range_dict(
                      (range(0,10), items['Titansword']),
                      (range(10,20), items['Dark Cleaver']),
                      (range(20,30), items['Dragonlance']),

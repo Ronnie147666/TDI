@@ -1,4 +1,6 @@
 import SpellsList
+from StatsNDice import roll
+
 
 class Player(object):
     def __init__(self):
@@ -29,9 +31,9 @@ class Player(object):
 class Paladin(Player):
     def __init__(self):
         super(Paladin, self).__init__()
-        self.stg=90
-        self.agi=90
-        self.inl=90
+        self.stg=roll(25,30)
+        self.agi=roll(15,20)
+        self.inl=roll(20,25)
     @staticmethod   
     def createPaladin():
         paladin = Paladin()
@@ -48,7 +50,9 @@ class Paladin(Player):
 class Warrior(Player):
     def __init__(self):
         super(Warrior, self).__init__()
-        self.hp=100
+        self.stg=roll(30,35)
+        self.agi=roll(20,25)
+        self.inl=roll(10,15)
 
     @staticmethod   
     def createWarrior():
@@ -66,7 +70,9 @@ class Warrior(Player):
 class Warlock(Player):
     def __init__(self):
         super(Warlock, self).__init__()
-        self.hp=100
+        self.stg=roll(10,15)
+        self.agi=roll(15,20)
+        self.inl=roll(25,30)
 
     @staticmethod   
     def createWarlock():
@@ -84,7 +90,9 @@ class Warlock(Player):
 class Druid(Player):
     def __init__(self):
         super(Druid, self).__init__()
-        self.hp=100
+        self.stg=roll(20,25)
+        self.agi=roll(20,25)
+        self.inl=roll(20,25)
 
     @staticmethod   
     def createDruid():
@@ -102,7 +110,9 @@ class Druid(Player):
 class Rogue(Player):
     def __init__(self):
         super(Rogue, self).__init__()
-        self.hp=100
+        self.stg=roll(15,25)
+        self.agi=roll(25,30)
+        self.inl=roll(15,25)
 
     @staticmethod   
     def createRogue():
@@ -120,7 +130,9 @@ class Rogue(Player):
 class Priest(Player):
     def __init__(self):
         super(Priest, self).__init__()
-        self.hp=100
+        self.stg=roll(10,15)
+        self.agi=roll(15,20)
+        self.inl=roll(25,35)
 
     @staticmethod   
     def createPriest():
@@ -138,7 +150,9 @@ class Priest(Player):
 class DeathKnight(Player):
     def __init__(self):
         super(DeathKnight, self).__init__()
-        self.hp=100
+        self.stg=roll(20,30)
+        self.agi=roll(15,25)
+        self.inl=roll(20,25)
 
     @staticmethod   
     def createDeathKnight():
@@ -156,7 +170,9 @@ class DeathKnight(Player):
 class Ranger(Player):
     def __init__(self):
         super(Ranger, self).__init__()
-        self.hp=100
+        self.stg=roll(20,25)
+        self.agi=roll(25,30)
+        self.inl=roll(20,25)
 
     @staticmethod   
     def createRanger():
@@ -174,7 +190,9 @@ class Ranger(Player):
 class Mage(Player):
     def __init__(self):
         super(Mage, self).__init__()
-        self.hp=100
+        self.stg=roll(10,20)
+        self.agi=roll(15,25)
+        self.inl=roll(25,35)
 
     @staticmethod   
     def createMage():
@@ -183,7 +201,7 @@ class Mage(Player):
 
     movesList = {
     'arcanepower':SpellsList.arcanepower,
-    'deathgrip':SpellsList.deathgrip,
+    'arcanebolt':SpellsList.arcanebolt,
     'ignite':SpellsList.ignite
 }
 
@@ -202,3 +220,7 @@ classList = {
     'death knight': DeathKnight.createDeathKnight
 
     }
+
+def displayClassSpell(theClass):
+    for key in theClass.movesList.keys():
+        print key.title()

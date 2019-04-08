@@ -1,5 +1,5 @@
 import EnemySpellsList
-import StatsNDice
+from StatsNDice import roll,range_dict
 
 class Enemy(object):   
     def __init__(self):
@@ -29,9 +29,9 @@ class Enemy(object):
 class BlackDragon(Enemy):
     def __init__(self):
         super(BlackDragon, self).__init__()          
-        self.stg=35
-        self.agi=30
-        self.inl=25
+        self.stg=roll(20,25)
+        self.agi=roll(10,20)
+        self.inl=roll(10,20)
 
     @staticmethod   
     def create():
@@ -48,9 +48,9 @@ class BlackDragon(Enemy):
 class DarkKnight(Enemy):
     def __init__(self):
         super(DarkKnight, self).__init__()          
-        self.stg=30
-        self.agi=25
-        self.inl=20
+        self.stg=roll(15,20)
+        self.agi=roll(20,25)
+        self.inl=roll(10,15)
 
     @staticmethod   
     def create():
@@ -68,9 +68,9 @@ class DarkKnight(Enemy):
 class Lich(Enemy):
     def __init__(self):
         super(Lich, self).__init__()
-        self.stg=15
-        self.agi=20
-        self.inl=35
+        self.stg=roll(10,15)
+        self.agi=roll(15,20)
+        self.inl=roll(25,30)
 
     @staticmethod   
     def create():
@@ -88,9 +88,9 @@ class Lich(Enemy):
 class Archmage(Enemy):
     def __init__(self):
         super(Archmage, self).__init__()
-        self.stg=15
-        self.agi=25
-        self.inl=35
+        self.stg=roll(10,15)
+        self.agi=roll(20,35)
+        self.inl=roll(30,35)
 
     @staticmethod   
     def create():
@@ -108,9 +108,9 @@ class Archmage(Enemy):
 class Demon(Enemy):
     def __init__(self):
         super(Demon, self).__init__()
-        self.stg=35
-        self.agi=25
-        self.inl=25
+        self.stg=roll(20,25)
+        self.agi=roll(15,25)
+        self.inl=roll(15,20)
 
     @staticmethod   
     def create():
@@ -127,14 +127,14 @@ class Demon(Enemy):
 class FuriousSwordmaster(Enemy):
     def __init__(self):
         super(FuriousSwordmaster, self).__init__()
-        self.stg=35
-        self.agi=30
-        self.inl=15
+        self.stg=roll(20,25)
+        self.agi=roll(25,35)
+        self.inl=roll(10,35)
 
     @staticmethod   
     def create():
        furiousSwordmaster = FuriousSwordmaster()
-        return furiousSwordmaster     
+       return furiousSwordmaster     
 
     movesList = {
     1:EnemySpellsList.furiousstrike,
@@ -147,9 +147,9 @@ class FuriousSwordmaster(Enemy):
 class DarkWizard(Enemy):
     def __init__(self):
         super(DarkWizard, self).__init__()
-        self.stg=15
-        self.agi=20
-        self.inl=45
+        self.stg=roll(15,20)
+        self.agi=roll(15,20)
+        self.inl=roll(35,40)
 
     @staticmethod   
     def create():
@@ -157,8 +157,7 @@ class DarkWizard(Enemy):
         return darkWizard     
 
     movesList = {
-    1:EnemySpellsList.soulsteal,
-    2:EnemySpellsList.dragonbreath
+
 }
 
 ###################################
@@ -166,9 +165,9 @@ class DarkWizard(Enemy):
 class Dreadlord(Enemy):
     def __init__(self):
         super(Dreadlord, self).__init__()
-        self.stg=15
-        self.agi=25
-        self.inl=30
+        self.stg=roll(25,30)
+        self.agi=roll(15,20)
+        self.inl=roll(15,20)
 
     @staticmethod   
     def create():
@@ -176,8 +175,7 @@ class Dreadlord(Enemy):
         return dreadlord     
 
     movesList = {
-    1:EnemySpellsList.soulsteal,
-    2:EnemySpellsList.dragonbreath
+
 }   
 
 ###################################
@@ -185,9 +183,9 @@ class Dreadlord(Enemy):
 class CursedNecromancer(Enemy):
     def __init__(self):
         super(CursedDjinni, self).__init__()
-        self.stg=25
-        self.agi=30
-        self.inl=35
+        self.stg=roll(15,25)
+        self.agi=roll(10,15)
+        self.inl=roll(25,35)
 
     @staticmethod   
     def create():
@@ -195,8 +193,7 @@ class CursedNecromancer(Enemy):
         return cursedDjinni     
 
     movesList = {
-    1:EnemySpellsList.soulsteal,
-    2:EnemySpellsList.dragonbreath
+
 }  
 
 ###################################
@@ -204,9 +201,9 @@ class CursedNecromancer(Enemy):
 class DrowRanger(Enemy):
     def __init__(self):
         super(DrowRanger, self).__init__()
-        self.stg=25
-        self.agi=40
-        self.inl=25
+        self.stg=roll(15,25)
+        self.agi=roll(20,35)
+        self.inl=roll(15,25)
 
     @staticmethod   
     def create():
@@ -214,8 +211,7 @@ class DrowRanger(Enemy):
         return drowRanger     
 
     movesList = {
-    1:EnemySpellsList.soulsteal,
-    2:EnemySpellsList.dragonbreath
+
 }  
 
 ###################################
@@ -223,9 +219,9 @@ class DrowRanger(Enemy):
 class FireElemental(Enemy):
     def __init__(self):
         super(FireElemental, self).__init__()
-        self.stg=30
-        self.agi=25
-        self.inl=25
+        self.stg=roll(20,30)
+        self.agi=roll(10,20)
+        self.inl=roll(10,20)
 
     @staticmethod   
     def create():
@@ -243,9 +239,9 @@ class FireElemental(Enemy):
 class WindElemental(Enemy):
     def __init__(self):
         super(WindElemental, self).__init__()
-        self.stg=25
-        self.agi=30
-        self.inl=25
+        self.stg=roll(10,20)
+        self.agi=roll(20,30)
+        self.inl=roll(10,20)
 
     @staticmethod   
     def create():
@@ -263,9 +259,9 @@ class WindElemental(Enemy):
 class WaterElemental(Enemy):
     def __init__(self):
         super(WaterElemental, self).__init__()
-        self.stg=25
-        self.agi=25
-        self.inl=30
+        self.stg=roll(10,20)
+        self.agi=roll(10,20)
+        self.inl=roll(20,30)
 
     @staticmethod   
     def create():
@@ -283,9 +279,9 @@ class WaterElemental(Enemy):
 class Ghost(Enemy):
     def __init__(self):
         super(Ghost, self).__init__()
-        self.stg=10
-        self.agi=30
-        self.inl=30
+        self.stg=roll(10,15)
+        self.agi=roll(20,30)
+        self.inl=roll(20,30)
 
     @staticmethod   
     def create():
@@ -293,8 +289,7 @@ class Ghost(Enemy):
         return ghost     
 
     movesList = {
-    1:EnemySpellsList.nighthowl,
-    2:EnemySpellsList.nighthowl
+    1:EnemySpellsList.nighthowl
 }  
 
 ###################################
@@ -302,9 +297,9 @@ class Ghost(Enemy):
 class MercilessGladiator(Enemy):
     def __init__(self):
         super(MercilessGladiator, self).__init__()
-        self.stg=25
-        self.agi=40
-        self.inl=10
+        self.stg=roll(20,35)
+        self.agi=roll(20,35)
+        self.inl=roll(10,15)
 
     @staticmethod   
     def create():
@@ -319,14 +314,16 @@ class MercilessGladiator(Enemy):
                         
 ###################################
     
-enemyList = StatsNDice.range_dict(
+enemyList = range_dict(
                      (range(0,10), BlackDragon.create),
-                     (range(10,20), FireElemental.create),
-                     (range(20,30), WindElemental.create),
-                     (range(30,40), WaterElemental.create),
-                     (range(40,45), Archmage.create))
-
-
-
-
-
+                     (range(10,20), DarkKnight.create),
+                     (range(20,30), Lich.create),
+                     (range(30,40), Archmage.create),
+                     (range(40,50), Demon.create),
+                     (range(50,60), FuriousSwordmaster.create),
+                     (range(60,70), Ghost.create),
+                     (range(70,80), MercilessGladiator.create),
+                     (range(80,100), FireElemental.create),
+                     (range(100,120), WindElemental.create),
+                     (range(120,140), WaterElemental.create)
+)
