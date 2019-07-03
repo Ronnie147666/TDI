@@ -21,7 +21,7 @@ def dragonbreath(enemy,target):
     LogNColor.Printer(str("Dragonbreath-Your HP:%d" %target.hp))
 
 def tailwhip(enemy,target):
-    s=enemy.dmg*1.3
+    s=int(round(enemy.dmg*1.3))
     target.hp-=StatsNDice.roll(s*2,s*4) if not isCritical(enemy.crit) else StatsNDice.roll(s*4,s*8)
     LogNColor.Printer(str("Tailwhip-Your HP:%d" %target.hp))
 
@@ -31,13 +31,13 @@ def tailwhip(enemy,target):
             
 def darkbinding(enemy,player):
     inlDebuff=int(round(player.inl/2))
-    enemy.spell-=inlBuff*1.5
-    enemy.res-=inlBuff*1.3
+    enemy.spell-=inlDebuff*1.5
+    enemy.res-=inlDebuff*1.3
     enemy.debuffs.append(BuffNDebuff.BuffNDebuff(inl=inlDebuff,time=4),)
     LogNColor.Printer(str("Dark Binding-Your Intellect:%d" %(player.inl+inlDebuff)))
 
 def shadowstrike(enemy,target):
-    s=(enemy.dmg*1.3)-target.arm*0.5
+    s=int(round((enemy.dmg*1.3)-target.arm*0.5))
     target.hp-=StatsNDice.roll(s*2,s*4) if not isCritical(enemy.crit) else StatsNDice.roll(s*4,s*8)
     LogNColor.Printer(str("Shadow Strike-Your HP:%d" %target.hp))
 
@@ -53,13 +53,13 @@ def darktouch(player,target):
 
 def icychains(enemy,player):
     agiDebuff=int(round(player.agi/2))
-    enemy.arm-=agiBuff*1.3
-    enemy.crit-=agiBuff*0.1    
-    enemy.debuffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff,time=4),)
+    enemy.arm-=agiDebuff*1.3
+    enemy.crit-=agiDebuff*0.1    
+    enemy.debuffs.append(BuffNDebuff.BuffNDebuff(agi=agiDebuff,time=4),)
     LogNColor.Printer(str("Icy Chains-Your Agility:%d" %(player.agi+agiDebuff)))
 
 def frostbolt(enemy,target):
-    s=enemy.spell*1.5
+    s=int(round(enemy.spell*1.5))
     target.hp-=StatsNDice.roll(s*2,s*4) if not isCritical(enemy.crit) else StatsNDice.roll(s*4,s*8)
     LogNColor.Printer(str("Deadlybolt-Your HP:%d" %target.hp))
 
@@ -81,7 +81,7 @@ def arcanefocus(enemy,placeHolder):
     LogNColor.Printer(str("Arcane Focus-Your Intellect:%d" %(enemy.inl+inlBuff)))
 
 def arcanemissiles(player,enemy):
-    s=enemy.spell*1.3
+    s=int(round(enemy.spell*1.3))
     player.hp-=StatsNDice.roll(s*2,s*4) if not isCritical(enemy.crit) else StatsNDice.roll(s*4,s*8)
     LogNColor.Printer(str("Arcane Missiles-Your HP:%d" %target.hp))    
 
@@ -118,7 +118,7 @@ def wrath(enemy,placeHolder):
                                             #########################
 
 def furiousstrike(enemy,target):
-    s=enemy.dmg*1.3
+    s=int(round(enemy.dmg*1.3))
     target.hp-=StatsNDice.roll(s*2,s*4) if not isCritical(enemy.crit) else StatsNDice.roll(s*4,s*8)
     LogNColor.Printer(str("Furious Strike-Your HP:%d" %target.hp))
 
@@ -156,7 +156,7 @@ def cuttingedge(player,target):
                                             #########################
     
 def firestrike(enemy,player):
-    s=(enemy.dmg+enemy.spell)
+    s=int(round((enemy.dmg+enemy.spell)))
     player.hp-=StatsNDice.roll(s*2,s*4) if not isCritical(enemy.crit) else StatsNDice.roll(s*4,s*8)
     LogNColor.Printer(str("Firestrike-Your HP:%d" %player.hp))
 
@@ -179,7 +179,7 @@ def firestorm(enemy,player):
                                             #########################
 
 def windstrike(enemy,player):
-    s=(enemy.dmg+enemy.spell)*0.75
+    s=int(round((enemy.dmg+enemy.spell)*0.75))
     player.hp-=StatsNDice.roll(s*2,s*4) if not isCritical(enemy.crit) else StatsNDice.roll(s*4,s*8)
     LogNColor.Printer(str("Windstrike-Your HP:%d" %player.hp))
 
@@ -202,7 +202,7 @@ def windstorm(enemy,player):
                                             #########################
 
 def waterstrike(enemy,player):
-    s=(enemy.dmg+enemy.spell)*0.75
+    s=int(round((enemy.dmg+enemy.spell)*0.75))
     player.hp-=StatsNDice.roll(s*2,s*4) if not isCritical(enemy.crit) else StatsNDice.roll(s*4,s*8)
     LogNColor.Printer(str("Waterstrike-Your HP:%d" %player.hp))
     
@@ -240,7 +240,7 @@ def nighthowl(placeHolder,target):
                                             #########################
 
 def colossalstrike(enemy,target):
-    s=enemy.dmg*1.3
+    s=int(round(enemy.dmg*1.3))
     target.hp-=StatsNDice.roll(s*2,s*4) if not isCritical(enemy.crit) else StatsNDice.roll(s*4,s*8)
     LogNColor.Printer(str("Titan Strike-Your HP:%d" %target.hp))
     
@@ -249,7 +249,7 @@ def colossalspirit(enemy,placeHolder):
     enemy.hp+= stgBuff*1.1
     enemy.dmg+= stgBuff*1.5
     enemy.buffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff,time=4))
-    LogNColor.Printer(str("Colossal Spirit-Enemy Strength:%d" %enemy.stg+stgBuff)) 
+    LogNColor.Printer(str("Colossal Spirit-Enemy Strength:%d" %(enemy.stg+stgBuff))) 
 
 def piercingshout(placeHolder,target):
     stgDebuff=-int(round(target.stg/4))

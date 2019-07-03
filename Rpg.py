@@ -35,17 +35,20 @@ def startGame():
       e = Enemy.enemyList[random.randint(0,140)]()
       StatsNDice.enemyLevelUp(e,floor-1)
       StatsNDice.calculateStats(e)
+      LogNColor.Printer('\n'"       ---------------------------------------                  ")
       LogNColor.Printer('\n'"Floor: "+str(floor))
       LogNColor.Printer(str("Your next fight will be a " +str(LogNColor.splitWords(type(e).__name__))+'\n'))
 
       LogNColor.Printer(str("Your stats:"'\n'))
+      LogNColor.Printer("Strength:"+str(p.stg))
+      LogNColor.Printer("Agility:"+str(p.agi))
+      LogNColor.Printer("Intellect:"+str(p.inl))
       LogNColor.Printer("Hp:"+str(p.hp))
       LogNColor.Printer("Dmg:"+str(p.dmg))
       LogNColor.Printer("Arm:"+str(p.arm))
       LogNColor.Printer("Crit:"+str(p.crit))
       LogNColor.Printer("Spell:"+str(p.spell))
-      LogNColor.Printer("Strength:"+str(p.stg))
-      LogNColor.Printer("Agility:"+str(p.agi))
+      LogNColor.Printer("Resistance:"+str(p.res))
       LogNColor.Printer("")
       
       if p.items:
@@ -55,13 +58,15 @@ def startGame():
           LogNColor.Printer("")    
 
       LogNColor.Printer(str("Enemy stats:"'\n'))
+      LogNColor.Printer("Strength:"+str(e.stg))
+      LogNColor.Printer("Agility:"+str(e.agi))
+      LogNColor.Printer("Intellect:"+str(e.inl))
       LogNColor.Printer("Hp:"+str(e.hp))
       LogNColor.Printer("Dmg:"+str(e.dmg))
       LogNColor.Printer("Arm:"+str(e.arm))
       LogNColor.Printer("Crit:"+str(e.crit))
       LogNColor.Printer("Spell:"+str(e.spell))
-      LogNColor.Printer("Strength:"+str(e.stg))
-      LogNColor.Printer("Strength:"+str(e.agi))
+      LogNColor.Printer("Resistance:"+str(e.res))
       LogNColor.Printer("")
       
       

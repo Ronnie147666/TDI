@@ -22,7 +22,7 @@ def calculateStatsWithoutHp(character):
      character.arm= totalAgi*3
      character.crit= totalAgi*0.1     
      character.spell= totalInl*5
-     character.res= totalInl*3
+     character.res= totalInl*2
 
 def calculateHpWBuffs(character):
      totalStg=character.stg+BuffNDebuff.getStrBuffNDebuff(character)

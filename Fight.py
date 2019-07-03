@@ -38,7 +38,7 @@ def fight(player,enemy,floor):
           ##except:
                 if s  == 'quit':
                     Rpg.quitGame()         
-                LogNColor.Printer("Wrong command")
+                LogNColor.Printer("Wrong command1")
 
 
 def getLoot(floor):
@@ -64,14 +64,15 @@ def lootPhase(player,floor):
                   elif canUnequip(c,player):
                         Item.unequipItem(player,int(filter(str.isdigit, c))-1)
                   elif canEquip(c,floor):
-                        itemAmount = len(player.items)
+                  ##      itemAmount = len(player.items)
                         Item.equipItem(player,loot[int(filter(str.isdigit, c))-1])
-                        if itemAmount != len(player.items):
-                              return
+                        return    
+                    ##    if itemAmount != len(player.items):
+                      ##        return
                   else:
-                        LogNColor.Printer("Wrong command!")
+                        LogNColor.Printer("Wrong command2")
             except:
-                  LogNColor.Printer("Wrong command")
+                  LogNColor.Printer("Wrong command3")
 
 
 def resolveAction(attacker,defender,move):

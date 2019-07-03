@@ -325,5 +325,5 @@ enemyList = range_dict(
                      (range(70,80), MercilessGladiator.create),
                      (range(80,100), FireElemental.create),
                      (range(100,120), WindElemental.create),
-                     (range(120,140), WaterElemental.create)
+                     (range(120,141), WaterElemental.create)
 )
