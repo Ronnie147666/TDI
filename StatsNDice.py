@@ -74,15 +74,15 @@ def enemyLevelUp(enemy,floor):
 
 
 def itemLevelUp(item,floor):
-     while floor>0:
-          newStg=item.stg*(1+0.25*floor)
-          newAgi=item.agi*(1+0.25*floor)
-          newInl=item.inl*(1+0.25*floor)
-          item.stg=int(round(newStg))
-          item.agi=int(round(newAgi))
-          item.inl=int(round(newInl))
-          floor-=1
-     
+   ##  while floor>0:
+     newStg=item.stg*(1+0.05*floor)
+     newAgi=item.agi*(1+0.05*floor)
+     newInl=item.inl*(1+0.05*floor)
+     item.stg=int(round(newStg))
+     item.agi=int(round(newAgi))
+     item.inl=int(round(newInl))
+     floor-=1
+
 
 def roll(x1,x2):
     return random.randint(x1,x2)

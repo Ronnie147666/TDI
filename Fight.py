@@ -64,11 +64,8 @@ def lootPhase(player,floor):
                   elif canUnequip(c,player):
                         Item.unequipItem(player,int(filter(str.isdigit, c))-1)
                   elif canEquip(c,floor):
-                  ##      itemAmount = len(player.items)
-                        Item.equipItem(player,loot[int(filter(str.isdigit, c))-1])
-                        return    
-                    ##    if itemAmount != len(player.items):
-                      ##        return
+                        if (Item.equipItem(player,loot[int(filter(str.isdigit, c))-1])):
+                              return    
                   else:
                         LogNColor.Printer("Wrong command2")
             except:

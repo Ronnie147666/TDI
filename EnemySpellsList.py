@@ -83,7 +83,7 @@ def arcanefocus(enemy,placeHolder):
 def arcanemissiles(player,enemy):
     s=int(round(enemy.spell*1.3))
     player.hp-=StatsNDice.roll(s*2,s*4) if not isCritical(enemy.crit) else StatsNDice.roll(s*4,s*8)
-    LogNColor.Printer(str("Arcane Missiles-Your HP:%d" %target.hp))    
+    LogNColor.Printer(str("Arcane Missiles-Your HP:%d" %player.hp))    
 
 def arcaneleak(enemy,player):
     inlDebuff=int(round(player.inl/2))
@@ -187,7 +187,7 @@ def windinvocation(enemy,placeHolder):
     agiBuff=int(round(enemy.agi/2))
     enemy.arm+=agiBuff*1.3
     enemy.crit+=agiBuff*1.1    
-    enemy.buffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff,time=4),)
+    enemy.buffs.append(BuffNDebuff.BuffNDebuff(agi=agiBuff,time=4),)
     LogNColor.Printer(str("Wind Invocation-Enemy Agility:%d" %(enemy.stg+stgBuff)))
 
 def windstorm(enemy,player):

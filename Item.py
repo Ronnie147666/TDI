@@ -20,6 +20,7 @@ def equipItem(player,item):
     player.stg+=item.stg
     player.agi+=item.agi
     player.inl+=item.inl
+    return True
 
 
 

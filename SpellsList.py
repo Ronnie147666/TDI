@@ -107,7 +107,7 @@ def shieldblock(player,placeHolder):
     player.hp+= stgBuff*10
     player.dmg+= stgBuff*5
     player.buffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff,time=4))
-    LogNColor.Printer(str("Shieldblock-Your Strength:%d" %player.stg+stgBuff))
+    LogNColor.Printer(str("Shieldblock-Your Strength:%d" %(player.stg+stgBuff)))
 
 def taunt(placeHolder,target):
     stgDebuff=-int(round(target.stg/4))
@@ -179,10 +179,10 @@ def prayer(player,placeHolder):
 
 def silence(player,enemy):
     intDebuff=int(round(player.inl/3))
-    enemy.spell-= intBuff*5
-    enemy.res-= intBuff*3
+    enemy.spell-= intDebuff*5
+    enemy.res-= intDebuff*3
     enemy.debuffs.append(BuffNDebuff.BuffNDebuff(inl=intDebuff,time=4))
-    LogNColor.Printer(str("Silence-Enemy Intellect:%d" %enemy.inl+intDebuff))
+    LogNColor.Printer(str("Silence-Enemy Intellect:%d" %(enemy.inl+intDebuff)))
 
 def penance(player,target):
     dmg=player.spell*2 -target.res*0.65
@@ -211,10 +211,10 @@ def deadlyshot(player,target):
 
 def paralyzeshot(player,enemy):
     agiDebuff=int(round(player.agi/3))
-    enemy.arm-= agiBuff*0.1
-    enemy.crit-= agiBuff*3
+    enemy.arm-= agiDebuff*0.1
+    enemy.crit-= agiDebuff*3
     enemy.debuffs.append(BuffNDebuff.BuffNDebuff(agi=agiDebuff,time=4))
-    LogNColor.Printer(str("Paralyze Shot-Enemy Agility:%d" %enemy.agi+agiDebuff))
+    LogNColor.Printer(str("Paralyze Shot-Enemy Agility:%d" %(enemy.agi+agiDebuff)))
 
                                             #########################
                                                         ##DeathKnight##
@@ -236,15 +236,15 @@ def runiccorruption(placeHolder,enemy):
     stgDebuff=int(round(enemy.stg/4))
     agiDebuff=int(round(enemy.agi/4))
     intDebuff=int(round(enemy.inl/4))
-    enemy.hp-= stgBuff*10
-    enemy.dmg-= stgBuff*3
-    enemy.arm-= agiBuff*0.1
-    enemy.crit-= agiBuff*3
-    enemy.spell-= intBuff*5
-    enemy.res-= intBuff*3
+    enemy.hp-= stgDebuff*10
+    enemy.dmg-= stgDebuff*3
+    enemy.arm-= agiDebuff*0.1
+    enemy.crit-= agiDebuff*3
+    enemy.spell-= intDebuff*5
+    enemy.res-= intDebuff*3
     enemy.debuffs.append(BuffNDebuff.BuffNDebuff(stg=stgDebuff,agi=agiDebuff,inl=intDebuff,time=4))
-    LogNColor.Printer(str("Runic Corruption-Enemy Strength:%d" %enemy.stg+stgDebuff))
-    LogNColor.Printer(str("Runic Corruption-Enemy Agility:%d" %enemy.agi+agiBuff))
-    LogNColor.Printer(str("Runic Corruption-Enemy Intellect:%d" %enemy.inl+intDebuff))
+    LogNColor.Printer(str("Runic Corruption-Enemy Strength:%d" %(enemy.stg+stgDebuff)))
+    LogNColor.Printer(str("Runic Corruption-Enemy Agility:%d" %(enemy.agi+agiDebuff)))
+    LogNColor.Printer(str("Runic Corruption-Enemy Intellect:%d" %(enemy.inl+intDebuff)))
 
     

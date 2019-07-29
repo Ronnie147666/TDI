@@ -41,8 +41,8 @@ class Paladin(Player):
     
     movesList = {
     'heal':SpellsList.heal,
-    'crusaderstrike':SpellsList.crusaderstrike,
-    'blessingofkings':SpellsList.blessingofkings
+    'crusader strike':SpellsList.crusaderstrike,
+    'blessing of kings':SpellsList.blessingofkings
 }
 
 ###################################
@@ -61,7 +61,7 @@ class Warrior(Player):
 
     movesList = {
     'slam':SpellsList.slam,
-    'shieldblock':SpellsList.shieldblock,
+    'shield block':SpellsList.shieldblock,
     'taunt':SpellsList.taunt
 }
 
@@ -81,7 +81,7 @@ class Warlock(Player):
 
     movesList = {
     'shadowbolt':SpellsList.shadowbolt,
-    'lifedrain':SpellsList.lifedrain,    
+    'life drain':SpellsList.lifedrain,    
     'immolate':SpellsList.immolate
 }
 
@@ -100,7 +100,7 @@ class Druid(Player):
         return druid
 
     movesList = {
-    'lunarstrike':SpellsList.lunarstrike,
+    'lunar strike':SpellsList.lunarstrike,
     'growth':SpellsList.growth,    
     'spirituality':SpellsList.spirituality
 }
@@ -160,9 +160,9 @@ class DeathKnight(Player):
         return deathKnight
 
     movesList = {
-    'deathstrike':SpellsList.deathstrike,
-    'deathgrip':SpellsList.deathgrip,
-    'runiccorruption':SpellsList.runiccorruption
+    'death strike':SpellsList.deathstrike,
+    'death grip':SpellsList.deathgrip,
+    'runic corruption':SpellsList.runiccorruption
 }
 
 ###################################
@@ -180,9 +180,9 @@ class Ranger(Player):
         return ranger
 
     movesList = {
-    'deadlyshot':SpellsList.deadlyshot,
-    'wildcall':SpellsList.wildcall,
-    'paralyzeshot':SpellsList.paralyzeshot
+    'deadly shot':SpellsList.deadlyshot,
+    'wild call':SpellsList.wildcall,
+    'paralyze shot':SpellsList.paralyzeshot
 }
     
 ###################################
@@ -200,7 +200,7 @@ class Mage(Player):
         return mage
 
     movesList = {
-    'arcanepower':SpellsList.arcanepower,
+    'arcane power':SpellsList.arcanepower,
     'arcanebolt':SpellsList.arcanebolt,
     'ignite':SpellsList.ignite
 }
