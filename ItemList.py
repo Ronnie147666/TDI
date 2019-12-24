@@ -4,18 +4,18 @@ from StatsNDice import roll, range_dict
 
 def items():
     return {
-    'Titansword': Item.Item(stg=roll(5, 25), agi=roll(5, 25), name="Titansword"),
-    'Dark Cleaver': Item.Item(stg=roll(5, 10), agi=roll(5, 15), name="Dark Cleaver"),
-    'Dragonlance': Item.Item(stg=roll(5, 15), agi=roll(5, 10), name="Dragonlance"),
-    'Grey Staff': Item.Item(agi=roll(5, 10), inl=roll(5, 10), name="Grey Staff"),
-    'Cursed Dagger': Item.Item(stg=roll(5, 10), agi=roll(5, 25), name="Cursed Dagger"),
-    'Twisted Hammer': Item.Item(stg=roll(5, 20), agi=roll(5, 10), name="Twisted Hammer"),
-    'Rod Of Betrayal': Item.Item(agi=roll(5, 15), inl=roll(5, 15), name="Rod Of Betrayal"),
-    'Arcanesword': Item.Item(stg=roll(5, 15), inl=roll(5, 15), name="Arcanesword"),
-    'Rod Of Centuries': Item.Item(stg=roll(5, 20), agi=roll(5, 20), inl=roll(5, 20), name="Rod Of Centuries"),
-    'Forbidden Wand': Item.Item(agi=roll(5, 10), inl=roll(5, 20), name="Forbidden Wand"),
-    'Raven Cloak': Item.Item(agi=roll(5, 15), inl=roll(5, 10), name="Raven Cloak"),
-    'Morellonomicon': Item.Item(agi=roll(5, 10), inl=roll(10, 15), name="Morellonomicon")
+    'Titansword': Item.Item(stg=roll(5, 25), agi=roll(5, 25), fireRes=roll(5, 25), frostRes=roll(5, 25) ,name="Titansword"),
+    'Dark Cleaver': Item.Item(stg=roll(5, 10), agi=roll(5, 15), shadowRes=roll(5, 25), natureRes=roll(5, 25) ,name="Dark Cleaver"),
+    'Dragonlance': Item.Item(stg=roll(5, 15), agi=roll(5, 10), fireRes=roll(5, 25), natureRes=roll(5, 25) ,name="Dragonlance"),
+    'Grey Staff': Item.Item(agi=roll(5, 10), inl=roll(5, 10), fireRes=roll(5, 25), shadowRes=roll(5, 25) ,name="Grey Staff"),
+    'Cursed Dagger': Item.Item(stg=roll(5, 10), agi=roll(5, 25), shadowRes=roll(5, 25), frostRes=roll(5, 25) ,name="Cursed Dagger"),
+    'Twisted Hammer': Item.Item(stg=roll(5, 20), agi=roll(5, 10), natureRes=roll(5, 25), frostRes=roll(5, 25) ,name="Twisted Hammer"),
+    'Rod Of Betrayal': Item.Item(agi=roll(5, 15), inl=roll(5, 15), fireRes=roll(5, 25), frostRes=roll(5, 25) ,name="Rod Of Betrayal"),
+    'Arcanesword': Item.Item(stg=roll(5, 15), inl=roll(5, 15), natureRes=roll(5, 25), frostRes=roll(5, 25) ,name="Arcanesword"),
+    'Rod Of Centuries': Item.Item(stg=roll(5, 20), agi=roll(5, 20), inl=roll(5, 20), shadowRes=roll(5, 25), frostRes=roll(5, 25) ,name="Rod Of Centuries"),
+    'Forbidden Wand': Item.Item(agi=roll(5, 10), inl=roll(5, 20), natureRes=roll(5, 25), frostRes=roll(5, 25) ,name="Forbidden Wand"),
+    'Raven Cloak': Item.Item(agi=roll(5, 15), inl=roll(5, 10), fireRes=roll(5, 25), shadowRes=roll(5, 25) ,name="Raven Cloak"),
+    'Morellonomicon': Item.Item(agi=roll(5, 10), inl=roll(10, 15), fireRes=roll(5, 25), frostRes=roll(5, 25) ,name="Morellonomicon")
 }
 
 

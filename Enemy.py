@@ -22,7 +22,7 @@ class Enemy(object):
         self.fireRes = 0
         self.frostRes = 0
         self.shadowRes = 0
-        self.poisonRes = 0
+        self.natureRes = 0
 
         self.buffs = []
         self.debuffs = []

@@ -81,7 +81,9 @@ def filterNumberFromString(c):
 
 def printItemStats(i, idx):
     LogNColor.Printer(
-        str(idx) + ": " + str(i.name) + " STR: " + str(i.stg) + " AGI: " + str(i.agi) + " INT: " + str(i.inl))
+        str(idx + 1) + ": " + str(i.name) + " STR: " + str(i.stg) + " AGI: " + str(i.agi) + " INT: " + str(
+            i.inl) + " FIRE RES: " + str(i.fireRes) + " FROST RES: " + str(i.frostRes) + " NATURE RES: " + str(
+            i.natureRes) + " SHADOW RES: " + str(i.shadowRes))
 
 
 def resolveAction(attacker, defender, move):
