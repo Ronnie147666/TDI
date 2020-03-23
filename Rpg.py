@@ -10,6 +10,8 @@ def printStats(character):
     LogNColor.Printer("Strength:" + str(character.stg)+"   |"+"Hp:" + str(character.hp)+"    |"+"Crit:" + str(character.crit))
     LogNColor.Printer("Agility:" + str(character.agi)+"    |"+"Dmg:" + str(character.dmg)+"   |"+"Spell:" + str(character.spell))
     LogNColor.Printer("Intellect:" + str(character.inl)+"  |"+"Arm:" + str(character.arm)+"    |"+"Resistance:" + str(character.res))
+    LogNColor.Printer("\nFire Res:" + str(character.fireRes)+"\nIce Res:" + str(character.frostRes))
+    LogNColor.Printer("Shadow Res:" + str(character.shadowRes)+"\nNature Res:" + str(character.natureRes))
     LogNColor.Printer("")
 
 

@@ -6,9 +6,9 @@ import LogNColor
 from StatsNDice import isCritical
 
 
-#########################
-##BlackDragon##
-#########################
+    #########################
+    ##BlackDragon##
+    #########################
 
 def dragonbreath(enemy, target):
     s = enemy.spell

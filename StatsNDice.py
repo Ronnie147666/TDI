@@ -67,14 +67,21 @@ def levelUp(character, floor):
 
 
 def enemyLevelUp(enemy, floor):
-    while floor > 0:
+    # while floor > 0:
         newStg = enemy.stg * (1 + 0.5 * floor)
         newAgi = enemy.agi * (1 + 0.5 * floor)
         newInl = enemy.inl * (1 + 0.5 * floor)
+        newFireRes = enemy.fireRes * (1 + 0.5 * floor)
+        newFrostRes = enemy.frostRes * (1 + 0.5 * floor)
+        newShadowRes = enemy.shadowRes * (1 + 0.5 * floor)
+        newNatureRes = enemy.natureRes * (1 + 0.5 * floor)
         enemy.stg = int(round(newStg))
         enemy.agi = int(round(newAgi))
         enemy.inl = int(round(newInl))
-        floor -= 1
+        enemy.fireRes = int(round(newFireRes))
+        enemy.frostRes = int(round(newFrostRes))
+        enemy.shadowRes = int(round(newShadowRes))
+        enemy.natureRes = int(round(newNatureRes))
 
 
 def itemLevelUp(item, floor):
@@ -82,10 +89,17 @@ def itemLevelUp(item, floor):
     newStg = item.stg * (1 + 0.05 * floor)
     newAgi = item.agi * (1 + 0.05 * floor)
     newInl = item.inl * (1 + 0.05 * floor)
+    newFireRes = item.fireRes * (1 + 0.05 * floor)
+    newFrostRes = item.frostRes * (1 + 0.05 * floor)
+    newShadowRes = item.shadowRes * (1 + 0.05 * floor)
+    newNatureRes = item.natureRes * (1 + 0.05 * floor)
     item.stg = int(round(newStg))
     item.agi = int(round(newAgi))
     item.inl = int(round(newInl))
-    floor -= 1
+    item.fireRes = int(round(newFireRes))
+    item.frostRes = int(round(newFrostRes))
+    item.shadowRes = int(round(newShadowRes))
+    item.natureRes = int(round(newNatureRes))
 
 
 def isCritical(crit):

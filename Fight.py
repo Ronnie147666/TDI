@@ -53,8 +53,7 @@ def getLoot(floor):
 
 def lootPhase(player, floor):
     loot = getLoot(floor)
-    for l in loot:
-        StatsNDice.itemLevelUp(l, floor)
+    adjustItemLevel(floor, loot)
     LogNColor.Printer('\n'"You dropped:")
     for idx, i in enumerate(loot, 1):
         printItemStats(i, idx)
@@ -75,13 +74,18 @@ def lootPhase(player, floor):
             LogNColor.Printer("Wrong command3")
 
 
+def adjustItemLevel(floor, loot):
+    for l in loot:
+        StatsNDice.itemLevelUp(l, floor)
+
+
 def filterNumberFromString(c):
     return int(list(filter(str.isdigit, c))[0])
 
 
 def printItemStats(i, idx):
     LogNColor.Printer(
-        str(idx + 1) + ": " + str(i.name) + " STR: " + str(i.stg) + " AGI: " + str(i.agi) + " INT: " + str(
+        str(idx) + ": " + str(i.name) + " STR: " + str(i.stg) + " AGI: " + str(i.agi) + " INT: " + str(
             i.inl) + " FIRE RES: " + str(i.fireRes) + " FROST RES: " + str(i.frostRes) + " NATURE RES: " + str(
             i.natureRes) + " SHADOW RES: " + str(i.shadowRes))
 
