@@ -9,7 +9,8 @@ def calculateStats(character):
     totalInl = character.inl + BuffNDebuff.getIntBuffNDebuff(character)
     character.hp = totalStg * 10
     character.dmg = totalStg * 5
-    character.arm = totalAgi * 3
+    # character.arm = totalAgi * 3
+    character.arm = round(setArmor(totalAgi), 1)
     character.crit = round(totalAgi * 0.1, 1)
     character.spell = totalInl * 5
     character.res = totalInl * 2
@@ -20,13 +21,14 @@ def calculateStatsWithoutHp(character):
     totalAgi = character.agi + BuffNDebuff.getAgiBuffNDebuff(character)
     totalInl = character.inl + BuffNDebuff.getIntBuffNDebuff(character)
     character.dmg = totalStg * 5
-    character.arm = totalAgi * 3
+    # character.arm = totalAgi * 3
+    character.arm = round(setArmor(totalAgi), 1)
     character.crit = round(totalAgi * 0.1, 1)
     character.spell = totalInl * 5
     character.res = totalInl * 2
 
 
-def calculateHpWBuffs(character):
+def calculateHpWithBuffs(character):
     totalStg = character.stg + BuffNDebuff.getStrBuffNDebuff(character)
     return totalStg * 10
 
@@ -34,6 +36,16 @@ def calculateHpWBuffs(character):
 def calculateHp(character):
     character.hp = character.stg * 10
 
+
+    # Stat formulas
+
+def setArmor(agility):
+    return ((min(agility, 500) * 0.1) +
+            ((min(agility - 500, 200) if not agility < 500 else 0) * 0.05) +
+            ((min(agility - 700, 200) if not agility < 700 else 0) * 0.01) +
+            ((min(agility - 900, 200) if not agility < 900 else 0) * 0.005))
+
+    #
 
 def levelUp(character, floor):
     points = random.randint(1, floor)
@@ -68,24 +80,23 @@ def levelUp(character, floor):
 
 def enemyLevelUp(enemy, floor):
     # while floor > 0:
-        newStg = enemy.stg * (1 + 0.5 * floor)
-        newAgi = enemy.agi * (1 + 0.5 * floor)
-        newInl = enemy.inl * (1 + 0.5 * floor)
-        newFireRes = enemy.fireRes * (1 + 0.5 * floor)
-        newFrostRes = enemy.frostRes * (1 + 0.5 * floor)
-        newShadowRes = enemy.shadowRes * (1 + 0.5 * floor)
-        newNatureRes = enemy.natureRes * (1 + 0.5 * floor)
-        enemy.stg = int(round(newStg))
-        enemy.agi = int(round(newAgi))
-        enemy.inl = int(round(newInl))
-        enemy.fireRes = int(round(newFireRes))
-        enemy.frostRes = int(round(newFrostRes))
-        enemy.shadowRes = int(round(newShadowRes))
-        enemy.natureRes = int(round(newNatureRes))
+    newStg = enemy.stg * (1 + 0.5 * floor)
+    newAgi = enemy.agi * (1 + 0.5 * floor)
+    newInl = enemy.inl * (1 + 0.5 * floor)
+    newFireRes = enemy.fireRes * (1 + 0.5 * floor)
+    newFrostRes = enemy.frostRes * (1 + 0.5 * floor)
+    newShadowRes = enemy.shadowRes * (1 + 0.5 * floor)
+    newNatureRes = enemy.natureRes * (1 + 0.5 * floor)
+    enemy.stg = int(round(newStg))
+    enemy.agi = int(round(newAgi))
+    enemy.inl = int(round(newInl))
+    enemy.fireRes = int(round(newFireRes))
+    enemy.frostRes = int(round(newFrostRes))
+    enemy.shadowRes = int(round(newShadowRes))
+    enemy.natureRes = int(round(newNatureRes))
 
 
 def itemLevelUp(item, floor):
-    ##  while floor>0:
     newStg = item.stg * (1 + 0.05 * floor)
     newAgi = item.agi * (1 + 0.05 * floor)
     newInl = item.inl * (1 + 0.05 * floor)
@@ -108,6 +119,13 @@ def isCritical(crit):
         LogNColor.Printer(str("You got a critical"))
         return True
     return False
+
+
+def printItemStats(itemList):
+    for idx, i in enumerate(itemList):
+        LogNColor.Printer(
+            str(idx + 1) + ": " + str(i.name) + " STR: " + str(i.stg) + " AGI: " + str(i.agi) + " INT: " + str(
+                i.inl))
 
 
 def roll(x1, x2):

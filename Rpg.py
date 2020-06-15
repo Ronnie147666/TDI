@@ -27,25 +27,12 @@ def startGame():
     LogNColor.Printer(str("Welcome to the Colosseum!"))
     p = None
     floor = 0
-    while p == None:
-        try:
-            LogNColor.Printer(str("What class do you choose:"))
-            for key in Class.classList.keys():
-                LogNColor.Printer(key.title())
-            c = str(input())
-            p = Class.classList[c]()
-            LogNColor.Printer('\n' + str(type(p).__name__) + str(" Spells:"))
-            Class.displayClassSpell(p)
-        except:
-            LogNColor.Printer(str("Wrong class!"))
+    while p is None:
+        p = classSelection(p)
 
-    while (True):
+    while True:
         resetCharacterBuffs(p)
         floor += 1
-        p.buffs = []
-        p.debuffs = []
-        p.hots = []
-        p.dots = []
         StatsNDice.calculateStats(p)
         e = Enemy.enemyList[random.randint(0, 140)]()
         StatsNDice.enemyLevelUp(e, floor - 1)
@@ -58,15 +45,25 @@ def startGame():
 
         if p.items:
             LogNColor.Printer("Your items:")
-            for idx, i in enumerate(p.items):
-                LogNColor.Printer(
-                    str(idx + 1) + ": " + str(i.name) + " STR: " + str(i.stg) + " AGI: " + str(i.agi) + " INT: " + str(
-                        i.inl))
+            StatsNDice.printItemStats(p.items)
             LogNColor.Printer("")
 
         printStats(e)
 
         Fight.fight(p, e, floor)
+
+def classSelection(p):
+    try:
+        LogNColor.Printer(str("What class do you choose:"))
+        for key in Class.classList.keys():
+            LogNColor.Printer(key.title())
+        c = str(input())
+        p = Class.classList[c]()
+        LogNColor.Printer('\n' + str(type(p).__name__) + str(" Spells:"))
+        Class.displayClassSpell(p)
+    except:
+        LogNColor.Printer(str("Wrong class!"))
+    return p
 
 
 if __name__ == '__main__':

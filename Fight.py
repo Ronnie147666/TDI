@@ -10,7 +10,7 @@ import LogNColor
 def fight(player, enemy, floor):
     import Rpg
     statsCalculated = False
-    while (player.hp > 0 and enemy.hp > 0):
+    while player.hp > 0 and enemy.hp > 0:
         if not statsCalculated:
             HotsNDots.getHotsNDots(player)
             HotsNDots.getHotsNDots(enemy)
@@ -24,7 +24,7 @@ def fight(player, enemy, floor):
                 LogNColor.Printer("What will you do: ")
                 s = str(input())
                 resolveAction(player, enemy, s)
-            if (enemy.hp > 0):
+            if enemy.hp > 0:
                 resolveAction(enemy, player, random.randint(1, 2))
             else:
                 lootPhase(player, floor)
@@ -55,8 +55,7 @@ def lootPhase(player, floor):
     loot = getLoot(floor)
     adjustItemLevel(floor, loot)
     LogNColor.Printer('\n'"You dropped:")
-    for idx, i in enumerate(loot, 1):
-        printItemStats(i, idx)
+    StatsNDice.printItemStats(loot)
     while True:
         LogNColor.Printer("Would you like to equip or unequip an item?")
         c = str(input())
@@ -66,7 +65,7 @@ def lootPhase(player, floor):
             elif canUnequip(c, player):
                 Item.unequipItem(player, filterNumberFromString(c) - 1)
             elif canEquip(c, floor):
-                if (Item.equipItem(player, loot[filterNumberFromString(c) - 1])):
+                if Item.equipItem(player, loot[filterNumberFromString(c) - 1]):
                     return
             else:
                 LogNColor.Printer("Wrong command2")
@@ -82,14 +81,6 @@ def adjustItemLevel(floor, loot):
 def filterNumberFromString(c):
     return int(list(filter(str.isdigit, c))[0])
 
-
-def printItemStats(i, idx):
-    LogNColor.Printer(
-        str(idx) + ": " + str(i.name) + " STR: " + str(i.stg) + " AGI: " + str(i.agi) + " INT: " + str(
-            i.inl) + " FIRE RES: " + str(i.fireRes) + " FROST RES: " + str(i.frostRes) + " NATURE RES: " + str(
-            i.natureRes) + " SHADOW RES: " + str(i.shadowRes))
-
-
 def resolveAction(attacker, defender, move):
     attacker.movesList[move](attacker, defender)
 
@@ -102,7 +93,7 @@ def findItemIndex(loot, choice):
 
 def canEquip(c, floor):
     # in range of floor max items
-    return (("equip" in c) and (filterNumberFromString(c) in range(1, floor + 1)))
+    return ("equip" in c) and (filterNumberFromString(c) in range(1, floor + 1))
 
 
 def canUnequip(c, player):

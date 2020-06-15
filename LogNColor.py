@@ -1,7 +1,7 @@
 from colorama import init, Fore, Back, Style
 import platform, re
 
-if (platform.system() == "Windows"):
+if platform.system() == "Windows":
     init(convert=True)
 
 def setColor(color):

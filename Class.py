@@ -13,12 +13,12 @@ class Player(object):
 
         self.hp = 0
         self.dmg = 0
+        self.spell = 0
         self.arm = 0
         self.crit = 0
-        self.spell = 0
-        self.res = 0
         self.moveCount = 1
 
+        self.arcaneRes = 0
         self.fireRes = 0
         self.frostRes = 0
         self.shadowRes = 0

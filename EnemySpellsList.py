@@ -89,13 +89,13 @@ def arcanefocus(enemy, placeHolder):
 def arcanemissiles(enemy, target):
     s = int(round(enemy.spell * 1.3))
     target.hp -= StatsNDice.roll(s * 2, s * 4) if not isCritical(enemy.crit) else StatsNDice.roll(s * 4, s * 8)
-    LogNColor.Printer(str("Arcane Missiles-Your HP:%d" % player.hp))
+    LogNColor.Printer(str("Arcane Missiles-Your HP:%d" % target.hp))
 
 
 def arcaneleak(enemy, target):
     inlDebuff = int(round(target.inl / 2))
-    target.spell -= inlBuff * 1.5
-    target.res -= inlBuff * 1.3
+    target.spell -= inlDebuff * 1.5
+    target.res -= inlDebuff * 1.3
     target.debuffs.append(BuffNDebuff.BuffNDebuff(inl=inlDebuff, time=4))
     LogNColor.Printer(str("Arcane Leak-Your Intellect:%d" % (target.inl + inlDebuff)))
 
@@ -172,8 +172,8 @@ def darkcurse(enemy, target):
     newHp = (target.stg - stgDebuff) * 10
     target.hp =  newHp if not newHp>target.hp else target.hp
     target.dmg -= stgDebuff * 1.3
-    target.debuffs.append(BuffNDebuff.BuffNDebuff(inl=inlDebuff, time=4))
-    LogNColor.Printer(str("Dark Curse-Your Intellect:%d" % (target.inl + inlDebuff)))
+    target.debuffs.append(BuffNDebuff.BuffNDebuff(inl=stgDebuff, time=4))
+    LogNColor.Printer(str("Dark Curse-Your Intellect:%d" % (target.inl + stgDebuff)))
 
     #########################
     ##Dreadlord##
@@ -270,7 +270,7 @@ def firestorm(enemy, target):
     newHp = (target.stg - stgDebuff) * 10
     target.hp =  newHp if not newHp>target.hp else target.hp
     target.dmg -= stgDebuff * 1.5
-    enemy.debuffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff, time=4))
+    enemy.debuffs.append(BuffNDebuff.BuffNDebuff(stg=stgDebuff, time=4))
     LogNColor.Printer(str("Fire Storm-Your Strength:%d" % (target.stg + stgDebuff)))
 
     #########################
@@ -289,14 +289,14 @@ def windinvocation(enemy, placeHolder):
     enemy.arm += agiBuff * 1.3
     enemy.crit += agiBuff * 1.1
     enemy.buffs.append(BuffNDebuff.BuffNDebuff(agi=agiBuff, time=4), )
-    LogNColor.Printer(str("Wind Invocation-Enemy Agility:%d" % (enemy.stg + stgBuff)))
+    LogNColor.Printer(str("Wind Invocation-Enemy Agility:%d" % (enemy.stg + agiBuff)))
 
 
 def windstorm(enemy, target):
     agiDebuff = int(round(target.agi / 2))
-    target.arm -= agiBuff * 1.3
-    target.crit -= agiBuff * 1.1
-    target.debuffs.append(BuffNDebuff.BuffNDebuff(stg=stgDebuff, time=4))
+    target.arm -= agiDebuff * 1.3
+    target.crit -= agiDebuff * 1.1
+    target.debuffs.append(BuffNDebuff.BuffNDebuff(stg=agiDebuff, time=4))
     LogNColor.Printer(str("Wind Storm-Your Agility:%d" % (target.stg + agiDebuff)))
 
     #########################
@@ -320,8 +320,8 @@ def waterinvocation(enemy, placeHolder):
 
 def waterstorm(enemy, target):
     agiDebuff = int(round(target.agi / 2))
-    target.arm -= agiBuff * 1.3
-    target.crit -= agiBuff * 1.1
+    target.arm -= agiDebuff * 1.3
+    target.crit -= agiDebuff * 1.1
     target.debuffs.append(BuffNDebuff.BuffNDebuff(agi=agiDebuff, time=4))
     LogNColor.Printer(str("Water Storm-Your Intellect:%d" % (target.stg + agiDebuff)))
 

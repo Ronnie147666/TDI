@@ -48,8 +48,8 @@ def clearBuffsNDebuffs(character):
     character.buffs = [buff for buff in character.buffs if buff.time > 0]
     character.debuffs = [debuff for debuff in character.debuffs if debuff.time > 0]
     if stgBuffs > 0:
-        if character.hp > StatsNDice.calculateHpWBuffs(character):
-            character.hp = StatsNDice.calculateHpWBuffs(character)
+        if character.hp > StatsNDice.calculateHpWithBuffs(character):
+            character.hp = StatsNDice.calculateHpWithBuffs(character)
     if stgDebuffs > 0:
         character.hp += stgDebuffs * 10
 

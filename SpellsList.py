@@ -1,6 +1,7 @@
 import random
 import BuffNDebuff
 import HotsNDots
+import Spellcast
 import StatsNDice
 import LogNColor
 from StatsNDice import isCritical
@@ -40,12 +41,12 @@ def backstab(player, target):
 
 
 def shadowbolt(player, target):
-    dmg = player.spell * 2
-    target.hp -= dmg if not isCritical(player.crit) else dmg * 2
+    Spellcast.castSpellTypeOne(player, 0, 2, target, 0, 0.5, target.shadowRes, 0)
     LogNColor.Printer(str("Shadowbolt-Enemy HP:%d" % target.hp))
 
 
 def lifedrain(player, target):
+    Spellcast.castSpellTypeOne(player, 0, 0.5, target, 0, 0.5, target.shadowRes, 0.5)
     dmg = int(round(player.spell / 2))
     target.hp -= dmg if not isCritical(player.crit) else dmg * 2
     player.hp += player.spell
@@ -72,8 +73,8 @@ def lunarstrike(player, target):
 
 def growth(player, placeHolder):
     hpHeal = int(round(player.spell / 4))
-    if player.hp + hpHeal > StatsNDice.calculateHpWBuffs(player):
-        player.hp = StatsNDice.calculateHpWBuffs(player)
+    if player.hp + hpHeal > StatsNDice.calculateHpWithBuffs(player):
+        player.hp = StatsNDice.calculateHpWithBuffs(player)
     else:
         player.hp += hpHeal
     player.hots.append(HotsNDots.HotNDot(hp=hpHeal, time=4, name="Growth"))
@@ -128,27 +129,36 @@ def taunt(placeHolder, target):
 
 
 def crusaderstrike(player, target):
-    dmg = (player.dmg * 2) - (target.arm * 0.75)
-    target.hp -= dmg if not isCritical(player.crit) else dmg * 2
-    LogNColor.Printer(str("Crusader Strike-Enemy HP:%d" % target.hp))
+    Spellcast.castSpell(player, 2, 0.2,  # caster, damageModifier, spellModifier
+                        target, 0.7, 0.9,  # target, armorModifier, resistanceModifier
+                        target.shadowRes, 0,  # resistanceTyper, lifesteal
+                        "Crusader Strike")
+
+    # dmg = (player.dmg * 2) - (target.arm * 0.75)
+    # target.hp -= dmg if not isCritical(player.crit) else dmg * 2
+    # LogNColor.Printer(str("Crusader Strike-Enemy HP:%d" % target.hp))
 
 
 def blessingofkings(player, placeHolder):
-    stgBuff = int(round(player.stg / 2))
-    inlBuff = int(round(player.inl / 2))
-    player.dmg += stgBuff * 10
-    player.dmg += stgBuff * 5
-    player.spell += inlBuff * 5
-    player.res += inlBuff * 3
-
-    player.buffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff, inl=inlBuff, time=4), )
-    LogNColor.Printer(str("Blessing Of Kings-Your Strength:%d" % (player.stg + stgBuff)))
-    LogNColor.Printer(str("Blessing Of Kings-Your Intellect:%d" % (player.inl + inlBuff)))
+    Spellcast.castBuff(player,
+                       1, 0, 1,  # strength, agility, intellect
+                       0.35, 4,  # modifier, duration
+                       "Blessing Of Kings")
+    # stgBuff = int(round(player.stg / 2))
+    # inlBuff = int(round(player.inl / 2))
+    # player.dmg += stgBuff * 10
+    # player.dmg += stgBuff * 5
+    # player.spell += inlBuff * 5
+    # player.res += inlBuff * 3
+    #
+    # player.buffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff, inl=inlBuff, time=4), )
+    # LogNColor.Printer(str("Blessing Of Kings-Your Strength:%d" % (player.stg + stgBuff)))
+    # LogNColor.Printer(str("Blessing Of Kings-Your Intellect:%d" % (player.inl + inlBuff)))
 
 
 def heal(player, placeHolder):
-    player.hp += player.spell
-    LogNColor.Printer(str("Heal-Your HP:%d" % player.hp))
+    Spellcast.castHeal(player, 0.75,
+                       "Heal")
 
     #########################
     ##Mage##
@@ -156,24 +166,23 @@ def heal(player, placeHolder):
 
 
 def arcanepower(player, placeHolder):
-    inlBuff = int(round(player.inl / 2))
-    player.spell += inlBuff * 5
-    player.res += inlBuff * 3
-    player.buffs.append(BuffNDebuff.BuffNDebuff(inl=inlBuff, time=4), )
-    LogNColor.Printer(str("Arcane Power-Your Intellect:%d" % (player.inl + inlBuff)))
-
+    Spellcast.castBuff(player,
+                       0, 0, 1,  # strength, agility, intellect
+                       0.5, 4,  # modifier, duration
+                       "Arcane Power")
 
 def arcanebolt(player, target):
-    dmg = player.spell * 3 - target.res * 0.6
-    target.hp -= dmg if not isCritical(player.crit) else dmg * 2
-    LogNColor.Printer(str("Arcanebolt-Enemy HP:%d" % target.hp))
+    Spellcast.castSpell(player, 0, 3,  # caster, damageModifier, spellModifier
+                        target, 0, 0.4,  # target, armorModifier, resistanceModifier
+                        target.shadowRes, 0,  # resistanceTyper, lifesteal
+                        "Arcanebolt")
 
 
 def ignite(player, target):
-    dmg = int(round(player.spell / 2, 5)) - target.res * 0.8
-    target.hp -= dmg
-    target.dots.append(HotsNDots.HotNDot(hp=dmg, time=4, name="Ignite"))
-    LogNColor.Printer(str("Ignite-Enemy HP:%d" % target.hp))
+    Spellcast.castDot(player, 0.4,  # caster, spellModifier
+                      target, 0.75,  # target, targetResistanceModifier
+                      target.fireRes, 4,  # targetResistance, duration
+                      "Ignite")
 
     #########################
     ##Priest##
@@ -182,8 +191,8 @@ def ignite(player, target):
 
 def prayer(player, placeHolder):
     hpHeal = int(round(player.spell / 0.2))
-    if player.hp + hpHeal > StatsNDice.calculateHpWBuffs(player):
-        player.hp = StatsNDice.calculateHpWBuffs(player)
+    if player.hp + hpHeal > StatsNDice.calculateHpWithBuffs(player):
+        player.hp = StatsNDice.calculateHpWithBuffs(player)
     else:
         player.hp += hpHeal
     player.hots.append(HotsNDots.HotNDot(hp=hpHeal, time=4, name="Prayer"))

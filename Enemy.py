@@ -230,11 +230,11 @@ class DrowRanger(Enemy):
         drowRanger = DrowRanger()
         return drowRanger
 
-        movesList = {
-            1: EnemySpellsList.precisionaura,
-            2: EnemySpellsList.frostshot,
-            3: EnemySpellsList.icyglance
-        }
+    movesList = {
+        1: EnemySpellsList.precisionaura,
+        2: EnemySpellsList.frostshot,
+        3: EnemySpellsList.icyglance
+    }
 
 
 ###################################
