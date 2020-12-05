@@ -7,7 +7,7 @@ import HotsNDots
 import LogNColor
 
 
-def fight(player, enemy, floor):
+def battle(player, enemy, floor):
     import Rpg
     statsCalculated = False
     while player.hp > 0 and enemy.hp > 0:
@@ -22,15 +22,17 @@ def fight(player, enemy, floor):
             ##try:
             for t in range(0, player.moveCount):
                 LogNColor.Printer("What will you do: ")
-                s = str(input())
-                resolveAction(player, enemy, s)
+                showCharacterSpells(player)
+                # s = str(input())
+                s = int(input())
+                resolveAction(player, enemy, s - 1)
             if enemy.hp > 0:
                 resolveAction(enemy, player, random.randint(1, 2))
             else:
                 lootPhase(player, floor)
                 StatsNDice.levelUp(player, floor)
                 StatsNDice.calculateStats(player)
-            if (player.hp <= 0):
+            if player.hp <= 0:
                 LogNColor.Printer("You lost!")
                 Rpg.startGame()
             BuffNDebuff.reduceBuffsNDebuffs(player)
@@ -45,7 +47,7 @@ def fight(player, enemy, floor):
 def getLoot(floor):
     loot = []
     for i in range(0, floor):
-        dice = random.randint(0, 9)
+        dice = random.randint(0, 120)
         newItem= ItemList.itemChance()[dice]
         loot.append(Item.createItem(newItem))
     return loot
@@ -82,7 +84,7 @@ def filterNumberFromString(c):
     return int(list(filter(str.isdigit, c))[0])
 
 def resolveAction(attacker, defender, move):
-    attacker.movesList[move](attacker, defender)
+    attacker.movesList[list(attacker.movesList.keys())[move]](attacker, defender)
 
 
 def findItemIndex(loot, choice):
@@ -90,6 +92,9 @@ def findItemIndex(loot, choice):
         if i.name == choice.title():
             return idx
 
+def showCharacterSpells(character):
+    for idx, val in enumerate(character.movesList):
+        LogNColor.Printer(str(idx + 1) + "." + val.title())
 
 def canEquip(c, floor):
     # in range of floor max items

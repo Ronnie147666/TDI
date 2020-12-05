@@ -17,5 +17,5 @@ for f in files:
 ZipFile = zipfile.ZipFile("textrpg.zip", "w" )
 
 for a in files_py:
-    print a
+    print(a)
     ZipFile.write(os.path.basename(a), compress_type=zipfile.ZIP_DEFLATED)

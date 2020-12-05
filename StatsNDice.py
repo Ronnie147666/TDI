@@ -9,11 +9,14 @@ def calculateStats(character):
     totalInl = character.inl + BuffNDebuff.getIntBuffNDebuff(character)
     character.hp = totalStg * 10
     character.dmg = totalStg * 5
-    # character.arm = totalAgi * 3
-    character.arm = round(setArmor(totalAgi), 1)
-    character.crit = round(totalAgi * 0.1, 1)
     character.spell = totalInl * 5
-    character.res = totalInl * 2
+    character.crit = round(totalAgi * 0.1, 1)
+    character.arm = round(setArmor(totalAgi + character.armorRating), 1)
+    character.arcaneRes = round(setResistance(character.inl + character.arcaneResRating), 1)
+    character.fireRes = round(setResistance(character.inl + character.fireResRating), 1)
+    character.frostRes = round(setResistance(character.inl + character.frostResRating), 1)
+    character.shadowRes = round(setResistance(character.inl + character.shadowResRating), 1)
+    character.natureRes = round(setResistance(character.inl + character.natureResRating), 1)
 
 
 def calculateStatsWithoutHp(character):
@@ -21,11 +24,14 @@ def calculateStatsWithoutHp(character):
     totalAgi = character.agi + BuffNDebuff.getAgiBuffNDebuff(character)
     totalInl = character.inl + BuffNDebuff.getIntBuffNDebuff(character)
     character.dmg = totalStg * 5
-    # character.arm = totalAgi * 3
-    character.arm = round(setArmor(totalAgi), 1)
-    character.crit = round(totalAgi * 0.1, 1)
     character.spell = totalInl * 5
-    character.res = totalInl * 2
+    character.crit = round(totalAgi * 0.1, 1)
+    character.arm = round(setArmor(totalAgi + character.armorRating), 1)
+    character.arcaneRes = round(setResistance(character.inl + character.arcaneResRating), 1)
+    character.fireRes = round(setResistance(character.inl + character.fireResRating), 1)
+    character.frostRes = round(setResistance(character.inl + character.frostResRating), 1)
+    character.shadowRes = round(setResistance(character.inl + character.shadowResRating), 1)
+    character.natureRes = round(setResistance(character.inl + character.natureResRating), 1)
 
 
 def calculateHpWithBuffs(character):
@@ -39,11 +45,17 @@ def calculateHp(character):
 
     # Stat formulas
 
-def setArmor(agility):
-    return ((min(agility, 500) * 0.1) +
-            ((min(agility - 500, 200) if not agility < 500 else 0) * 0.05) +
-            ((min(agility - 700, 200) if not agility < 700 else 0) * 0.01) +
-            ((min(agility - 900, 200) if not agility < 900 else 0) * 0.005))
+def setArmor(armorRating):
+    return ((min(armorRating, 500) * 0.1) +
+            ((min(armorRating - 500, 200) if not armorRating < 500 else 0) * 0.05) +
+            ((min(armorRating - 700, 200) if not armorRating < 700 else 0) * 0.01) +
+            ((min(armorRating - 900, 200) if not armorRating < 900 else 0) * 0.005))
+
+def setResistance(resistanceRating):
+    return ((min(resistanceRating, 500) * 0.05) +
+            ((min(resistanceRating - 500, 200) if not resistanceRating < 500 else 0) * 0.01) +
+            ((min(resistanceRating - 700, 200) if not resistanceRating < 700 else 0) * 0.005) +
+            ((min(resistanceRating - 900, 200) if not resistanceRating < 900 else 0) * 0.001))
 
     #
 
@@ -100,17 +112,17 @@ def itemLevelUp(item, floor):
     newStg = item.stg * (1 + 0.05 * floor)
     newAgi = item.agi * (1 + 0.05 * floor)
     newInl = item.inl * (1 + 0.05 * floor)
-    newFireRes = item.fireRes * (1 + 0.05 * floor)
-    newFrostRes = item.frostRes * (1 + 0.05 * floor)
-    newShadowRes = item.shadowRes * (1 + 0.05 * floor)
-    newNatureRes = item.natureRes * (1 + 0.05 * floor)
+    newFireResRating = item.fireResRating * (1 + 0.05 * floor)
+    newFrostResRating = item.frostResRating * (1 + 0.05 * floor)
+    newShadowResRating = item.shadowResRating * (1 + 0.05 * floor)
+    newNatureResRating = item.natureResRating * (1 + 0.05 * floor)
     item.stg = int(round(newStg))
     item.agi = int(round(newAgi))
     item.inl = int(round(newInl))
-    item.fireRes = int(round(newFireRes))
-    item.frostRes = int(round(newFrostRes))
-    item.shadowRes = int(round(newShadowRes))
-    item.natureRes = int(round(newNatureRes))
+    item.fireResRating = int(round(newFireResRating))
+    item.frostResRating = int(round(newFrostResRating))
+    item.shadowResRating = int(round(newShadowResRating))
+    item.natureResRating = int(round(newNatureResRating))
 
 
 def isCritical(crit):

@@ -9,14 +9,14 @@ def castSpell(caster, casterDamageModifier, casterSpellModifier,
               lifestealModifier, spellName):
     pDmg = caster.dmg * casterDamageModifier * (1 - (target.arm * targetArmorModifier)/100)
     mDmg = caster.spell * casterSpellModifier * (1 - (targetResistance * targetResistanceModifier) / 100)
-    dmg = pDmg + mDmg
+    dmg = round(pDmg + mDmg)
     totalDmg = dmg if not StatsNDice.isCritical(caster.crit) else (dmg * 1,75)
     target.hp -= totalDmg
     caster.hp = caster.hp + (totalDmg * lifestealModifier) \
         if (caster.hp + (totalDmg * lifestealModifier)) <= StatsNDice.calculateHpWithBuffs(caster) \
         else StatsNDice.calculateHpWithBuffs(caster)
     LogNColor.Printer(str(LogNColor.splitWords(type(caster).__name__)) +
-                      LogNColor.Printer(" casts " + spellName) + " for " + str(totalDmg) + "!")
+                      " casts " + spellName + " for " + str(totalDmg) + "!")
 
 
 def castHeal(caster, modifier, spellName):
@@ -27,16 +27,20 @@ def castHeal(caster, modifier, spellName):
                       LogNColor.Printer(" casts" + spellName) + " for " + str(healAmount) + " heal!")
 
 
-def castBuff(target, sBuff, aBuff, iBuff, modifier, duration, spellName):  # sBuff, aBuff, iBuff -> 0 if not included
-    stgBuff = sBuff * int(round(target.stg * modifier))
-    agiBuff = aBuff * int(round(target.agi * modifier))
-    inlBuff = iBuff * int(round(target.inl * modifier))
+def castBuff(target, sBuff, aBuff, iBuff, duration, spellName):
+    stgBuff = int(round(target.stg * sBuff))
+    agiBuff = int(round(target.agi * aBuff))
+    inlBuff = int(round(target.inl * iBuff))
     target.hp += stgBuff * 10
     target.dmg += stgBuff * 5
-    target.arm += agiBuff * 3
-    target.crit += agiBuff * 0.1
     target.spell += inlBuff * 5
-    target.res += inlBuff * 3
+    target.crit += agiBuff * 0.1
+    target.arm = round(StatsNDice.setArmor(target.agi + agiBuff), 1)
+    target.arcaneRes = round(StatsNDice.setResistance(target.inl + inlBuff), 1)
+    target.fireRes = round(StatsNDice.setResistance(target.inl + inlBuff), 1)
+    target.frostRes = round(StatsNDice.setResistance(target.inl + inlBuff), 1)
+    target.shadowRes = round(StatsNDice.setResistance(target.inl + inlBuff), 1)
+    target.natureRes = round(StatsNDice.setResistance(target.inl + inlBuff), 1)
     target.buffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff, agi=agiBuff, inl=inlBuff, time=duration))
     LogNColor.Printer(str(LogNColor.splitWords(type(target).__name__)) +
                       " casts " + spellName + " for" +
@@ -45,28 +49,38 @@ def castBuff(target, sBuff, aBuff, iBuff, modifier, duration, spellName):  # sBu
                       str(" %d Intellect" % inlBuff))
 
 
-def castDebuff(target, sDebuff, aDebuff, iDebuff, modifier, duration):  # sDebuff, aDebuff, iDebuff -> 0 if not included
-    stgDebuff = sDebuff * int(round(target.stg * modifier))
-    agiDebuff = aDebuff * int(round(target.agi * modifier))
-    inlDebuff = iDebuff * int(round(target.inl * modifier))
+def castDebuff(target, sDebuff, aDebuff, iDebuff, duration, spellName):
+    stgDebuff = int(round(target.stg * sDebuff))
+    agiDebuff = int(round(target.agi * aDebuff))
+    inlDebuff = int(round(target.inl * iDebuff))
     newHp = (target.stg - stgDebuff) * 10
     target.hp = newHp if not (newHp > target.hp and sDebuff == 0) else target.hp
     target.dmg -= stgDebuff * 5
-    target.arm -= agiDebuff * 3
-    target.crit -= agiDebuff * 0.1
     target.spell -= inlDebuff * 5
-    target.res -= inlDebuff * 3
+    target.crit -= agiDebuff * 0.1
+    target.arm = round(StatsNDice.setArmor(target.agi - agiDebuff), 1)
+    target.arcaneRes = round(StatsNDice.setResistance(target.inl - inlDebuff), 1)
+    target.fireRes = round(StatsNDice.setResistance(target.inl - inlDebuff), 1)
+    target.frostRes = round(StatsNDice.setResistance(target.inl - inlDebuff), 1)
+    target.shadowRes = round(StatsNDice.setResistance(target.inl - inlDebuff), 1)
+    target.natureRes = round(StatsNDice.setResistance(target.inl - inlDebuff), 1)
     target.debuffs.append(BuffNDebuff.BuffNDebuff(stg=stgDebuff, agi=agiDebuff, inl=inlDebuff, time=duration))
+    LogNColor.Printer(str(LogNColor.splitWords(type(target).__name__)) +
+                      " casts " + spellName + " for" +
+                      str(" %d Strength" % stgDebuff) +
+                      str(" %d Agility" % agiDebuff) +
+                      str(" %d Intellect" % inlDebuff))
 
 
-def castHot(caster, modifier, duration, title):
-    h = caster.spell * modifier
+def castHot(caster, modifier, duration, spellName):
+    h = int(round(caster.spell * modifier))
     hot = h if not StatsNDice.isCritical(caster.crit) else h * 2
-    if caster.hp + hot > StatsNDice.calculateHpWithBuffs(caster):
-        caster.hp = StatsNDice.calculateHpWithBuffs(caster)
+    maxHp = StatsNDice.calculateHpWithBuffs(caster)
+    if caster.hp + hot > maxHp:
+        caster.hp = maxHp
     else:
         caster.hp += hot
-    caster.hots.append(HotsNDots.HotNDot(hp=hot, time=duration, name=title))
+    caster.hots.append(HotsNDots.HotNDot(hp=hot, time=duration, name=spellName))
 
 
 def castDot(caster, casterSpellModifier, target, targetResistanceModifier, targetResistance, duration, spellName):

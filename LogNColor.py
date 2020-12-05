@@ -28,3 +28,10 @@ def splitWords(word):
 ##Fore: BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, RESET.
 ##Back: BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, RESET.
 ##Style: DIM, NORMAL, BRIGHT, RESET_ALL
+
+
+def printItemStats(idx, i):
+    Printer(
+        str(idx + 1) + ": " + str(i.name) + " STR: " + str(i.stg) + " AGI: " + str(i.agi) + " INT: " +
+        str(i.inl) + " ARMOR RATING: " + str(i.armorRating) + " FIRE RES: " + str(i.fireResRating) + " FROST RES: " +
+        str(i.frostResRating) + " NATURE RES: " + str(i.natureResRating) + " SHADOW RES: " + str(i.shadowResRating))

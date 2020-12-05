@@ -2,14 +2,14 @@ import random
 import Class
 import Enemy
 import StatsNDice
-import Fight
+import Battle
 import LogNColor
 
 def printStats(character):
     LogNColor.Printer(LogNColor.splitWords(type(character).__name__)+str(" Stats:"'\n'))
     LogNColor.Printer("Strength:" + str(character.stg)+"   |"+"Hp:" + str(character.hp)+"    |"+"Crit:" + str(character.crit))
     LogNColor.Printer("Agility:" + str(character.agi)+"    |"+"Dmg:" + str(character.dmg)+"   |"+"Spell:" + str(character.spell))
-    LogNColor.Printer("Intellect:" + str(character.inl)+"  |"+"Arm:" + str(character.arm)+"    |"+"Resistance:" + str(character.res))
+    LogNColor.Printer("Intellect:" + str(character.inl)+"  |"+"Arm:" + str(character.arm))
     LogNColor.Printer("\nFire Res:" + str(character.fireRes)+"\nIce Res:" + str(character.frostRes))
     LogNColor.Printer("Shadow Res:" + str(character.shadowRes)+"\nNature Res:" + str(character.natureRes))
     LogNColor.Printer("")
@@ -50,7 +50,7 @@ def startGame():
 
         printStats(e)
 
-        Fight.fight(p, e, floor)
+        Battle.battle(p, e, floor)
 
 def classSelection(p):
     try:

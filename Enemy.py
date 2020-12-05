@@ -19,9 +19,22 @@ class Enemy(object):
         self.res = 0
         self.moveCount = 1
 
+        self.armorRating = 0
+        self.armor = 0
+
+        self.arcaneResRating = 0
+        self.arcaneRes = 0
+
+        self.fireResRating = 0
         self.fireRes = 0
+
+        self.frostResRating = 0
         self.frostRes = 0
+
+        self.shadowResRating = 0
         self.shadowRes = 0
+
+        self.natureResRating = 0
         self.natureRes = 0
 
         self.buffs = []
@@ -39,6 +52,12 @@ class BlackDragon(Enemy):
         self.stg = roll(20, 25)
         self.agi = roll(10, 20)
         self.inl = roll(10, 20)
+        self.armorRating = roll(1, 5)
+        self.arcaneResRating = roll(1, 5)
+        self.fireResRating = roll(1, 5)
+        self.frostResRating = roll(1, 5)
+        self.natureResRating = roll(1, 5)
+        self.shadowResRating = roll(1, 5)
 
     @staticmethod
     def create():
@@ -59,6 +78,12 @@ class DarkKnight(Enemy):
         self.stg = roll(15, 20)
         self.agi = roll(20, 25)
         self.inl = roll(10, 15)
+        self.armorRating = roll(1, 5)
+        self.arcaneResRating = roll(1, 5)
+        self.fireResRating = roll(1, 5)
+        self.frostResRating = roll(1, 5)
+        self.natureResRating = roll(1, 5)
+        self.shadowResRating = roll(1, 5)
 
     @staticmethod
     def create():
@@ -80,6 +105,12 @@ class Lich(Enemy):
         self.stg = roll(10, 15)
         self.agi = roll(15, 20)
         self.inl = roll(25, 30)
+        self.armorRating = roll(1, 5)
+        self.arcaneResRating = roll(1, 5)
+        self.fireResRating = roll(1, 5)
+        self.frostResRating = roll(1, 5)
+        self.natureResRating = roll(1, 5)
+        self.shadowResRating = roll(1, 5)
 
     @staticmethod
     def create():
@@ -101,6 +132,12 @@ class Archmage(Enemy):
         self.stg = roll(10, 15)
         self.agi = roll(20, 35)
         self.inl = roll(30, 35)
+        self.armorRating = roll(1, 5)
+        self.arcaneResRating = roll(1, 5)
+        self.fireResRating = roll(1, 5)
+        self.frostResRating = roll(1, 5)
+        self.natureResRating = roll(1, 5)
+        self.shadowResRating = roll(1, 5)
 
     @staticmethod
     def create():
@@ -122,6 +159,12 @@ class Demon(Enemy):
         self.stg = roll(20, 25)
         self.agi = roll(15, 25)
         self.inl = roll(15, 20)
+        self.armorRating = roll(1, 5)
+        self.arcaneResRating = roll(1, 5)
+        self.fireResRating = roll(1, 5)
+        self.frostResRating = roll(1, 5)
+        self.natureResRating = roll(1, 5)
+        self.shadowResRating = roll(1, 5)
 
     @staticmethod
     def create():
@@ -142,6 +185,12 @@ class FuriousSwordmaster(Enemy):
         self.stg = roll(20, 25)
         self.agi = roll(25, 35)
         self.inl = roll(10, 35)
+        self.armorRating = roll(1, 5)
+        self.arcaneResRating = roll(1, 5)
+        self.fireResRating = roll(1, 5)
+        self.frostResRating = roll(1, 5)
+        self.natureResRating = roll(1, 5)
+        self.shadowResRating = roll(1, 5)
 
     @staticmethod
     def create():
@@ -163,6 +212,12 @@ class DarkWizard(Enemy):
         self.stg = roll(15, 20)
         self.agi = roll(15, 20)
         self.inl = roll(35, 40)
+        self.armorRating = roll(1, 5)
+        self.arcaneResRating = roll(1, 5)
+        self.fireResRating = roll(1, 5)
+        self.frostResRating = roll(1, 5)
+        self.natureResRating = roll(1, 5)
+        self.shadowResRating = roll(1, 5)
 
     @staticmethod
     def create():
@@ -184,6 +239,12 @@ class Dreadlord(Enemy):
         self.stg = roll(25, 30)
         self.agi = roll(15, 20)
         self.inl = roll(15, 20)
+        self.armorRating = roll(1, 5)
+        self.arcaneResRating = roll(1, 5)
+        self.fireResRating = roll(1, 5)
+        self.frostResRating = roll(1, 5)
+        self.natureResRating = roll(1, 5)
+        self.shadowResRating = roll(1, 5)
 
     @staticmethod
     def create():
@@ -204,6 +265,12 @@ class CursedNecromancer(Enemy):
         self.stg = roll(15, 25)
         self.agi = roll(10, 15)
         self.inl = roll(25, 35)
+        self.armorRating = roll(1, 5)
+        self.arcaneResRating = roll(1, 5)
+        self.fireResRating = roll(1, 5)
+        self.frostResRating = roll(1, 5)
+        self.natureResRating = roll(1, 5)
+        self.shadowResRating = roll(1, 5)
 
     @staticmethod
     def create():
@@ -224,6 +291,12 @@ class DrowRanger(Enemy):
         self.stg = roll(15, 25)
         self.agi = roll(20, 35)
         self.inl = roll(15, 25)
+        self.armorRating = roll(1, 5)
+        self.arcaneResRating = roll(1, 5)
+        self.fireResRating = roll(1, 5)
+        self.frostResRating = roll(1, 5)
+        self.natureResRating = roll(1, 5)
+        self.shadowResRating = roll(1, 5)
 
     @staticmethod
     def create():
@@ -245,6 +318,12 @@ class FireElemental(Enemy):
         self.stg = roll(20, 30)
         self.agi = roll(10, 20)
         self.inl = roll(10, 20)
+        self.armorRating = roll(1, 5)
+        self.arcaneResRating = roll(1, 5)
+        self.fireResRating = roll(1, 5)
+        self.frostResRating = roll(1, 5)
+        self.natureResRating = roll(1, 5)
+        self.shadowResRating = roll(1, 5)
 
     @staticmethod
     def create():
@@ -266,6 +345,12 @@ class WindElemental(Enemy):
         self.stg = roll(10, 20)
         self.agi = roll(20, 30)
         self.inl = roll(10, 20)
+        self.armorRating = roll(1, 5)
+        self.arcaneResRating = roll(1, 5)
+        self.fireResRating = roll(1, 5)
+        self.frostResRating = roll(1, 5)
+        self.natureResRating = roll(1, 5)
+        self.shadowResRating = roll(1, 5)
 
     @staticmethod
     def create():
@@ -287,6 +372,12 @@ class WaterElemental(Enemy):
         self.stg = roll(10, 20)
         self.agi = roll(10, 20)
         self.inl = roll(20, 30)
+        self.armorRating = roll(1, 5)
+        self.arcaneResRating = roll(1, 5)
+        self.fireResRating = roll(1, 5)
+        self.frostResRating = roll(1, 5)
+        self.natureResRating = roll(1, 5)
+        self.shadowResRating = roll(1, 5)
 
     @staticmethod
     def create():
@@ -308,6 +399,12 @@ class Ghost(Enemy):
         self.stg = roll(10, 15)
         self.agi = roll(20, 30)
         self.inl = roll(20, 30)
+        self.armorRating = roll(1, 5)
+        self.arcaneResRating = roll(1, 5)
+        self.fireResRating = roll(1, 5)
+        self.frostResRating = roll(1, 5)
+        self.natureResRating = roll(1, 5)
+        self.shadowResRating = roll(1, 5)
 
     @staticmethod
     def create():
@@ -327,6 +424,12 @@ class MercilessGladiator(Enemy):
         self.stg = roll(20, 35)
         self.agi = roll(20, 35)
         self.inl = roll(10, 15)
+        self.armorRating = roll(1, 5)
+        self.arcaneResRating = roll(1, 5)
+        self.fireResRating = roll(1, 5)
+        self.frostResRating = roll(1, 5)
+        self.natureResRating = roll(1, 5)
+        self.shadowResRating = roll(1, 5)
 
     @staticmethod
     def create():
