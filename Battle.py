@@ -7,10 +7,10 @@ import HotsNDots
 import LogNColor
 
 
-def fight(player, enemy, floor):
+def battle(player, enemy, floor):
     import Rpg
     statsCalculated = False
-    while (player.hp > 0 and enemy.hp > 0):
+    while player.hp > 0 and enemy.hp > 0:
         if not statsCalculated:
             HotsNDots.getHotsNDots(player)
             HotsNDots.getHotsNDots(enemy)
@@ -19,79 +19,61 @@ def fight(player, enemy, floor):
             BuffNDebuff.clearBuffsNDebuffs(player)
             BuffNDebuff.clearBuffsNDebuffs(enemy)
             statsCalculated = True
-            ##try:
+            # try:
             for t in range(0, player.moveCount):
                 LogNColor.Printer("What will you do: ")
-                s = str(input())
-                resolveAction(player, enemy, s)
-            if (enemy.hp > 0):
+                showCharacterSpells(player)
+                s = int(input())
+                resolveAction(player, enemy, s - 1)
+            if enemy.hp > 0:
                 resolveAction(enemy, player, random.randint(1, 2))
             else:
-                lootPhase(player, floor)
+                lootPhase(player, enemy, floor)
                 StatsNDice.levelUp(player, floor)
                 StatsNDice.calculateStats(player)
-            if (player.hp <= 0):
+            if player.hp <= 0:
                 LogNColor.Printer("You lost!")
                 Rpg.startGame()
             BuffNDebuff.reduceBuffsNDebuffs(player)
             BuffNDebuff.reduceBuffsNDebuffs(enemy)
             statsCalculated = False
-            ##except:
+            # except:
             if s == 'quit':
                 Rpg.quitGame()
             LogNColor.Printer("Wrong command1")
 
 
-def getLoot(floor):
-    loot = []
-    for i in range(0, floor):
-        dice = random.randint(0, 9)
-        newItem= ItemList.itemChance()[dice]
-        loot.append(Item.createItem(newItem))
-    return loot
-
-
-def lootPhase(player, floor):
-    loot = getLoot(floor)
-    adjustItemLevel(floor, loot)
+def lootPhase(player, enemy, floor):
+    if enemy.items:
+        loot = enemy.items
+    else:
+        LogNColor.Printer('\n'"You dropped nothing!")
+        return
     LogNColor.Printer('\n'"You dropped:")
-    for idx, i in enumerate(loot, 1):
-        printItemStats(i, idx)
+    LogNColor.printItemStats(loot)
     while True:
         LogNColor.Printer("Would you like to equip or unequip an item?")
         c = str(input())
         try:
             if c == "continue":
                 return
-            elif canUnequip(c, player):
+            elif c[0] == "e" and canEquip(c, loot):
+                Item.equipItem(player, loot[filterNumberFromString(c) - 1])
+                return
+            elif c[0] == "u" and canUnequip(c, player):
                 Item.unequipItem(player, filterNumberFromString(c) - 1)
-            elif canEquip(c, floor):
-                if (Item.equipItem(player, loot[filterNumberFromString(c) - 1])):
-                    return
             else:
                 LogNColor.Printer("Wrong command2")
         except:
             LogNColor.Printer("Wrong command3")
 
 
-def adjustItemLevel(floor, loot):
-    for l in loot:
-        StatsNDice.itemLevelUp(l, floor)
-
-
 def filterNumberFromString(c):
     return int(list(filter(str.isdigit, c))[0])
 
 
-def printItemStats(i, idx):
-    LogNColor.Printer(
-        str(idx) + ": " + str(i.name) + " STR: " + str(i.stg) + " AGI: " + str(i.agi) + " INT: " + str(
-            i.inl) + " FIRE RES: " + str(i.fireRes) + " FROST RES: " + str(i.frostRes) + " NATURE RES: " + str(
-            i.natureRes) + " SHADOW RES: " + str(i.shadowRes))
-
-
 def resolveAction(attacker, defender, move):
-    attacker.movesList[move](attacker, defender)
+    attacker.movesList[list(attacker.movesList.keys())[move]](attacker, defender)
 
 
 def findItemIndex(loot, choice):
@@ -100,11 +82,16 @@ def findItemIndex(loot, choice):
             return idx
 
 
-def canEquip(c, floor):
-    # in range of floor max items
-    return (("equip" in c) and (filterNumberFromString(c) in range(1, floor + 1)))
+def showCharacterSpells(character):
+    for idx, val in enumerate(character.movesList):
+        LogNColor.Printer(str(idx + 1) + "." + val.title())
+
+
+def canEquip(c, loot):
+    # check if number given is in range of loot's max index
+    return filterNumberFromString(c) in range(1, len(loot) + 1)
 
 
 def canUnequip(c, player):
-    # in range of player max items
-    return ("unequip" in c) and (filterNumberFromString(c) in range(1, len(player.items) + 1))
+    # check if number given is in range of player's inventory max index
+    return filterNumberFromString(c) in range(1, len(player.items) + 1)

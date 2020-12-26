@@ -13,16 +13,28 @@ class Player(object):
 
         self.hp = 0
         self.dmg = 0
-        self.arm = 0
-        self.crit = 0
         self.spell = 0
-        self.res = 0
-        self.moveCount = 1
+        self.crit = 0
+        self.moveCount = 2
 
+        self.armorRating = 0
+        self.armor = 0
+
+        self.arcaneResRating = 0
+        self.arcaneRes = 0
+
+        self.fireResRating = 0
         self.fireRes = 0
+
+        self.frostResRating = 0
         self.frostRes = 0
+
+        self.shadowResRating = 0
         self.shadowRes = 0
+
+        self.natureResRating = 0
         self.natureRes = 0
+
 
         self.items = []
         self.buffs = []
@@ -30,6 +42,7 @@ class Player(object):
         self.dots = []
         self.hots = []
         self.curse = 0
+        self.inventory = {}
 
 
 ###################################
@@ -58,7 +71,7 @@ class Paladin(Player):
 class Warrior(Player):
     def __init__(self):
         super(Warrior, self).__init__()
-        self.stg = roll(30000, 35000)
+        self.stg = roll(30, 35)
         self.agi = roll(20, 25)
         self.inl = roll(10, 15)
 
@@ -236,6 +249,6 @@ classList = {
 }
 
 
-def displayClassSpell(theClass):
-    for key in theClass.movesList.keys():
-        print(key.title())
+# def displayClassSpell(theClass):
+#     for key in theClass.movesList.keys():
+#         print(key.title())

@@ -3,368 +3,347 @@ import BuffNDebuff
 import HotsNDots
 import StatsNDice
 import LogNColor
+import Spellcast
 from StatsNDice import isCritical
 
 
-    #########################
-    ##BlackDragon##
-    #########################
+#########################
+##BlackDragon##
+#########################
 
 def dragonbreath(enemy, target):
-    s = enemy.spell
-    target.hp -= StatsNDice.roll(s * 2, s * 4) if not isCritical(enemy.crit) else StatsNDice.roll(s * 4, s * 8)
-    LogNColor.Printer(str("Dragonbreath-Your HP:%d" % target.hp))
-
+    Spellcast.castSpell(target, 0, 0.75,  # caster, damageModifier, spellModifier
+                        target, 0, 0.8,  # target, armorModifier, resistanceModifier
+                        target.fireRes, 0,  # resistanceTyper, lifesteal
+                        "Dragonbreath")
 
 def tailwhip(enemy, target):
-    s = int(round(enemy.dmg * 1.3))
-    target.hp -= StatsNDice.roll(s * 2, s * 4) if not isCritical(enemy.crit) else StatsNDice.roll(s * 4, s * 8)
-    LogNColor.Printer(str("Tailwhip-Your HP:%d" % target.hp))
+    Spellcast.castSpell(target, 0.9, 0.15,  # caster, damageModifier, spellModifier
+                        target, 0.2, 0.9,  # target, armorModifier, resistanceModifier
+                        target.natureRes, 0,  # resistanceTyper, lifesteal
+                        "Tail Whip")
 
-    #########################
-    ##DarkKnight##
-    #########################
-
+#########################
+##DarkKnight##
+#########################
 
 def darkbinding(enemy, target):
-    inlDebuff = int(round(target.inl / 2))
-    target.spell -= inlDebuff * 1.5
-    target.res -= inlDebuff * 1.3
-    target.debuffs.append(BuffNDebuff.BuffNDebuff(inl=inlDebuff, time=4))
-    LogNColor.Printer(str("Dark Binding-Your Intellect:%d" % (target.inl + inlDebuff)))
+    Spellcast.castDebuff(target,
+                         0, 0, 0.5,  # strength, agility, intellect
+                         4,  # duration
+                         "Dark Binding")
 
-
-def shadowstrike(enemy, target):
-    s = int(round((enemy.dmg * 1.3) - target.arm * 0.5))
-    target.hp -= StatsNDice.roll(s * 2, s * 4) if not isCritical(enemy.crit) else StatsNDice.roll(s * 4, s * 8)
-    LogNColor.Printer(str("Shadow Strike-Your HP:%d" % target.hp))
-
+def darkstrike(enemy, target):
+    Spellcast.castSpell(target, 1.3, 0,  # caster, damageModifier, spellModifier
+                        target, 0.5, 0,  # target, armorModifier, resistanceModifier
+                        target.shadowRes, 0,  # resistanceTyper, lifesteal
+                        "Dark Strike")
 
 def darktouch(enemy, target):
-    dmg = int(round(enemy.spell / 2))
-    target.hp -= dmg
-    target.dots.append(HotsNDots.HotNDot(hp=dmg, time=5, name="Dark Touch"))
-    LogNColor.Printer(str("Dark Touch-Enemy HP:%d" % target.hp))
+    Spellcast.castDot(target, 0.5,  # caster, spellModifier
+                      target, 0.75,  # target, targetResistanceModifier
+                      target.shadowRes, 4,  # targetResistance, duration
+                      "Dark Touch")
 
-    #########################
-    ##Lich##
-    #########################
-
+#########################
+##Lich##
+#########################
 
 def icychains(enemy, target):
-    agiDebuff = int(round(target.agi / 2))
-    target.arm -= agiDebuff * 1.3
-    target.crit -= agiDebuff * 0.1
-    target.debuffs.append(BuffNDebuff.BuffNDebuff(agi=agiDebuff, time=4))
-    LogNColor.Printer(str("Icy Chains-Your Agility:%d" % (target.agi + agiDebuff)))
-
+    Spellcast.castDebuff(target,
+                         0, 0.5, 0,  # strength, agility, intellect
+                         4,  # duration
+                         "Icy Chains")
 
 def frostbolt(enemy, target):
-    s = int(round(enemy.spell * 1.5))
-    target.hp -= StatsNDice.roll(s * 2, s * 4) if not isCritical(enemy.crit) else StatsNDice.roll(s * 4, s * 8)
-    LogNColor.Printer(str("Deadlybolt-Your HP:%d" % target.hp))
-
+    Spellcast.castSpell(target, 0, 1.5,  # caster, damageModifier, spellModifier
+                        target, 0, 0.75,  # target, armorModifier, resistanceModifier
+                        target.iceRes, 0,  # resistanceTyper, lifesteal
+                        "Frostbolt")
 
 def stealife(enemy, target):
-    s = int(round(enemy.spell * 1.5))
-    sd = StatsNDice.roll(s * 2, s * 4) if not isCritical(enemy.crit) else StatsNDice.roll(s * 4, s * 8)
-    target.hp -= sd
-    enemy.hp += sd
-    LogNColor.Printer(str("Steal Life-Your HP:%d" % target.hp))
-    LogNColor.Printer(str("Steal Life-Enemy HP:%d" % enemy.hp))
+    Spellcast.castSpell(target, 0, 1,  # caster, damageModifier, spellModifier
+                        target, 0, 0.65,  # target, armorModifier, resistanceModifier
+                        target.shadowRes, 0.75,  # resistanceTyper, lifesteal
+                        "Steal Life")
 
-    #########################
-    ##Archmage##
-    #########################
-
+#########################
+##Archmage##
+#########################
 
 def arcanefocus(enemy, placeHolder):
-    inlBuff = int(round(enemy.inl / 2))
-    enemy.spell += inlBuff * 1.5
-    enemy.res += inlBuff * 1.3
-    enemy.buffs.append(BuffNDebuff.BuffNDebuff(inl=inlBuff, time=4))
-    LogNColor.Printer(str("Arcane Focus-Enemy Intellect:%d" % (enemy.inl + inlBuff)))
-
+    Spellcast.castBuff(enemy,
+                       0, 0, 0.5,  # strength, agility, intellect
+                       4,  # duration
+                       "Arcane Focus")
 
 def arcanemissiles(enemy, target):
-    s = int(round(enemy.spell * 1.3))
-    target.hp -= StatsNDice.roll(s * 2, s * 4) if not isCritical(enemy.crit) else StatsNDice.roll(s * 4, s * 8)
-    LogNColor.Printer(str("Arcane Missiles-Your HP:%d" % player.hp))
-
+    Spellcast.castSpell(target, 0, 1,  # caster, damageModifier, spellModifier
+                        target, 0, 0.65,  # target, armorModifier, resistanceModifier
+                        target.arcaneRes, 0.75,  # resistanceTyper, lifesteal
+                        "Arcane Missiles")
 
 def arcaneleak(enemy, target):
-    inlDebuff = int(round(target.inl / 2))
-    target.spell -= inlBuff * 1.5
-    target.res -= inlBuff * 1.3
-    target.debuffs.append(BuffNDebuff.BuffNDebuff(inl=inlDebuff, time=4))
-    LogNColor.Printer(str("Arcane Leak-Your Intellect:%d" % (target.inl + inlDebuff)))
+    Spellcast.castDebuff(target,
+                         0, 0, 0.5,  # strength, agility, intellect
+                         4,  # duration
+                         "Arcane Leak")
 
-    #########################
-    ##Demon##
-    #########################
-
+#########################
+##Demon##
+#########################
 
 def soulsteal(enemy, target):
-    dmg = int(round(enemy.spell))
-    target.hp -= dmg
-    enemy.hp += dmg
-    LogNColor.Printer(str("Soulsteal-Your HP:%d" % target.hp))
-    LogNColor.Printer(str("Soulsteal-Enemy HP:%d" % enemy.hp))
-
+    Spellcast.castSpell(target, 0, 1,  # caster, damageModifier, spellModifier
+                        target, 0, 0.45,  # target, armorModifier, resistanceModifier
+                        target.shadowRes, 0.85,  # resistanceTyper, lifesteal
+                        "Soulsteal")
 
 def wrath(enemy, placeHolder):
-    stgBuff = int(round(enemy.stg / 2))
-    agiBuff = int(round(enemy.agi / 2))
-    enemy.dmg += stgBuff * 1.1
-    enemy.dmg += stgBuff * 1.5
-    enemy.arm += agiBuff * 1.3
-    enemy.crit += agiBuff * 0.1
-    enemy.buffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff, agi=agiBuff, time=4))
-    LogNColor.Printer(str("Wrath-Enemy Strength:%d" % (enemy.stg + stgBuff)))
-    LogNColor.Printer(str("Wrath-Enemy Agility:%d" % (enemy.agi + agiBuff)))
+    Spellcast.castBuff(enemy,
+                       0.5, 0.5, 0,  # strength, agility, intellect
+                       4,  # duration
+                       "Wrath")
 
-    #########################
-    ##FuriousSwordmaster##
-    #########################
-
+#########################
+##FuriousSwordmaster##
+#########################
 
 def furiousstrike(enemy, target):
-    s = int(round(enemy.dmg * 1.3))
-    target.hp -= StatsNDice.roll(s * 2, s * 4) if not isCritical(enemy.crit) else StatsNDice.roll(s * 4, s * 8)
-    LogNColor.Printer(str("Furious Strike-Your HP:%d" % target.hp))
-
+    Spellcast.castSpell(target, 1.3, 0,  # caster, damageModifier, spellModifier
+                        target, 0.4, 0,  # target, armorModifier, resistanceModifier
+                        target.fireRes, 0,  # resistanceTyper, lifesteal
+                        "Furious Strike")
 
 def swiftspirit(enemy, placeHolder):
-    agiBuff = int(round(enemy.agi / 4))
-    enemy.arm += agiBuff * 1.3
-    enemy.crit += agiBuff * 1.1
-    enemy.buffs.append(BuffNDebuff.BuffNDebuff(agi=agiBuff, time=4))
-    LogNColor.Printer(str("Swift Spirit-Enemy Strength:%d" % (enemy.agi + agiBuff)))
-
+    Spellcast.castBuff(enemy,
+                       0, 0.25, 0,  # strength, agility, intellect
+                       4,  # duration
+                       "Swift Spirit")
 
 def cuttingedge(enemy, target):
-    dmg = int(round(enemy.dmg / 2)) - (target.arm * 0.8)
-    target.hp -= dmg
-    target.dots.append(HotsNDots.HotNDot(hp=dmg, time=5, name="Cutting Edge"))
-    LogNColor.Printer(str("Cutting Edge-Enemy HP:%d" % target.hp))
+    Spellcast.castDot(target, 0.9,  # caster, spellModifier
+                      target, 0.25,  # target, targetResistanceModifier
+                      target.fireRes, 4,  # targetResistance, duration
+                      "Cutting Edge")
 
-    #########################
-    ##DarkWizard##
-    #########################
-
+#########################
+##DarkWizard##
+#########################
 
 def darkarts(enemy, target):
-    s = int(round(enemy.spell * 1.3))
-    target.hp -= StatsNDice.roll(s * 2, s * 4) if not isCritical(enemy.crit) else StatsNDice.roll(s * 4, s * 8)
-    LogNColor.Printer(str("Dark Arts-Your HP:%d" % target.hp))
-
+    Spellcast.castSpell(target, 0, 1.3,  # caster, damageModifier, spellModifier
+                        target, 0, 0.9,  # target, armorModifier, resistanceModifier
+                        target.shadowRes, 0,  # resistanceTyper, lifesteal
+                        "Dark Arts")
 
 def darkfocus(enemy, placeHolder):
-    inlBuff = int(round(enemy.inl / 2))
-    enemy.spell += inlBuff * 1.5
-    enemy.res += inlBuff * 1.3
-    enemy.buffs.append(BuffNDebuff.BuffNDebuff(inl=inlBuff, time=4))
-    LogNColor.Printer(str("Dark Focus-Enemy Intellect:%d" % (enemy.inl + inlBuff)))
-
+    Spellcast.castBuff(enemy,
+                       0, 0, 0.5,  # strength, agility, intellect
+                       3,  # duration
+                       "Dark Focus")
 
 def darkcurse(enemy, target):
-    stgDebuff = int(round(target.stg / 2))
-    newHp = (target.stg - stgDebuff) * 10
-    target.hp =  newHp if not newHp>target.hp else target.hp
-    target.dmg -= stgDebuff * 1.3
-    target.debuffs.append(BuffNDebuff.BuffNDebuff(inl=inlDebuff, time=4))
-    LogNColor.Printer(str("Dark Curse-Your Intellect:%d" % (target.inl + inlDebuff)))
+    Spellcast.castDebuff(target,
+                         0.5, 0, 0,  # strength, agility, intellect
+                         4,  # duration
+                         "Dark Curse")
 
-    #########################
-    ##Dreadlord##
-    #########################
-
+#########################
+##Dreadlord##
+#########################
 
 def mindblast(enemy, target):
-    s = int(round(enemy.spell * 1.8))
-    target.hp -= StatsNDice.roll(s * 2, s * 4) if not isCritical(enemy.crit) else StatsNDice.roll(s * 4, s * 8)
-    LogNColor.Printer(str("Mind Blast-Your HP:%d" % target.hp))
-
+    Spellcast.castSpell(target, 0, 1.8,  # caster, damageModifier, spellModifier
+                        target, 0, 0.85,  # target, armorModifier, resistanceModifier
+                        target.shadowRes, 0,  # resistanceTyper, lifesteal
+                        "Mind Blast")
 
 def paralysis(enemy, target):
-    stgDebuff = -int(round(target.stg / 4))
-    agiDebuff = int(round(target.agi / 2))
-    newHp = (target.stg - stgDebuff) * 10
-    target.hp =  newHp if not newHp>target.hp else target.hp
-    target.dmg -= stgDebuff * 5
-    target.arm -= agiDebuff * 1.3
-    target.crit -= agiDebuff * 0.1
-    target.debuffs.append(BuffNDebuff.BuffNDebuff(stg=stgDebuff, agi=agiDebuff, time=4))
-    LogNColor.Printer(str("Paralysis-Your Strength:%d" % (target.stg - stgDebuff)))
-    LogNColor.Printer(str("Paralysis-Your Agility:%d" % (target.agi - agiDebuff)))
+    Spellcast.castDebuff(target,
+                         0.25, 0.5, 0,  # strength, agility, intellect
+                         3,  # duration
+                         "Paralysis")
 
-    #########################
-    ##CursedNecromancer##
-    #########################
-
+#########################
+##CursedNecromancer##
+#########################
 
 def deathfocus(enemy, placeHolder):
-    inlBuff = int(round(enemy.inl / 2))
-    enemy.spell += inlBuff * 1.5
-    enemy.res += inlBuff * 1.3
-    enemy.buffs.append(BuffNDebuff.BuffNDebuff(inl=inlBuff, time=4))
-    LogNColor.Printer(str("Death Focus-Enemy Intellect:%d" % (enemy.inl + inlBuff)))
-
+    Spellcast.castBuff(enemy,
+                       0, 0, 0.5,  # strength, agility, intellect
+                       4,  # duration
+                       "Death Focus")
 
 def deathcall(enemy, target):
-    s = int(round(enemy.spell * 2.0))
-    target.hp -= StatsNDice.roll(s * 2, s * 4) if not isCritical(enemy.crit) else StatsNDice.roll(s * 4, s * 8)
-    LogNColor.Printer(str("Death Call - Your HP:%d" % target.hp))
+    Spellcast.castSpell(target, 0, 2.0,  # caster, damageModifier, spellModifier
+                        target, 0, 0.75,  # target, armorModifier, resistanceModifier
+                        target.shadowRes, 0.25,  # resistanceTyper, lifesteal
+                        "Death Call")
 
-    #########################
-    ##DrowRanger##
-    #########################
+#########################
+##DrowRanger##
+#########################
 
 
 def precisionaura(enemy, placeHolder):
-    agiBuff = int(round(enemy.agi / 2))
-    inlBuff = int(round(enemy.inl / 2))
-    enemy.arm += agiBuff * 3
-    enemy.crit += agiBuff * 0.1
-    enemy.spell += inlBuff * 1.5
-    enemy.res += inlBuff * 1.3
-    enemy.buffs.append(BuffNDebuff.BuffNDebuff(agi=agiBuff, inl=inlBuff, time=4))
-    LogNColor.Printer(str("Precision Aura-Enemy Agility:%d" % (enemy.agi + agiBuff)))
-    LogNColor.Printer(str("Precision Aura-Enemy Strength:%d" % (enemy.inl + inlBuff)))
-
+    Spellcast.castBuff(enemy,
+                       0, 0.5, 0.5,  # strength, agility, intellect
+                       2,  # duration
+                       "Precision Aura")
 
 def frostshot(enemy, target):
-    dmg = enemy.dmg * 2 - target.arm * 0.9
-    target.hp -= dmg if not isCritical(enemy.crit) else dmg * 2
-    LogNColor.Printer(str("Frost Shot-Your HP:%d" % target.hp))
-
+    Spellcast.castSpell(target, 2.0, 0,  # caster, damageModifier, spellModifier
+                        target, 0.85, 0,  # target, armorModifier, resistanceModifier
+                        target.frostRes, 0.15,  # resistanceTyper, lifesteal
+                        "Frost Shot")
 
 def icyglance(enemy, target):
-    agiDebuff = int(round(target.agi / 3))
-    target.arm -= agiDebuff * 0.1
-    target.crit -= agiDebuff * 3
-    target.debuffs.append(BuffNDebuff.BuffNDebuff(agi=agiDebuff, time=4))
-    LogNColor.Printer(str("Icy Glance-Your Agility:%d" % (target.agi + agiDebuff)))
+    Spellcast.castDebuff(target,
+                         0, 0.3, 0,  # strength, agility, intellect
+                         5,  # duration
+                         "Icy Glance")
 
-    #########################
-    ##FireElemental##
-    #########################
+#########################
+##ArcaneElemental##
+#########################
 
+def arcanestrike(enemy, target):
+    Spellcast.castSpell(target, 0, 2,  # caster, damageModifier, spellModifier
+                        target, 0, 0.5,  # target, armorModifier, resistanceModifier
+                        target.arcaneRes, 0.5,  # resistanceTyper, lifesteal
+                        "Arcane Strike")
+
+def arcaneinvocation(enemy, placeHolder):
+    Spellcast.castBuff(enemy,
+                       0.25, 0.25, 0.25,  # strength, agility, intellect
+                       2,  # duration
+                       "Arcane Invocation")
+
+def arcanestorm(enemy, target):
+    Spellcast.castDebuff(target,
+                         0.25, 0.25, 0.25,  # strength, agility, intellect
+                         2,  # duration
+                         "Arcane Storm")
+
+#########################
+##FireElemental##
+#########################
 
 def firestrike(enemy, target):
-    s = int(round((enemy.dmg + enemy.spell)))
-    target.hp -= StatsNDice.roll(s * 2, s * 4) if not isCritical(enemy.crit) else StatsNDice.roll(s * 4, s * 8)
-    LogNColor.Printer(str("Firestrike-Your HP:%d" % target.hp))
-
+    Spellcast.castSpell(target, 0, 2,  # caster, damageModifier, spellModifier
+                        target, 0, 0.5,  # target, armorModifier, resistanceModifier
+                        target.fireRes, 0.5,  # resistanceTyper, lifesteal
+                        "Fire Strike")
 
 def fireinvocation(enemy, placeHolder):
-    stgBuff = int(round(enemy.stg / 2))
-    enemy.hp += stgBuff * 1.1
-    enemy.dmg += stgBuff * 1.5
-    enemy.buffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff, time=4))
-    LogNColor.Printer(str("Fire Invocation-Enemy Strength:%d" % (enemy.stg + stgBuff)))
-
+    Spellcast.castBuff(enemy,
+                       0.25, 0.25, 0.25,  # strength, agility, intellect
+                       2,  # duration
+                       "Fire Invocation")
 
 def firestorm(enemy, target):
-    stgDebuff = int(round(target.stg / 2))
-    newHp = (target.stg - stgDebuff) * 10
-    target.hp =  newHp if not newHp>target.hp else target.hp
-    target.dmg -= stgDebuff * 1.5
-    enemy.debuffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff, time=4))
-    LogNColor.Printer(str("Fire Storm-Your Strength:%d" % (target.stg + stgDebuff)))
+    Spellcast.castDebuff(target,
+                         0.25, 0.25, 0.25,  # strength, agility, intellect
+                         2,  # duration
+                         "Fire Storm")
 
-    #########################
-    ##WindElemental##
-    #########################
+#########################
+##FrostElemental##
+#########################
 
+def froststrike(enemy, target):
+    Spellcast.castSpell(target, 0, 2,  # caster, damageModifier, spellModifier
+                        target, 0, 0.5,  # target, armorModifier, resistanceModifier
+                        target.frostRes, 0.5,  # resistanceTyper, lifesteal
+                        "Frost Strike")
 
-def windstrike(enemy, target):
-    s = int(round((enemy.dmg + enemy.spell) * 0.75))
-    target.hp -= StatsNDice.roll(s * 2, s * 4) if not isCritical(enemy.crit) else StatsNDice.roll(s * 4, s * 8)
-    LogNColor.Printer(str("Windstrike-Your HP:%d" % target.hp))
+def frostinvocation(enemy, placeHolder):
+    Spellcast.castBuff(enemy,
+                       0.25, 0.25, 0.25,  # strength, agility, intellect
+                       2,  # duration
+                       "Frost Invocation")
 
+def froststorm(enemy, target):
+    Spellcast.castDebuff(target,
+                         0.25, 0.25, 0.25,  # strength, agility, intellect
+                         2,  # duration
+                         "Frost Storm")
 
-def windinvocation(enemy, placeHolder):
-    agiBuff = int(round(enemy.agi / 2))
-    enemy.arm += agiBuff * 1.3
-    enemy.crit += agiBuff * 1.1
-    enemy.buffs.append(BuffNDebuff.BuffNDebuff(agi=agiBuff, time=4), )
-    LogNColor.Printer(str("Wind Invocation-Enemy Agility:%d" % (enemy.stg + stgBuff)))
-
-
-def windstorm(enemy, target):
-    agiDebuff = int(round(target.agi / 2))
-    target.arm -= agiBuff * 1.3
-    target.crit -= agiBuff * 1.1
-    target.debuffs.append(BuffNDebuff.BuffNDebuff(stg=stgDebuff, time=4))
-    LogNColor.Printer(str("Wind Storm-Your Agility:%d" % (target.stg + agiDebuff)))
-
-    #########################
-    ##WaterElemental##
-    #########################
+#########################
+##ShadowElemental##
+#########################
 
 
-def waterstrike(enemy, target):
-    s = int(round((enemy.dmg + enemy.spell) * 0.75))
-    target.hp -= StatsNDice.roll(s * 2, s * 4) if not isCritical(enemy.crit) else StatsNDice.roll(s * 4, s * 8)
-    LogNColor.Printer(str("Waterstrike-Your HP:%d" % target.hp))
+def shadowstrike(enemy, target):
+    Spellcast.castSpell(target, 0, 2,  # caster, damageModifier, spellModifier
+                        target, 0, 0.5,  # target, armorModifier, resistanceModifier
+                        target.shadowRes, 0.5,  # resistanceTyper, lifesteal
+                        "Shadow Strike")
+
+def shadowinvocation(enemy, placeHolder):
+    Spellcast.castBuff(enemy,
+                       0.25, 0.25, 0.25,  # strength, agility, intellect
+                       2,  # duration
+                       "Shadow Invocation")
+
+def shadowstorm(enemy, target):
+    Spellcast.castDebuff(target,
+                         0.25, 0.25, 0.25,  # strength, agility, intellect
+                         2,  # duration
+                         "Shadow Storm")
+
+#########################
+##NatureElemental##
+#########################
 
 
-def waterinvocation(enemy, placeHolder):
-    inlBuff = int(round(enemy.inl / 2))
-    enemy.spell += inlBuff * 1.5
-    enemy.res += inlBuff * 1.3
-    enemy.buffs.append(BuffNDebuff.BuffNDebuff(inl=inlBuff, time=4))
-    LogNColor.Printer(str("Water Invocation-Enemy Intellect:%d" % (enemy.inl + inlBuff)))
+def naturestrike(enemy, target):
+    Spellcast.castSpell(target, 0, 2,  # caster, damageModifier, spellModifier
+                        target, 0, 0.5,  # target, armorModifier, resistanceModifier
+                        target.natureRes, 0.5,  # resistanceTyper, lifesteal
+                        "Nature Strike")
 
+def natureinvocation(enemy, placeHolder):
+    Spellcast.castBuff(enemy,
+                       0.25, 0.25, 0.25,  # strength, agility, intellect
+                       2,  # duration
+                       "Nature Invocation")
 
-def waterstorm(enemy, target):
-    agiDebuff = int(round(target.agi / 2))
-    target.arm -= agiBuff * 1.3
-    target.crit -= agiBuff * 1.1
-    target.debuffs.append(BuffNDebuff.BuffNDebuff(agi=agiDebuff, time=4))
-    LogNColor.Printer(str("Water Storm-Your Intellect:%d" % (target.stg + agiDebuff)))
+def naturestorm(enemy, target):
+    Spellcast.castDebuff(target,
+                         0.25, 0.25, 0.25,  # strength, agility, intellect
+                         2,  # duration
+                         "Nature Storm")
 
-    #########################
-    ##Ghost##
-    #########################
-
+#########################
+##Ghost##
+#########################
 
 def nighthowl(placeHolder, target):
-    stgDebuff = int(round(target.stg / 3))
-    intDebuff = int(round(target.inl / 3))
-    newHp = (target.stg - stgDebuff) * 10
-    target.hp =  newHp if not newHp>target.hp else target.hp
-    target.dmg -= stgDebuff * 1.3
-    target.spell -= intDebuff * 1.5
-    target.res -= intDebuff * 1.3
-    target.debuffs.append(BuffNDebuff.BuffNDebuff(stg=stgDebuff, inl=intDebuff, time=4))
-    LogNColor.Printer(str("Runic Corruption-Enemy Strength:%d" % (target.stg + stgDebuff)))
-    LogNColor.Printer(str("Runic Corruption-Enemy Intellect:%d" % (target.inl + intDebuff)))
+    Spellcast.castDebuff(target,
+                         0.25, 0, 0.25,  # strength, agility, intellect
+                         4,  # duration
+                         "Night Howl")
 
-    #########################
-    ##MercilessGladiator##
-    #########################
-
+#########################
+##MercilessGladiator##
+#########################
 
 def colossalstrike(enemy, target):
-    s = int(round(enemy.dmg * 1.3))
-    target.hp -= StatsNDice.roll(s * 2, s * 4) if not isCritical(enemy.crit) else StatsNDice.roll(s * 4, s * 8)
-    LogNColor.Printer(str("Titan Strike-Your HP:%d" % target.hp))
-
+    Spellcast.castSpell(target, 1.35, 0,  # caster, damageModifier, spellModifier
+                        target, 0.4, 0,  # target, armorModifier, resistanceModifier
+                        target.armor, 0,  # resistanceTyper, lifesteal
+                        "Colossal Strike")
 
 def colossalspirit(enemy, placeHolder):
-    stgBuff = int(round(enemy.stg / 4))
-    enemy.hp += stgBuff * 1.1
-    enemy.dmg += stgBuff * 1.5
-    enemy.buffs.append(BuffNDebuff.BuffNDebuff(stg=stgBuff, time=4))
-    LogNColor.Printer(str("Colossal Spirit-Enemy Strength:%d" % (enemy.stg + stgBuff)))
-
+    Spellcast.castBuff(enemy,
+                       0.75, 0, 0,  # strength, agility, intellect
+                       4,  # duration
+                       "Colossal Spirit")
 
 def piercingshout(placeHolder, target):
-    stgDebuff = -int(round(target.stg / 4))
-    newHp = (target.stg - stgDebuff) * 10
-    target.hp =  newHp if not newHp>target.hp else target.hp
-    target.dmg += stgDebuff * 1.5
-    target.debuffs.append(BuffNDebuff.BuffNDebuff(stg=stgDebuff, time=4))
-    LogNColor.Printer(str("Piercing Shout-Your Strength:%d" % (target.stg + stgDebuff)))
+    Spellcast.castDebuff(target,
+                         0.55, 0, 0,  # strength, agility, intellect
+                         4,  # duration
+                         "Piercing Shout")

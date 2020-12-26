@@ -1,18 +1,40 @@
 import random
 import Class
 import Enemy
+import Item
 import StatsNDice
-import Fight
+import Battle
 import LogNColor
 
-def printStats(character):
-    LogNColor.Printer(LogNColor.splitWords(type(character).__name__)+str(" Stats:"'\n'))
-    LogNColor.Printer("Strength:" + str(character.stg)+"   |"+"Hp:" + str(character.hp)+"    |"+"Crit:" + str(character.crit))
-    LogNColor.Printer("Agility:" + str(character.agi)+"    |"+"Dmg:" + str(character.dmg)+"   |"+"Spell:" + str(character.spell))
-    LogNColor.Printer("Intellect:" + str(character.inl)+"  |"+"Arm:" + str(character.arm)+"    |"+"Resistance:" + str(character.res))
-    LogNColor.Printer("\nFire Res:" + str(character.fireRes)+"\nIce Res:" + str(character.frostRes))
-    LogNColor.Printer("Shadow Res:" + str(character.shadowRes)+"\nNature Res:" + str(character.natureRes))
-    LogNColor.Printer("")
+def startGame():
+    LogNColor.setColor("magenta")
+    LogNColor.Printer(str("Welcome to the Colosseum!"))
+    p = None
+    floor = 0
+    while p is None:
+        p = classSelection(p)
+
+    while True:
+        resetCharacterBuffs(p)
+        floor += 1
+        StatsNDice.calculateStats(p)
+        e = prepareEnemy(floor)
+        LogNColor.printNextFloor(e, floor)
+
+        LogNColor.printCharacterStats(p)
+
+        if p.items:
+            LogNColor.printCharacterItems(p)
+
+        LogNColor.printCharacterStats(e)
+
+        if e.items:
+            LogNColor.printCharacterItems(e)
+
+        Battle.battle(p, e, floor)
+
+def resolveClassSelection(index):
+    return Class.classList[list(Class.classList.keys())[index]]()
 
 
 def resetCharacterBuffs(character):
@@ -21,52 +43,27 @@ def resetCharacterBuffs(character):
     character.hots = []
     character.dots = []
 
+def prepareEnemy(floor):
+    e = Enemy.enemyList[random.randint(0, 140)]()
+    Item.enemyGearUp(e)
+    Item.adjustItemLevel(e.items, floor)
+    Item.calculateEnemyStatsWithItems(e)
+    StatsNDice.enemyLevelUp(e, floor - 1)
+    StatsNDice.calculateStats(e)
+    return e
 
-def startGame():
-    LogNColor.setColor("yellow")
-    LogNColor.Printer(str("Welcome to the Colosseum!"))
-    p = None
-    floor = 0
-    while p == None:
-        try:
-            LogNColor.Printer(str("What class do you choose:"))
-            for key in Class.classList.keys():
-                LogNColor.Printer(key.title())
-            c = str(input())
-            p = Class.classList[c]()
-            LogNColor.Printer('\n' + str(type(p).__name__) + str(" Spells:"))
-            Class.displayClassSpell(p)
-        except:
-            LogNColor.Printer(str("Wrong class!"))
 
-    while (True):
-        resetCharacterBuffs(p)
-        floor += 1
-        p.buffs = []
-        p.debuffs = []
-        p.hots = []
-        p.dots = []
-        StatsNDice.calculateStats(p)
-        e = Enemy.enemyList[random.randint(0, 140)]()
-        StatsNDice.enemyLevelUp(e, floor - 1)
-        StatsNDice.calculateStats(e)
-        LogNColor.Printer('\n'"       ---------------------------------------                  ")
-        LogNColor.Printer('\n'"Floor: " + str(floor))
-        LogNColor.Printer(str("Your next fight will be a " + str(LogNColor.splitWords(type(e).__name__)) + '\n'))
-
-        printStats(p)
-
-        if p.items:
-            LogNColor.Printer("Your items:")
-            for idx, i in enumerate(p.items):
-                LogNColor.Printer(
-                    str(idx + 1) + ": " + str(i.name) + " STR: " + str(i.stg) + " AGI: " + str(i.agi) + " INT: " + str(
-                        i.inl))
-            LogNColor.Printer("")
-
-        printStats(e)
-
-        Fight.fight(p, e, floor)
+def classSelection(p):
+    try:
+        LogNColor.printClassChoicePrompt()
+        for idx, val in enumerate(Class.classList):
+            LogNColor.Printer(str(idx + 1) + "." + val.title())
+        c = int(input())
+        p = resolveClassSelection(c - 1)
+        LogNColor.printClassSpells(p)
+    except:
+        LogNColor.Printer(str("Wrong class!"))
+    return p
 
 
 if __name__ == '__main__':

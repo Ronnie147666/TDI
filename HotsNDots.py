@@ -15,10 +15,10 @@ def getHotsNDots(character):
         dot.time -= 1
         LogNColor.Printer(str("Enemy got " + str(int(round(dot.hp))) + " damage from " + dot.name))
     for hot in character.hots:
-        if character.hp + hot.hp > StatsNDice.calculateHpWBuffs(character):
+        if character.hp + hot.hp > StatsNDice.calculateHpWithBuffs(character):
             LogNColor.Printer(
-                str("You heal " + str(StatsNDice.calculateHpWBuffs(character) - character.hp) + " HP from " + hot.name))
-            character.hp = StatsNDice.calculateHpWBuffs(character)
+                str("You heal " + str(StatsNDice.calculateHpWithBuffs(character) - character.hp) + " HP from " + hot.name))
+            character.hp = StatsNDice.calculateHpWithBuffs(character)
             return character
         character.hp += int(round(hot.hp))
         hot.time -= 1
